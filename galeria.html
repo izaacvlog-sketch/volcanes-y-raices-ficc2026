@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galería — Volcanes y Raíces</title>
+<meta name="description" content="Fotografías y videos de Cacahoatán, el volcán Tacaná y el Festival Internacional del Café 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&family=Alex+Brush&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/site.css">
+</head>
+<body class="page-galeria">
+
+<nav class="nav" id="nav" aria-label="Menú principal">
+  <a href="/" class="brand">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><b>Volcanes y Raíces</b><span>Revista · Cacahoatán</span></span>
+  </a>
+  <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navMenu" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+  <div class="nav-menu" id="navMenu">
+    <ul class="nav-links">
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/ficc-2026" class="nav-ficc">FICC 2026</a></li>
+        <li><a href="/revista-volcanes-y-raices">Revista</a></li>
+        <li><a href="/galeria" aria-current="page">Galería</a></li>
+        <li><a href="/patrocinadores">Patrocinadores</a></li>
+        <li><a href="/contacto">Contacto</a></li>
+    </ul>
+    <a href="/revista.pdf" id="navDlBtn" data-pdf-link class="nav-cta" download="Revista-Volcanes-y-Raices.pdf">Descargar revista</a>
+  </div>
+</nav>
+
+<section class="hero hero--page hero--galeria">
+  <div class="hero-bg"></div>
+  <div class="hero-mist"></div>
+  <div class="hero-inner wrap">
+    <div class="hero-eyebrow">Fotografías y videos</div>
+    <h1 class="hero-title">Galería</h1>
+    <p class="hero-sub">Paisajes de Cacahoatán, el volcán Tacaná y las imágenes del Festival Internacional del Café.</p>
+  </div>
+</section>
+
+<section class="section-pad" id="fotos" style="background:var(--cream);">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <span class="eyebrow">Fotografías</span>
+      <h2 class="display">Imágenes de nuestra tierra</h2>
+      <p>Toca una foto para verla en grande.</p>
+    </div>
+    <div class="chips" data-filter-group=".gal-item" role="group" aria-label="Filtrar fotografías">
+      <button type="button" class="chip" data-filter="todos" aria-pressed="true">Todas</button>
+      <button type="button" class="chip" data-filter="cacahoatan" aria-pressed="false">Cacahoatán</button>
+      <button type="button" class="chip" data-filter="ficc" aria-pressed="false">FICC 2026</button>
+      <button type="button" class="chip" data-filter="revista" aria-pressed="false">Revista</button>
+    </div>
+    <div class="gal-grid">
+      <a class="gal-item" data-cat="cacahoatan" href="/assets/hero.jpg" data-lightbox data-caption="Cacahoatán y el volcán Tacaná al atardecer"><img src="/assets/hero.jpg" alt="Vista aérea de Cacahoatán con el volcán Tacaná al atardecer" loading="lazy"><figcaption>Cacahoatán y el volcán Tacaná al atardecer</figcaption></a>
+      <a class="gal-item" data-cat="cacahoatan" href="/assets/cascada.jpg" data-lightbox data-caption="Cascada Agua Caliente"><img src="/assets/cascada.jpg" alt="Cascada Agua Caliente entre rocas y vegetación" loading="lazy"><figcaption>Cascada Agua Caliente</figcaption></a>
+      <a class="gal-item" data-cat="revista" href="/assets/editorial.jpg" data-lightbox data-caption="Volcán Tacaná · Revista Volcanes y Raíces"><img src="/assets/editorial.jpg" alt="Volcán Tacaná con el logo de la revista" loading="lazy"><figcaption>Volcán Tacaná · Revista Volcanes y Raíces</figcaption></a>
+      <a class="gal-item" data-cat="ficc" href="/assets/ficc/ficc-flyer.jpg" data-lightbox data-caption="Cartel oficial del FICC 2026"><img src="/assets/ficc/ficc-flyer.jpg" alt="Cartel del Festival Internacional del Café Cacahoatán 2026" loading="lazy"><figcaption>Cartel oficial del FICC 2026</figcaption></a>
+      <a class="gal-item" data-cat="ficc" href="/assets/ficc/grano-de-oro-2.jpg" data-lightbox data-caption="Concurso Grano de Oro"><img src="/assets/ficc/grano-de-oro-2.jpg" alt="Cartel del Concurso Grano de Oro" loading="lazy"><figcaption>Concurso Grano de Oro</figcaption></a>
+      <a class="gal-item" data-cat="ficc" href="/assets/ficc/grano-de-oro.jpg" data-lightbox data-caption="Requisitos del Concurso Grano de Oro"><img src="/assets/ficc/grano-de-oro.jpg" alt="Requisitos del Concurso Grano de Oro" loading="lazy"><figcaption>Requisitos del Concurso Grano de Oro</figcaption></a>
+      <a class="gal-item" data-cat="ficc" href="/assets/ficc/ficc-banner.jpg" data-lightbox data-caption="Festival del Café Cacahoatán 2026"><img src="/assets/ficc/ficc-banner.jpg" alt="Portada del Festival del Café Cacahoatán 2026" loading="lazy"><figcaption>Festival del Café Cacahoatán 2026</figcaption></a>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad" id="videos" style="background:var(--paper);border-top:1px solid var(--line);">
+  <div class="wrap">
+    <div class="video-box" data-reveal>
+      <span class="eyebrow" style="color:var(--gold-soft);">Videos</span>
+      <h3>Próximamente</h3>
+      <p>Aquí se publicarán los videos de la revista y del festival.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="/" class="brand">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-text"><b>Volcanes y Raíces</b><span>Revista · Cacahoatán</span></span>
+        </a>
+        <p>Revista trimestral hecha en Cacahoatán, Chiapas, a las faldas del volcán Tacaná. Cultura, turismo y negocios con raíz local.</p>
+      </div>
+      <div>
+        <h4>FICC 2026</h4>
+        <ul>
+          <li><a href="/ficc-2026">Festival Internacional del Café</a></li>
+          <li><a href="/ficc-2026#grano-de-oro">Concurso Grano de Oro</a></li>
+          <li><a href="/ficc-2026#programa">Programa y actividades</a></li>
+          <li><a href="/ficc-2026#participantes">Registro de participantes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Revista y más</h4>
+        <ul>
+          <li><a href="/revista-volcanes-y-raices#ediciones">Hojear la revista</a></li>
+          <li><a id="dlBtn2" href="/revista.pdf" data-pdf-link download="Revista-Volcanes-y-Raices.pdf">Descargar PDF</a></li>
+          <li><a href="/galeria">Galería</a></li>
+          <li><a href="/patrocinadores">Patrocinadores</a></li>
+          <li><a href="/contacto">Contacto</a></li>
+          <li><a href="/admin" rel="nofollow" style="opacity:.55;font-size:.8rem;">Acceso administrador</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Revista Volcanes y Raíces — Cacahoatán, Chiapas.</span>
+      <span>Edición Oct / Sep / Nov 2025</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/js/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "name": "revista-volcanes-y-raices",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Landing page de Revista Volcanes y Raíces con flipbook y panel de administrador",
+  "dependencies": {
+    "@vercel/blob": "^2.8.0"
+  }
+}

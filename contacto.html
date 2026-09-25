@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contacto — Volcanes y Raíces</title>
+<meta name="description" content="Contacto de la Revista Volcanes y Raíces y del Festival Internacional del Café Cacahoatán 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&family=Alex+Brush&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/site.css">
+</head>
+<body class="page-contacto">
+
+<nav class="nav" id="nav" aria-label="Menú principal">
+  <a href="/" class="brand">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><b>Volcanes y Raíces</b><span>Revista · Cacahoatán</span></span>
+  </a>
+  <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navMenu" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+  <div class="nav-menu" id="navMenu">
+    <ul class="nav-links">
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/ficc-2026" class="nav-ficc">FICC 2026</a></li>
+        <li><a href="/revista-volcanes-y-raices">Revista</a></li>
+        <li><a href="/galeria">Galería</a></li>
+        <li><a href="/patrocinadores">Patrocinadores</a></li>
+        <li><a href="/contacto" aria-current="page">Contacto</a></li>
+    </ul>
+    <a href="/revista.pdf" id="navDlBtn" data-pdf-link class="nav-cta" download="Revista-Volcanes-y-Raices.pdf">Descargar revista</a>
+  </div>
+</nav>
+
+<section class="hero hero--page hero--contacto">
+  <div class="hero-bg"></div>
+  <div class="hero-mist"></div>
+  <div class="hero-inner wrap">
+    <div class="hero-eyebrow">Estamos para ayudarte</div>
+    <h1 class="hero-title">Contacto</h1>
+    <p class="hero-sub">Escríbenos sobre la revista, el festival, publicidad o colaboraciones.</p>
+  </div>
+</section>
+
+<section class="section-pad" id="datos" style="background:var(--cream);padding-bottom:0;">
+  <div class="wrap">
+    <div class="contact-cards">
+      <div class="contact-card" data-reveal><span>Revista</span><b>Correo editorial</b><a href="mailto:revista.volcanesyraices@gmail.com">revista.volcanesyraices@gmail.com</a><p>Publicidad, colaboraciones y suscripciones.</p></div>
+      <div class="contact-card contact-card--ficc" data-reveal><span>FICC 2026</span><b>Comité organizador</b><a href="mailto:ficc.cacahoatan2026@gmail.com">ficc.cacahoatan2026@gmail.com</a><p>Registro, Grano de Oro y expositores: <a href="/ficc-2026#participantes">formulario del festival</a>.</p></div>
+      <div class="contact-card contact-card--ficc" data-reveal><span>WhatsApp FICC</span><b>Informes del festival</b><a href="https://wa.me/529622570907" target="_blank" rel="noopener">962 257 0907</a></div>
+      <div class="contact-card" data-reveal><span>Ubicación</span><b>Cacahoatán, Chiapas</b><p>A las faldas del volcán Tacaná. El festival es en el Parque Central.</p></div>
+    </div>
+  </div>
+</section>
+<section class="contacto section-pad" id="formulario">
+  <div class="wrap contact-grid">
+    <div class="contact-info" data-reveal>
+      <span class="eyebrow">Contacto</span>
+      <h2 class="display" style="font-size:clamp(2rem,4.4vw,3.1rem);margin:10px 0 14px;line-height:1.08;">Solicita Más Información</h2>
+      <p>Déjanos tus datos y nos pondremos en contacto contigo a la brevedad.</p>
+      <p>Ya sea que quieras anunciar tu negocio, colaborar con contenido, suscribirte o simplemente conocer más de la revista, este es el canal directo con nuestro equipo.</p>
+      <span class="mail-line">✉ revista.volcanesyraices@gmail.com</span>
+    </div>
+    <form class="contact-form" data-reveal id="infoForm" novalidate>
+      <!-- honeypot anti-spam: bots fill it, humans never see it -->
+      <div style="position:absolute;left:-9999px;top:-9999px;" aria-hidden="true">
+        <label>No llenar este campo<input type="text" name="_honey" tabindex="-1" autocomplete="off"></label>
+      </div>
+      <div class="field">
+        <label for="cf-nombre">Nombre completo *</label>
+        <input type="text" id="cf-nombre" name="Nombre" placeholder="Tu nombre completo" required>
+      </div>
+      <div class="field">
+        <label for="cf-empresa">Empresa o negocio</label>
+        <input type="text" id="cf-empresa" name="Empresa" placeholder="Nombre de tu empresa (opcional)">
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="cf-correo">Correo electrónico *</label>
+          <input type="email" id="cf-correo" name="Correo" placeholder="tucorreo@ejemplo.com" required>
+        </div>
+        <div class="field">
+          <label for="cf-celular">Teléfono</label>
+          <input type="tel" id="cf-celular" name="Telefono" placeholder="962 000 00 00" pattern="[0-9+\s()-]{8,20}">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="cf-ciudad">Ciudad</label>
+          <input type="text" id="cf-ciudad" name="Ciudad" placeholder="Tu ciudad">
+        </div>
+        <div class="field">
+          <label for="cf-interes">Tipo de interés</label>
+          <select id="cf-interes" name="Tipo de interes">
+            <option value="Publicidad en la revista">Publicidad en la revista</option>
+            <option value="Colaboración">Colaboración</option>
+            <option value="Suscripción">Suscripción</option>
+            <option value="Información general" selected>Información general</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label for="cf-mensaje">Mensaje *</label>
+        <textarea id="cf-mensaje" name="Mensaje" placeholder="Cuéntanos en qué podemos ayudarte" required></textarea>
+      </div>
+      <button type="submit" class="form-submit" id="formBtn">Enviar solicitud</button>
+      <p class="form-error" id="formError" hidden>Por favor completa los campos obligatorios marcados con *.</p>
+      <div class="form-success" id="formSuccess" hidden>
+        <strong>Gracias por contactarnos.</strong><br>
+        Hemos recibido tu solicitud y te responderemos pronto.
+      </div>
+      <p class="form-note">Tus datos llegan directamente al correo de la revista y no se comparten con terceros.</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="/" class="brand">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-text"><b>Volcanes y Raíces</b><span>Revista · Cacahoatán</span></span>
+        </a>
+        <p>Revista trimestral hecha en Cacahoatán, Chiapas, a las faldas del volcán Tacaná. Cultura, turismo y negocios con raíz local.</p>
+      </div>
+      <div>
+        <h4>FICC 2026</h4>
+        <ul>
+          <li><a href="/ficc-2026">Festival Internacional del Café</a></li>
+          <li><a href="/ficc-2026#grano-de-oro">Concurso Grano de Oro</a></li>
+          <li><a href="/ficc-2026#programa">Programa y actividades</a></li>
+          <li><a href="/ficc-2026#participantes">Registro de participantes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Revista y más</h4>
+        <ul>
+          <li><a href="/revista-volcanes-y-raices#ediciones">Hojear la revista</a></li>
+          <li><a id="dlBtn2" href="/revista.pdf" data-pdf-link download="Revista-Volcanes-y-Raices.pdf">Descargar PDF</a></li>
+          <li><a href="/galeria">Galería</a></li>
+          <li><a href="/patrocinadores">Patrocinadores</a></li>
+          <li><a href="/contacto">Contacto</a></li>
+          <li><a href="/admin" rel="nofollow" style="opacity:.55;font-size:.8rem;">Acceso administrador</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Revista Volcanes y Raíces — Cacahoatán, Chiapas.</span>
+      <span>Edición Oct / Sep / Nov 2025</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/js/site.js"></script>
+</body>
+</html>

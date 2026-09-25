@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Administrador — Volcanes y Raíces</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal-deep:#0B6E67; --teal:#16A398; --gold:#E3A419; --gold-soft:#F4C64A;
+    --cream:#FBF7EE; --paper:#FFFDF8; --ink:#182422; --ink-soft:#4B5A57;
+    --line:rgba(11,110,103,.18); --danger:#B3362B;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; min-height:100vh;
+    font-family:'Work Sans',sans-serif; color:var(--ink);
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 0%, rgba(22,163,152,.28), transparent 60%),
+      linear-gradient(180deg,#0B3D3A 0%, #0A2A2C 60%, #081F22 100%);
+    display:flex; align-items:flex-start; justify-content:center;
+    padding:48px 16px;
+  }
+  .panel{
+    width:100%; max-width:560px;
+    background:var(--paper); border-radius:24px;
+    box-shadow:0 30px 80px -20px rgba(0,0,0,.55);
+    padding:clamp(24px,5vw,40px);
+  }
+  .brand{display:flex;align-items:center;gap:12px;margin-bottom:26px;color:var(--teal-deep);text-decoration:none;}
+  .brand-mark{
+    width:46px;height:46px;flex-shrink:0;background-color:currentColor;
+    -webkit-mask:url("/assets/logo-vr.png") center/contain no-repeat;
+            mask:url("/assets/logo-vr.png") center/contain no-repeat;
+  }
+  .brand b{display:block;font-family:'Playfair Display',serif;font-size:1.05rem;}
+  .brand span{display:block;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);}
+  h1{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,4vw,2rem);margin:0 0 8px;line-height:1.15;}
+  .lead{color:var(--ink-soft);line-height:1.6;margin:0 0 24px;font-size:.95rem;}
+  label{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--teal-deep);margin-bottom:8px;}
+  input[type=password]{
+    width:100%;padding:14px 16px;border:1.5px solid var(--line);border-radius:12px;
+    background:var(--cream);font:inherit;font-size:1rem;color:var(--ink);outline:none;
+  }
+  input[type=password]:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(22,163,152,.15);}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    width:100%;margin-top:16px;padding:15px 20px;border:none;border-radius:100px;
+    background:var(--gold);color:#1c1305;font:inherit;font-weight:700;font-size:1rem;cursor:pointer;
+    box-shadow:0 14px 30px -8px rgba(227,164,25,.55);transition:transform .2s ease, opacity .2s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+  .btn:focus-visible, .link-btn:focus-visible, .drop:focus-visible{outline:3px solid var(--teal);outline-offset:3px;}
+  .msg{margin-top:14px;font-size:.88rem;line-height:1.5;padding:12px 14px;border-radius:12px;}
+  .msg.error{color:var(--danger);background:rgba(179,54,43,.08);border:1px solid rgba(179,54,43,.3);}
+  .msg.ok{color:var(--teal-deep);background:rgba(22,163,152,.1);border:1px solid var(--teal);}
+  .msg.warn{color:#7a5300;background:rgba(227,164,25,.12);border:1px solid rgba(227,164,25,.5);}
+  .status{
+    border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:22px;
+    background:var(--cream);font-size:.9rem;line-height:1.55;
+  }
+  .status b{color:var(--teal-deep);}
+  .status a{color:var(--teal-deep);font-weight:600;}
+  .drop{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+    border:2px dashed rgba(11,110,103,.35);border-radius:16px;padding:30px 18px;text-align:center;
+    background:var(--cream);cursor:pointer;transition:border-color .2s ease, background .2s ease;
+  }
+  .drop:hover, .drop.over{border-color:var(--teal);background:rgba(22,163,152,.07);}
+  .drop strong{font-size:1rem;}
+  .drop small{color:var(--ink-soft);font-size:.82rem;}
+  .file-card{display:flex;gap:16px;align-items:center;margin-top:18px;}
+  .file-card canvas{width:84px;height:auto;border-radius:6px;box-shadow:0 6px 18px -6px rgba(0,0,0,.35);background:#fff;flex-shrink:0;}
+  .file-card .meta{font-size:.9rem;line-height:1.5;word-break:break-word;}
+  .file-card .meta b{display:block;font-size:.95rem;}
+  .progress{height:10px;border-radius:10px;background:rgba(11,110,103,.12);overflow:hidden;margin-top:18px;}
+  .progress > div{height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--gold));transition:width .2s ease;}
+  .progress-label{font-size:.82rem;color:var(--ink-soft);margin-top:6px;text-align:right;}
+  .row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:22px;flex-wrap:wrap;}
+  .link-btn{background:none;border:none;color:var(--teal-deep);font:inherit;font-weight:600;cursor:pointer;padding:4px 0;text-decoration:underline;}
+  a.back{color:var(--teal-deep);font-weight:600;font-size:.9rem;}
+  [hidden]{display:none !important;}
+  @media (prefers-reduced-motion: reduce){ .btn, .progress > div{transition:none;} }
+</style>
+</head>
+<body>
+<main class="panel">
+  <a class="brand" href="/">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span><b>Volcanes y Raíces</b><span>Panel de administración</span></span>
+  </a>
+
+  <!-- Step 1: sign in -->
+  <section id="loginView">
+    <h1>Acceso de administrador</h1>
+    <p class="lead">Escribe la contraseña para publicar una nueva edición de la revista en el flipbook.</p>
+    <form id="loginForm" autocomplete="off">
+      <label for="pwd">Contraseña</label>
+      <input type="password" id="pwd" autocomplete="current-password" required>
+      <button class="btn" type="submit" id="loginBtn">Entrar</button>
+    </form>
+    <div class="msg error" id="loginError" role="alert" hidden></div>
+  </section>
+
+  <!-- Step 2: upload -->
+  <section id="uploadView" hidden>
+    <h1>Publicar nueva edición</h1>
+    <p class="lead">El PDF que subas reemplaza a la edición actual del flipbook y del botón “Descargar revista”.</p>
+
+    <div class="status" id="currentStatus">Consultando la edición publicada…</div>
+
+    <div class="msg warn" id="storageWarn" hidden>
+      Falta conectar el almacenamiento: en Vercel abre tu proyecto → <b>Storage</b> → <b>Create</b> → <b>Blob</b> (acceso público) y conéctalo a este proyecto. Después vuelve a desplegar.
+    </div>
+
+    <label class="drop" id="drop" tabindex="0" for="fileInput">
+      <strong>Elige el PDF de la revista</strong>
+      <small>o arrástralo aquí · solo archivos .pdf · máximo 300 MB</small>
+    </label>
+    <input type="file" id="fileInput" accept="application/pdf,.pdf" hidden>
+
+    <div class="file-card" id="fileCard" hidden>
+      <canvas id="coverPreview" aria-label="Vista previa de la portada"></canvas>
+      <div class="meta">
+        <b id="fileName"></b>
+        <span id="fileInfo"></span>
+      </div>
+    </div>
+    <div class="msg warn" id="sizeWarn" hidden></div>
+
+    <button class="btn" id="publishBtn" disabled>Publicar edición</button>
+
+    <div id="progressWrap" hidden>
+      <div class="progress"><div id="progressBar"></div></div>
+      <div class="progress-label" id="progressLabel">0%</div>
+    </div>
+
+    <div class="msg error" id="uploadError" role="alert" hidden></div>
+    <div class="msg ok" id="uploadOk" role="status" hidden></div>
+
+    <div class="row">
+      <a class="back" href="/revista-volcanes-y-raices">← Ver la revista</a>
+      <button class="link-btn" id="logoutBtn" type="button">Cerrar sesión</button>
+    </div>
+  </section>
+</main>
+
+<script src="/assets/vendor/pdf.min.js"></script>
+<script type="module">
+  import { upload } from '/assets/blob-client.js';
+
+  const PDF_PATHNAME = 'revista/actual.pdf';
+  const MAX_BYTES = 300 * 1024 * 1024;
+  const RECOMMENDED_BYTES = 60 * 1024 * 1024;
+  let password = ''; // kept in memory only; closing the tab signs you out
+  let selectedFile = null;
+
+  const $ = (id) => document.getElementById(id);
+  const show = (el, on = true) => { el.hidden = !on; };
+  const fmtMB = (b) => (b / 1024 / 1024).toFixed(1) + ' MB';
+  const fmtDate = (d) => new Date(d).toLocaleString('es-MX', { dateStyle: 'long', timeStyle: 'short' });
+
+  if (window.pdfjsLib) {
+    pdfjsLib.GlobalWorkerOptions.workerSrc = '/assets/vendor/pdf.worker.min.js';
+  }
+
+  // ---------- login ----------
+  $('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    show($('loginError'), false);
+    const pwd = $('pwd').value;
+    if (!pwd) return;
+    $('loginBtn').disabled = true;
+    $('loginBtn').textContent = 'Verificando…';
+    try {
+      const res = await fetch('/api/auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: pwd }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || 'No se pudo verificar la contraseña');
+      password = pwd;
+      $('pwd').value = '';
+      show($('loginView'), false);
+      show($('uploadView'), true);
+      show($('storageWarn'), !data.storageReady);
+      loadCurrent();
+    } catch (err) {
+      $('loginError').textContent = err.message === 'Failed to fetch'
+        ? 'No hay conexión con el servidor. Este panel solo funciona con la página publicada en Vercel.'
+        : err.message;
+      show($('loginError'), true);
+    } finally {
+      $('loginBtn').disabled = false;
+      $('loginBtn').textContent = 'Entrar';
+    }
+  });
+
+  $('logoutBtn').addEventListener('click', () => {
+    password = '';
+    selectedFile = null;
+    show($('uploadView'), false);
+    show($('loginView'), true);
+    $('pwd').focus();
+  });
+
+  // ---------- current edition ----------
+  async function loadCurrent() {
+    const box = $('currentStatus');
+    try {
+      const res = await fetch('/api/current?t=' + Date.now(), { cache: 'no-store' });
+      if (!res.ok) throw new Error();
+      const d = await res.json();
+      box.innerHTML = `<b>Edición publicada:</b> subida el ${fmtDate(d.uploadedAt)} · ${fmtMB(d.size)} · <a href="${d.url}" target="_blank" rel="noopener">abrir PDF</a>`;
+    } catch {
+      box.innerHTML = '<b>Edición publicada:</b> la que viene incluida con la página (todavía no se ha subido ninguna desde este panel).';
+    }
+  }
+
+  // ---------- file selection ----------
+  const drop = $('drop');
+  drop.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); $('fileInput').click(); } });
+  ['dragenter', 'dragover'].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.add('over'); }));
+  ['dragleave', 'drop'].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.remove('over'); }));
+  drop.addEventListener('drop', (e) => { const f = e.dataTransfer.files && e.dataTransfer.files[0]; if (f) pickFile(f); });
+  $('fileInput').addEventListener('change', (e) => { const f = e.target.files[0]; if (f) pickFile(f); });
+
+  async function pickFile(file) {
+    show($('uploadError'), false);
+    show($('uploadOk'), false);
+    show($('sizeWarn'), false);
+    $('publishBtn').disabled = true;
+
+    const isPdf = file.type === 'application/pdf' || /\.pdf$/i.test(file.name);
+    if (!isPdf) return fail('Ese archivo no es un PDF. Elige el archivo .pdf de la revista.');
+    if (file.size > MAX_BYTES) return fail(`El archivo pesa ${fmtMB(file.size)}. El máximo es 300 MB.`);
+
+    selectedFile = file;
+    $('fileName').textContent = file.name;
+    $('fileInfo').textContent = fmtMB(file.size) + ' · leyendo páginas…';
+    show($('fileCard'), true);
+
+    if (file.size > RECOMMENDED_BYTES) {
+      $('sizeWarn').textContent = `Este PDF pesa ${fmtMB(file.size)}. Se puede publicar, pero en celulares con datos móviles tardará en cargar. Si puedes, expórtalo comprimido (menos de 60 MB) para que abra más rápido.`;
+      show($('sizeWarn'), true);
+    }
+
+    // read page count + render the cover so you can confirm it's the right file
+    try {
+      const buf = await file.arrayBuffer();
+      const pdf = await pdfjsLib.getDocument({ data: new Uint8Array(buf), isEvalSupported: false }).promise;
+      const page = await pdf.getPage(1);
+      const base = page.getViewport({ scale: 1 });
+      const vp = page.getViewport({ scale: 240 / base.width });
+      const c = $('coverPreview');
+      c.width = Math.floor(vp.width); c.height = Math.floor(vp.height);
+      await page.render({ canvasContext: c.getContext('2d'), viewport: vp }).promise;
+      $('fileInfo').textContent = `${fmtMB(file.size)} · ${pdf.numPages} páginas`;
+      pdf.destroy();
+    } catch {
+      return fail('No se pudo leer el PDF. Puede estar dañado o protegido con contraseña.');
+    }
+    $('publishBtn').disabled = false;
+  }
+
+  function fail(text) {
+    selectedFile = null;
+    $('uploadError').textContent = text;
+    show($('uploadError'), true);
+    $('publishBtn').disabled = true;
+  }
+
+  // ---------- publish ----------
+  $('publishBtn').addEventListener('click', async () => {
+    if (!selectedFile || !password) return;
+    show($('uploadError'), false);
+    show($('uploadOk'), false);
+    $('publishBtn').disabled = true;
+    $('publishBtn').textContent = 'Publicando…';
+    show($('progressWrap'), true);
+    setProgress(0);
+
+    try {
+      await upload(PDF_PATHNAME, selectedFile, {
+        access: 'public',
+        contentType: 'application/pdf',
+        handleUploadUrl: '/api/upload',
+        clientPayload: JSON.stringify({ password }),
+        multipart: selectedFile.size > 20 * 1024 * 1024,
+        onUploadProgress: ({ percentage }) => setProgress(percentage),
+      });
+      setProgress(100);
+      $('uploadOk').innerHTML = '<b>Edición publicada.</b> Los visitantes la verán en el flipbook en aproximadamente un minuto. <a href="/revista-volcanes-y-raices#ediciones" style="color:inherit;font-weight:700;">Ver el flipbook</a>';
+      show($('uploadOk'), true);
+      selectedFile = null;
+      $('fileInput').value = '';
+      show($('fileCard'), false);
+      show($('sizeWarn'), false);
+      loadCurrent();
+    } catch (err) {
+      const m = (err && err.message) || '';
+      let text = 'No se pudo publicar la edición. Revisa tu conexión e inténtalo de nuevo.';
+      if (/Contraseña incorrecta/i.test(m)) text = 'La sesión ya no es válida: la contraseña cambió. Cierra sesión y vuelve a entrar.';
+      else if (/almacenamiento|Blob|BLOB_READ_WRITE_TOKEN|store/i.test(m)) text = 'Falta conectar el almacenamiento Blob al proyecto en Vercel (Storage → Create → Blob) y volver a desplegar.';
+      else if (/content type|contentType/i.test(m)) text = 'El archivo debe ser un PDF.';
+      else if (m) text += ' Detalle: ' + m;
+      $('uploadError').textContent = text;
+      show($('uploadError'), true);
+      show($('progressWrap'), false);
+      $('publishBtn').disabled = !selectedFile;
+    } finally {
+      $('publishBtn').textContent = 'Publicar edición';
+    }
+  });
+
+  function setProgress(p) {
+    const v = Math.max(0, Math.min(100, Math.round(p)));
+    $('progressBar').style.width = v + '%';
+    $('progressLabel').textContent = v + '%';
+  }
+</script>
+</body>
+</html>
