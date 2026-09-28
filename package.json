@@ -5,6 +5,7 @@
   "type": "module",
   "description": "Landing page de Revista Volcanes y Raíces con flipbook y panel de administrador",
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "@vercel/blob": "^2.8.0"
   }
 }
