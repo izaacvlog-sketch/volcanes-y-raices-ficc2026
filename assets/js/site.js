@@ -264,7 +264,7 @@
       const samplesOk = !isGdo() || document.getElementById('gd-muestras').checked;
       gdoCheckLabel.classList.toggle('bad', !samplesOk);
       if(!valid || !accepted || !samplesOk){
-        errEl.textContent = 'Completa los campos obligatorios marcados con *.';
+        errEl.textContent = 'Revisa los campos marcados.';
         errEl.hidden = false;
         const firstBad = form.querySelector('[required]:invalid');
         if(firstBad) firstBad.focus();
@@ -311,8 +311,8 @@
           body: JSON.stringify(payload)
         });
         if(!res.ok) throw new Error('send failed');
-        form.querySelectorAll('.field, .field-row, .ficc-check, .form-submit, .form-intro, .gdo-fields').forEach(el=>el.style.display='none');
-        if(gdo) okEl.innerHTML = '<strong>¡Inscripción recibida!</strong><br>Ya estás registrado en el Concurso Grano de Oro. El comité te contactará con la fecha y el lugar para entregar tus dos muestras.';
+        form.querySelectorAll('.field, .field-row, .ficc-check, .form-submit, .form-intro, .gdo-fields, .reg-more').forEach(el=>el.style.display='none');
+        if(gdo) okEl.innerHTML = '<strong>¡Inscripción recibida!</strong><br>Te avisaremos dónde y cuándo entregar tus muestras.';
         okEl.hidden = false;
         okEl.scrollIntoView({behavior:'smooth', block:'center'});
       }catch(err){

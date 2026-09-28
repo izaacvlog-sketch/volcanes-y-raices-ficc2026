@@ -147,13 +147,7 @@
             <a class="gdo-btn" href="#participantes" data-registro="Concurso Grano de Oro">Inscribirme al concurso</a>
           </div>
         </div>
-        <div class="gdo-posters" data-reveal>
-          <figure style="margin:0;">
-            <a class="gdo-poster" href="/assets/ficc/grano-de-oro.jpg" data-lightbox data-caption="Requisitos del Concurso Grano de Oro">
-              <img src="/assets/ficc/grano-de-oro.jpg" width="1024" height="1536" loading="lazy" alt="Convocatoria del Concurso Grano de Oro con los cinco requisitos para participantes.">
-            </a>
-            <figcaption>Requisitos</figcaption>
-          </figure>
+        <div class="gdo-posters gdo-posters--one" data-reveal>
           <figure style="margin:0;">
             <a class="gdo-poster" href="/assets/ficc/grano-de-oro-2.jpg" data-lightbox data-caption="Concurso Grano de Oro · FICC 2026">
               <img src="/assets/ficc/grano-de-oro-2.jpg" width="1024" height="1536" loading="lazy" alt="Cartel del Concurso Grano de Oro con el logo del INIFAP.">
@@ -217,30 +211,22 @@
     </div>
   </section>
 
-  <section class="ficc-block" id="participantes" aria-labelledby="part-title">
-    <div class="wrap part-grid">
-      <div data-reveal>
-        <span class="eyebrow">Participantes</span>
-        <h2 id="part-title" style="font-family:'Playfair Display',serif;font-size:clamp(2rem,4.4vw,3rem);margin:10px 0 14px;line-height:1.08;color:var(--crema);">Regístrate al FICC 2026</h2>
-        <p style="color:rgba(243,227,192,.8);line-height:1.65;margin:0 0 20px;">Elige cómo quieres participar. El comité organizador te contactará por correo o WhatsApp.</p>
-        <ul class="part-list">
-          <li><span class="dot green"></span><span><b>Concurso Grano de Oro</b>Productores con dos muestras: Arábica y Robusta.</span></li>
-          <li><span class="dot"></span><span><b>Expositores y productores</b>Stands comerciales, fincas y marcas de café.</span></li>
-          <li><span class="dot"></span><span><b>Baristas y catadores</b>Profesionales del café que quieran participar.</span></li>
-          <li><span class="dot"></span><span><b>Visitantes, medios y patrocinadores</b>Registro para asistir, cubrir o apoyar el festival.</span></li>
-        </ul>
-      </div>
-      <form class="ficc-form" id="ficcForm" novalidate data-reveal>
-        <h3>Registro FICC 2026</h3>
-        <p class="form-intro">Llena tus datos y elige cómo quieres participar. Los campos con * son obligatorios.</p>
+  <section class="ficc-block reg" id="participantes" aria-labelledby="part-title">
+    <div class="wrap reg-wrap">
+      <header class="reg-head" data-reveal>
+        <span class="eyebrow">Registro</span>
+        <h2 id="part-title">Regístrate al FICC 2026</h2>
+        <p>Te contactamos por correo o WhatsApp.</p>
+      </header>
+      <form class="reg-form" id="ficcForm" novalidate data-reveal>
         <div style="position:absolute;left:-9999px;top:-9999px;" aria-hidden="true">
           <label>No llenar este campo<input type="text" name="_honey" tabindex="-1" autocomplete="off"></label>
         </div>
         <div class="field">
-          <label for="fc-tipo">Quiero registrarme como *</label>
+          <label for="fc-tipo">Participo como</label>
           <select id="fc-tipo" required>
             <option value="" selected disabled>Elige una opción</option>
-            <option value="Concurso Grano de Oro">Participante del Concurso Grano de Oro</option>
+            <option value="Concurso Grano de Oro">Concurso Grano de Oro</option>
             <option>Visitante</option>
             <option>Expositor / stand comercial</option>
             <option>Productor de café</option>
@@ -250,58 +236,37 @@
           </select>
         </div>
         <div class="field">
-          <label for="fc-nombre">Nombre completo *</label>
-          <input type="text" id="fc-nombre" autocomplete="name" placeholder="Tu nombre completo" required>
+          <label for="fc-nombre">Nombre completo</label>
+          <input type="text" id="fc-nombre" autocomplete="name" required>
         </div>
         <div class="field-row">
           <div class="field">
-            <label for="fc-correo">Correo electrónico *</label>
-            <input type="email" id="fc-correo" autocomplete="email" placeholder="tucorreo@ejemplo.com" required>
+            <label for="fc-correo">Correo</label>
+            <input type="email" id="fc-correo" autocomplete="email" required>
           </div>
           <div class="field">
-            <label for="fc-tel">WhatsApp / teléfono *</label>
-            <input type="tel" id="fc-tel" autocomplete="tel" placeholder="962 000 00 00" pattern="[0-9+\s()-]{8,20}" required>
-          </div>
-        </div>
-        <div class="field-row">
-          <div class="field">
-            <label for="fc-ciudad">Ciudad y estado</label>
-            <input type="text" id="fc-ciudad" autocomplete="address-level2" placeholder="Ej. Tapachula, Chiapas">
-          </div>
-          <div class="field">
-            <label for="fc-pais">País</label>
-            <input type="text" id="fc-pais" autocomplete="country-name" value="México">
-          </div>
-        </div>
-        <div class="field-row">
-          <div class="field">
-            <label for="fc-empresa">Empresa, finca o marca</label>
-            <input type="text" id="fc-empresa" autocomplete="organization" placeholder="Si aplica">
-          </div>
-          <div class="field">
-            <label for="fc-personas">¿Cuántas personas asistirán?</label>
-            <input type="number" id="fc-personas" min="1" max="200" inputmode="numeric" value="1">
+            <label for="fc-tel">WhatsApp</label>
+            <input type="tel" id="fc-tel" autocomplete="tel" pattern="[0-9+\s()-]{8,20}" required>
           </div>
         </div>
         <fieldset class="gdo-fields" id="gdoFields" hidden>
-          <legend>Datos para el Concurso Grano de Oro</legend>
-          <p class="gdo-note">El nombre del productor es el “Nombre completo” de arriba. Estos datos deben coincidir con la etiqueta de tus muestras.</p>
+          <legend>Datos de tus muestras</legend>
           <div class="field">
-            <label for="gd-parcela">Ubicación de la parcela *</label>
-            <input type="text" id="gd-parcela" data-gdo-required placeholder="Comunidad, ejido o finca y municipio">
+            <label for="gd-parcela">Ubicación de la parcela</label>
+            <input type="text" id="gd-parcela" data-gdo-required placeholder="Comunidad y municipio">
           </div>
           <div class="field-row">
             <div class="field">
-              <label for="gd-altitud">Altitud (metros sobre el nivel del mar) *</label>
-              <input type="number" id="gd-altitud" data-gdo-required min="0" max="5000" inputmode="numeric" placeholder="Ej. 1200">
+              <label for="gd-altitud">Altitud (msnm)</label>
+              <input type="number" id="gd-altitud" data-gdo-required min="0" max="5000" inputmode="numeric">
             </div>
             <div class="field">
-              <label for="gd-cosecha">Fecha de cosecha *</label>
+              <label for="gd-cosecha">Fecha de cosecha</label>
               <input type="month" id="gd-cosecha" data-gdo-required>
             </div>
           </div>
           <div class="field">
-            <label for="gd-beneficio">Tipo de beneficiado *</label>
+            <label for="gd-beneficio">Beneficiado</label>
             <select id="gd-beneficio" data-gdo-required>
               <option value="" selected disabled>Elige una opción</option>
               <option>Lavado (húmedo)</option>
@@ -313,24 +278,45 @@
           </div>
           <label class="ficc-check" id="gdoCheckLabel">
             <input type="checkbox" id="gd-muestras">
-            <span>Entregaré dos muestras, una Arábica y una Robusta, en bolsas de papel selladas e identificadas. *</span>
+            <span>Entregaré una muestra Arábica y una Robusta, selladas e identificadas.</span>
           </label>
         </fieldset>
-        <div class="field">
-          <label for="fc-msg">Comentarios</label>
-          <textarea id="fc-msg" placeholder="Cuéntanos qué productos exhibirías, qué necesitas para tu stand o cualquier duda"></textarea>
-        </div>
+        <details class="reg-more">
+          <summary>Más datos (opcional)</summary>
+          <div class="field-row">
+            <div class="field">
+              <label for="fc-ciudad">Ciudad</label>
+              <input type="text" id="fc-ciudad" autocomplete="address-level2">
+            </div>
+            <div class="field">
+              <label for="fc-pais">País</label>
+              <input type="text" id="fc-pais" autocomplete="country-name" value="México">
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="fc-empresa">Empresa o finca</label>
+              <input type="text" id="fc-empresa" autocomplete="organization">
+            </div>
+            <div class="field">
+              <label for="fc-personas">Asistentes</label>
+              <input type="number" id="fc-personas" min="1" max="200" inputmode="numeric" value="1">
+            </div>
+          </div>
+          <div class="field">
+            <label for="fc-msg">Comentarios</label>
+            <textarea id="fc-msg" rows="3"></textarea>
+          </div>
+        </details>
         <label class="ficc-check" id="fcCheckLabel">
           <input type="checkbox" id="fc-acepto" required>
-          <span>Acepto que el comité organizador del FICC 2026 me contacte por correo o WhatsApp sobre mi registro. *</span>
+          <span>Acepto que me contacten sobre mi registro.</span>
         </label>
-        <button type="submit" class="form-submit" id="fcBtn">Enviar mi registro</button>
-        <p class="form-error" id="fcError" role="alert" hidden>Completa los campos obligatorios marcados con *.</p>
+        <button type="submit" class="form-submit" id="fcBtn">Enviar registro</button>
+        <p class="form-error" id="fcError" role="alert" hidden>Revisa los campos marcados.</p>
         <div class="form-success" id="fcSuccess" role="status" hidden>
-          <strong>¡Registro recibido!</strong><br>
-          Gracias por registrarte al Festival Internacional del Café Cacahoatán 2026. El comité organizador te contactará pronto.
+          <strong>¡Registro recibido!</strong><br>Te contactaremos pronto.
         </div>
-        <p class="form-note">Tu registro llega directo al comité organizador (ficc.cacahoatan2026@gmail.com).</p>
       </form>
     </div>
   </section>
