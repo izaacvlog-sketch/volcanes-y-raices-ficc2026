@@ -1268,3 +1268,41 @@
 .reg-form .form-submit:hover{transform:none;background:var(--gold-soft);}
 .reg-form .form-error{color:#F08A7C;}
 .reg-form .form-success{background:rgba(91,210,122,.1);border:1px solid rgba(91,210,122,.5);color:#E8F7EA;}
+
+/* ===== Transiciones 3D ===== */
+/* Aparición de contenido al hacer scroll: se inclina desde abajo como una página que se levanta */
+[data-reveal]{
+  opacity:0;
+  transform:perspective(1200px) rotateX(16deg) translate3d(0,56px,-40px);
+  transform-origin:50% 100%;
+  transition:opacity .9s ease, transform 1.1s cubic-bezier(.2,.8,.2,1);
+  will-change:transform, opacity;
+}
+[data-reveal].in{opacity:1;transform:none;will-change:auto;}
+
+/* Al saltar a una sección desde el menú de secciones */
+.sec-3d{animation:sec3d .9s cubic-bezier(.2,.8,.2,1) both;transform-origin:50% 0;}
+@keyframes sec3d{
+  0%{opacity:.35;transform:perspective(1600px) rotateX(-9deg) translate3d(0,30px,-120px);}
+  100%{opacity:1;transform:none;}
+}
+
+/* Cambio de página (Inicio, FICC 2026, Revista, Galería...): giro 3D tipo página de revista */
+@view-transition{navigation:auto;}
+.nav{view-transition-name:site-nav;}
+::view-transition{background:#10201e;}
+::view-transition-old(root){animation:vtOut .5s cubic-bezier(.4,0,.2,1) both;transform-origin:0 50%;}
+::view-transition-new(root){animation:vtIn .7s cubic-bezier(.2,.8,.2,1) both;transform-origin:100% 50%;}
+::view-transition-group(site-nav){animation-duration:0s;}
+@keyframes vtOut{
+  to{opacity:0;transform:perspective(1800px) rotateY(18deg) translate3d(-4%,0,-220px);}
+}
+@keyframes vtIn{
+  from{opacity:0;transform:perspective(1800px) rotateY(-18deg) translate3d(4%,0,-220px);}
+}
+
+@media (prefers-reduced-motion: reduce){
+  [data-reveal]{opacity:1;transform:none;transition:none;}
+  .sec-3d{animation:none;}
+  ::view-transition-old(root), ::view-transition-new(root){animation:none;}
+}
