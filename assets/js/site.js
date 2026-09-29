@@ -61,9 +61,37 @@
 
   // ---- reveal on scroll ----
   const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+    entries.forEach(e=>{ if(e.isIntersecting){
+      const el = e.target; el.classList.add('in'); io.unobserve(el);
+      // al terminar, el elemento recupera sus propias animaciones (hover, etc.)
+      setTimeout(()=>{ el.style.transitionDelay=''; el.removeAttribute('data-reveal'); }, 1700);
+    } });
   }, {threshold:.15});
-  document.querySelectorAll('[data-reveal]').forEach(el=>io.observe(el));
+  document.querySelectorAll('[data-reveal]').forEach(el=>{
+    // escalonado: tarjetas hermanas entran una tras otra
+    const sibs = el.parentElement ? [...el.parentElement.children].filter(c=>c.hasAttribute('data-reveal')) : [];
+    const i = sibs.indexOf(el);
+    if(i > 0 && !el.style.transitionDelay) el.style.transitionDelay = Math.min(i*90, 360) + 'ms';
+    io.observe(el);
+  });
+
+  // ---- transición 3D al saltar a una sección (menú de secciones, botones con #) ----
+  (function(){
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    function flip(target){
+      if(!target) return;
+      const sec = target.closest('section') || target;
+      sec.classList.remove('sec-3d'); void sec.offsetWidth; sec.classList.add('sec-3d');
+      sec.addEventListener('animationend', ()=>sec.classList.remove('sec-3d'), {once:true});
+    }
+    document.addEventListener('click', (e)=>{
+      const a = e.target.closest('a[href*="#"]');
+      if(!a) return;
+      const url = new URL(a.href, location.href);
+      if(url.pathname !== location.pathname || !url.hash || url.hash.length < 2) return;
+      flip(document.getElementById(decodeURIComponent(url.hash.slice(1))));
+    });
+  })();
 
   // ---- current edition of the magazine ----
   // Comes from /api/current (the PDF the admin uploaded to Vercel Blob);
