@@ -172,7 +172,7 @@
   // ---- preselect a form option from the link (?registro=patrocinador, ?interes=publicidad) ----
   (function(){
     const p = new URLSearchParams(location.search);
-    const reg = {'grano-de-oro':'Concurso Grano de Oro','patrocinador':'Patrocinador','expositor':'Expositor / stand comercial','visitante':'Visitante','productor':'Productor de café'}[p.get('registro')];
+    const reg = {'grano-de-oro':'Concurso Grano de Oro','patrocinador':'Patrocinador','expositor':'Expositor / stand comercial','visitante':'Visitante','productor':'Productor de café','embajadora':'Embajadora del Café'}[p.get('registro')];
     const tipo = document.getElementById('fc-tipo');
     if(reg && tipo){ tipo.value = reg; tipo.dispatchEvent(new Event('change')); }
     const int = {'publicidad':'Publicidad en la revista','colaboracion':'Colaboración','suscripcion':'Suscripción'}[p.get('interes')];
@@ -226,6 +226,14 @@
     start();
   })();
 
+  // ---- convocatorias con fecha límite (Embajadora) ----
+  document.querySelectorAll('[data-deadline]').forEach(el=>{
+    if(new Date() < new Date(el.getAttribute('data-deadline'))) return;
+    el.innerHTML = 'Convocatoria cerrada. ¡Gracias por participar!';
+    document.querySelectorAll('[data-emb-btn]').forEach(b=>b.remove());
+    const opt = document.querySelector('#fc-tipo option[value="Embajadora del Café"]'); if(opt) opt.remove();
+  });
+
   // ---- FICC 2026: countdown + registration form (FormSubmit AJAX to the festival's email) ----
   (function(){
     const countEl = document.getElementById('ficcCount');
@@ -258,12 +266,27 @@
     const gdoCheckLabel = document.getElementById('gdoCheckLabel');
     const GDO = 'Concurso Grano de Oro';
     const isGdo = () => tipoSel.value === GDO;
-    function syncGdo(){
+    let syncGdo = function(){
       const on = isGdo();
       gdoFields.hidden = !on;
       gdoFields.querySelectorAll('[data-gdo-required]').forEach(el=>{ el.required = on; });
       document.getElementById('gd-muestras').required = on;
+    };
+    // Embajadora del Café: campos propios
+    const embFields = document.getElementById('embFields');
+    const embCheckLabel = document.getElementById('embCheckLabel');
+    const EMB = 'Embajadora del Café';
+    const isEmb = () => tipoSel.value === EMB;
+    function syncEmb(){
+      if(!embFields) return;
+      const on = isEmb();
+      embFields.hidden = !on;
+      embFields.querySelectorAll('[data-emb-required]').forEach(el=>{ el.required = on; });
+      document.getElementById('em-requisitos').required = on;
     }
+    const _syncGdo = syncGdo;
+    syncGdo = function(){ _syncGdo(); syncEmb(); };
+    if(embFields) document.getElementById('em-requisitos').addEventListener('change', e=>{ if(e.target.checked) embCheckLabel.classList.remove('bad'); });
     tipoSel.addEventListener('change', syncGdo);
     document.getElementById('gd-muestras').addEventListener('change', e=>{ if(e.target.checked) gdoCheckLabel.classList.remove('bad'); });
     document.getElementById('fc-acepto').addEventListener('change', e=>{ if(e.target.checked) checkLabel.classList.remove('bad'); });
@@ -291,7 +314,9 @@
       checkLabel.classList.toggle('bad', !accepted);
       const samplesOk = !isGdo() || document.getElementById('gd-muestras').checked;
       gdoCheckLabel.classList.toggle('bad', !samplesOk);
-      if(!valid || !accepted || !samplesOk){
+      const embOk = !isEmb() || document.getElementById('em-requisitos').checked;
+      if(embCheckLabel) embCheckLabel.classList.toggle('bad', !embOk);
+      if(!valid || !accepted || !samplesOk || !embOk){
         errEl.textContent = 'Revisa los campos marcados.';
         errEl.hidden = false;
         const firstBad = form.querySelector('[required]:invalid');
@@ -306,7 +331,7 @@
       try{
         const gdo = isGdo();
         const payload = {
-          _subject: gdo ? `Registro Concurso Grano de Oro - ${nombre}` : `Nuevo registro FICC 2026 - ${tipo} - ${nombre}`,
+          _subject: gdo ? `Registro Concurso Grano de Oro - ${nombre}` : (isEmb() ? `Registro Embajadora del Café 2026 - ${nombre}` : `Nuevo registro FICC 2026 - ${tipo} - ${nombre}`),
           _template: 'table',
           _captcha: 'false',
           _autoresponse: 'Gracias por registrarte al Festival Internacional del Café Cacahoatán 2026 (18 al 22 de diciembre, Parque Central de Cacahoatán, Chiapas). El comité organizador te contactará pronto. Informes por WhatsApp: 962 257 0907.',
@@ -333,6 +358,15 @@
             'Confirma entrega de muestras': 'Sí'
           });
         }
+        if(isEmb()){
+          payload._autoresponse = 'Gracias por inscribirte al certamen Embajadora del Café Cacahoatán 2026. El comité organizador revisará tu registro y te contactará pronto. Informes: 962 166 0228.';
+          Object.assign(payload, {
+            'Edad': val('em-edad'),
+            'Estatura (m)': val('em-estatura'),
+            'Localidad de Cacahoatán': val('em-localidad'),
+            'Confirma requisitos de la convocatoria': 'Sí'
+          });
+        }
         const res = await fetch('https://formsubmit.co/ajax/ficc.cacahoatan2026@gmail.com', {
           method:'POST',
           headers:{'Content-Type':'application/json','Accept':'application/json'},
@@ -340,6 +374,7 @@
         });
         if(!res.ok) throw new Error('send failed');
         form.querySelectorAll('.field, .field-row, .ficc-check, .form-submit, .form-intro, .gdo-fields, .reg-more').forEach(el=>el.style.display='none');
+        if(isEmb()) okEl.innerHTML = '<strong>¡Inscripción recibida!</strong><br>Ya estás registrada como aspirante a Embajadora del Café. Te contactaremos pronto.';
         if(gdo) okEl.innerHTML = '<strong>¡Inscripción recibida!</strong><br>Te avisaremos dónde y cuándo entregar tus muestras.';
         okEl.hidden = false;
         okEl.scrollIntoView({behavior:'smooth', block:'center'});
