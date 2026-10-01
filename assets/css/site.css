@@ -1306,3 +1306,8 @@
   .sec-3d{animation:none;}
   ::view-transition-old(root), ::view-transition-new(root){animation:none;}
 }
+
+/* Título con la tipografía de la portada de la revista */
+h1.hero-title--img{line-height:0;font-size:inherit;margin:0;}
+h1.hero-title--img img{width:clamp(280px,50vw,640px);height:auto;filter:drop-shadow(0 6px 26px rgba(0,0,0,.35));}
+.hero--page h1.hero-title--img img{width:clamp(250px,40vw,500px);}
