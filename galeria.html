@@ -9,6 +9,56 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&family=Alex+Brush&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/site.css?v=20261001b">
+<style>
+/* Galería: refined, quieter palette (slate + warm neutrals). Scoped to this page only. */
+.page-galeria{--slate:#202A36;--slate-2:#3A4654;--mute:#6B7480;--neutral:#F6F5F2;--hair:rgba(32,42,54,.10);}
+.page-galeria #fotos{background:var(--neutral)!important;}
+.page-galeria #fotos .section-head{max-width:720px;}
+.page-galeria #fotos .eyebrow{color:var(--mute);display:inline-flex;align-items:center;gap:12px;}
+.page-galeria #fotos .eyebrow::before{content:"";width:28px;height:1px;background:#C9A45C;}
+.page-galeria #fotos .section-head h2{color:var(--slate);font-weight:600;letter-spacing:-.01em;}
+.page-galeria #fotos .section-head p{color:var(--mute);}
+.page-galeria .chips{gap:10px;}
+.page-galeria .chip{
+  font-weight:500;letter-spacing:.01em;padding:10px 20px;border-radius:999px;
+  border:1px solid var(--hair);background:#fff;color:var(--slate-2);
+  box-shadow:0 1px 2px rgba(16,24,40,.04);
+}
+.page-galeria .chip:hover{border-color:rgba(32,42,54,.28);color:var(--slate);}
+.page-galeria .chip[aria-pressed="true"]{background:var(--slate);border-color:var(--slate);color:#fff;box-shadow:0 8px 20px -10px rgba(32,42,54,.6);}
+.page-galeria .chip:focus-visible{outline:2px solid #C9A45C;outline-offset:3px;}
+.page-galeria .gal-grid{column-gap:20px;}
+.page-galeria .gal-item{
+  margin-bottom:20px;border-radius:18px;background:var(--slate);
+  box-shadow:0 1px 2px rgba(16,24,40,.06),0 18px 40px -22px rgba(16,24,40,.45);
+  transition:transform .45s cubic-bezier(.2,.7,.2,1),box-shadow .45s ease;
+}
+.page-galeria .gal-item:hover{transform:translateY(-3px);box-shadow:0 2px 4px rgba(16,24,40,.06),0 28px 50px -24px rgba(16,24,40,.55);}
+.page-galeria .gal-item img{transition:transform .8s cubic-bezier(.2,.7,.2,1);}
+.page-galeria .gal-item:hover img{transform:scale(1.03);}
+.page-galeria .gal-item figcaption{
+  font-weight:500;font-size:.8rem;letter-spacing:.01em;padding:40px 18px 14px;
+}
+.page-galeria .gal-item--wm figcaption{padding-right:32%;line-height:1.35;
+  background:linear-gradient(0deg,rgba(17,23,31,.78),rgba(17,23,31,0));
+}
+.page-galeria .gal-rights{margin:22px 0 0;font-size:.78rem;color:var(--mute);letter-spacing:.01em;}
+.page-galeria #videos{background:#fff!important;border-top:1px solid var(--hair)!important;}
+.page-galeria .video-box{background:linear-gradient(135deg,#2A3542,#161D26);border-radius:24px;}
+.page-galeria .video-box .eyebrow{color:#C9A45C!important;}
+/* lightbox */
+.page-galeria .lightbox::backdrop{background:rgba(14,19,26,.94);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);}
+.page-galeria .lightbox img{border-radius:14px;box-shadow:0 30px 80px -20px rgba(0,0,0,.6);}
+.page-galeria .lightbox figcaption{font-size:.85rem;letter-spacing:.02em;color:rgba(255,255,255,.8);margin-top:14px;}
+.page-galeria .lightbox button{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18);font-weight:300;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);}
+.page-galeria .lightbox button:hover{background:rgba(255,255,255,.18);}
+/* download deterrence: no drag, no long-press save, no selection */
+.page-galeria .gal-item,.page-galeria .gal-item img,.page-galeria .lightbox img{
+  -webkit-user-select:none;user-select:none;-webkit-user-drag:none;-webkit-touch-callout:none;
+}
+.page-galeria .gal-item img,.page-galeria .lightbox figure{position:relative;}
+.page-galeria .lightbox figure::after{content:"";position:absolute;inset:0 0 2.4em 0;} /* shield over the big photo */
+</style>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Volcanes y Raíces">
 <meta property="og:title" content="Galería — Volcanes y Raíces">
@@ -55,23 +105,39 @@
     <div class="section-head" data-reveal>
       <span class="eyebrow">Fotografías</span>
       <h2 class="display">Imágenes de nuestra tierra</h2>
-      <p>Toca una foto para verla en grande.</p>
+      <p>Toca una foto para verla en grande. Fotografía aérea de Cacahoatán, sus cascadas y el volcán Tacaná.</p>
     </div>
     <div class="chips" data-filter-group=".gal-item" role="group" aria-label="Filtrar fotografías">
       <button type="button" class="chip" data-filter="todos" aria-pressed="true">Todas</button>
       <button type="button" class="chip" data-filter="cacahoatan" aria-pressed="false">Cacahoatán</button>
+      <button type="button" class="chip" data-filter="aereas" aria-pressed="false">Vistas aéreas</button>
+      <button type="button" class="chip" data-filter="cascadas" aria-pressed="false">Cascadas</button>
       <button type="button" class="chip" data-filter="ficc" aria-pressed="false">FICC 2026</button>
       <button type="button" class="chip" data-filter="revista" aria-pressed="false">Revista</button>
     </div>
-    <div class="gal-grid">
+    <div class="gal-grid" id="galGrid">
+      <a class="gal-item gal-item--wm" data-cat="cacahoatan aereas" href="/assets/galeria/cacahoatan-tacana-panoramica.webp" data-lightbox data-caption="Cacahoatán y el volcán Tacaná desde el aire"><img src="/assets/galeria/cacahoatan-tacana-panoramica-thumb.webp" alt="Vista aérea panorámica de Cacahoatán con el volcán Tacaná en el horizonte" width="760" height="535" loading="lazy" decoding="async" draggable="false"><figcaption>Cacahoatán y el volcán Tacaná desde el aire</figcaption></a>
+      <a class="gal-item gal-item--wm" data-cat="cascadas" href="/assets/galeria/cascada-entre-rocas.webp" data-lightbox data-caption="Cascada entre rocas y selva"><img src="/assets/galeria/cascada-entre-rocas-thumb.webp" alt="Cascada cayendo entre paredes de roca cubiertas de vegetación" width="760" height="428" loading="lazy" decoding="async" draggable="false"><figcaption>Cascada entre rocas y selva</figcaption></a>
+      <a class="gal-item gal-item--wm" data-cat="cacahoatan aereas" href="/assets/galeria/atardecer-centro.webp" data-lightbox data-caption="Atardecer sobre el centro de Cacahoatán"><img src="/assets/galeria/atardecer-centro-thumb.webp" alt="Atardecer de colores sobre el centro de Cacahoatán y su torre del reloj" width="760" height="535" loading="lazy" decoding="async" draggable="false"><figcaption>Atardecer sobre el centro de Cacahoatán</figcaption></a>
+      <a class="gal-item gal-item--wm" data-cat="cascadas aereas" href="/assets/galeria/cascadas-gemelas.webp" data-lightbox data-caption="Caídas de agua en la montaña"><img src="/assets/galeria/cascadas-gemelas-thumb.webp" alt="Vista aérea de dos caídas de agua entre la selva" width="760" height="428" loading="lazy" decoding="async" draggable="false"><figcaption>Caídas de agua en la montaña</figcaption></a>
+      <a class="gal-item gal-item--wm" data-cat="cacahoatan aereas" href="/assets/galeria/cacahoatan-traza-tacana.webp" data-lightbox data-caption="Las calles de Cacahoatán y el Tacaná"><img src="/assets/galeria/cacahoatan-traza-tacana-thumb.webp" alt="Vista aérea de la traza urbana de Cacahoatán con el volcán Tacaná al fondo" width="760" height="535" loading="lazy" decoding="async" draggable="false"><figcaption>Las calles de Cacahoatán y el Tacaná</figcaption></a>
+      <a class="gal-item gal-item--wm" data-cat="cacahoatan aereas" href="/assets/galeria/arco-cacahoatan.webp" data-lightbox data-caption="Arco de bienvenida a Cacahoatán"><img src="/assets/galeria/arco-cacahoatan-thumb.webp" alt="Arco de bienvenida con el nombre de Cacahoatán sobre la carretera" width="760" height="429" loading="lazy" decoding="async" draggable="false"><figcaption>Arco de bienvenida a Cacahoatán</figcaption></a>
+      <a class="gal-item gal-item--wm" data-cat="cascadas aereas" href="/assets/galeria/cascada-canada-aerea.webp" data-lightbox data-caption="Cascada en la cañada"><img src="/assets/galeria/cascada-canada-aerea-thumb.webp" alt="Vista aérea de una cascada en una cañada cubierta de selva" width="760" height="428" loading="lazy" decoding="async" draggable="false"><figcaption>Cascada en la cañada</figcaption></a>
+      <a class="gal-item gal-item--wm" data-cat="cacahoatan aereas" href="/assets/galeria/tacana-entre-nubes.webp" data-lightbox data-caption="Volcán Tacaná entre nubes"><img src="/assets/galeria/tacana-entre-nubes-thumb.webp" alt="Volcán Tacaná rodeado de nubes sobre los campos de Cacahoatán" width="760" height="570" loading="lazy" decoding="async" draggable="false"><figcaption>Volcán Tacaná entre nubes</figcaption></a>
+      <a class="gal-item gal-item--wm" data-cat="cacahoatan aereas" href="/assets/galeria/parque-central-noche.webp" data-lightbox data-caption="El parque central de noche"><img src="/assets/galeria/parque-central-noche-thumb.webp" alt="Vista aérea nocturna del parque central de Cacahoatán iluminado" width="760" height="429" loading="lazy" decoding="async" draggable="false"><figcaption>El parque central de noche</figcaption></a>
+      <a class="gal-item gal-item--wm" data-cat="cascadas aereas" href="/assets/galeria/cascada-escalonada.webp" data-lightbox data-caption="Cascada escalonada"><img src="/assets/galeria/cascada-escalonada-thumb.webp" alt="Vista aérea de una cascada escalonada entre la vegetación" width="760" height="428" loading="lazy" decoding="async" draggable="false"><figcaption>Cascada escalonada</figcaption></a>
+      <a class="gal-item gal-item--wm" data-cat="cacahoatan aereas" href="/assets/galeria/comunidad-montana.webp" data-lightbox data-caption="Comunidad en la montaña"><img src="/assets/galeria/comunidad-montana-thumb.webp" alt="Vista aérea de una comunidad entre montañas verdes" width="760" height="428" loading="lazy" decoding="async" draggable="false"><figcaption>Comunidad en la montaña</figcaption></a>
+      <a class="gal-item gal-item--wm" data-cat="cacahoatan aereas" href="/assets/galeria/arco-buen-viaje.webp" data-lightbox data-caption="Arco «Buen Viaje»"><img src="/assets/galeria/arco-buen-viaje-thumb.webp" alt="Arco de despedida con la leyenda Buen Viaje sobre la carretera entre árboles" width="760" height="429" loading="lazy" decoding="async" draggable="false"><figcaption>Arco «Buen Viaje»</figcaption></a>
+      <a class="gal-item gal-item--wm" data-cat="cacahoatan aereas" href="/assets/galeria/cacahoatan-cielo-azul.webp" data-lightbox data-caption="Cacahoatán bajo cielo azul"><img src="/assets/galeria/cacahoatan-cielo-azul-thumb.webp" alt="Vista aérea de Cacahoatán bajo un cielo azul con el volcán Tacaná" width="760" height="535" loading="lazy" decoding="async" draggable="false"><figcaption>Cacahoatán bajo cielo azul</figcaption></a>
       <a class="gal-item" data-cat="cacahoatan" href="/assets/hero.jpg" data-lightbox data-caption="Cacahoatán y el volcán Tacaná al atardecer"><img src="/assets/hero.jpg" alt="Vista aérea de Cacahoatán con el volcán Tacaná al atardecer" loading="lazy"><figcaption>Cacahoatán y el volcán Tacaná al atardecer</figcaption></a>
-      <a class="gal-item" data-cat="cacahoatan" href="/assets/cascada.jpg" data-lightbox data-caption="Cascada Agua Caliente"><img src="/assets/cascada.jpg" alt="Cascada Agua Caliente entre rocas y vegetación" loading="lazy"><figcaption>Cascada Agua Caliente</figcaption></a>
+      <a class="gal-item" data-cat="cacahoatan cascadas" href="/assets/cascada.jpg" data-lightbox data-caption="Cascada Agua Caliente"><img src="/assets/cascada.jpg" alt="Cascada Agua Caliente entre rocas y vegetación" loading="lazy"><figcaption>Cascada Agua Caliente</figcaption></a>
       <a class="gal-item" data-cat="revista" href="/assets/editorial.jpg" data-lightbox data-caption="Volcán Tacaná · Revista Volcanes y Raíces"><img src="/assets/editorial.jpg" alt="Volcán Tacaná con el logo de la revista" loading="lazy"><figcaption>Volcán Tacaná · Revista Volcanes y Raíces</figcaption></a>
       <a class="gal-item" data-cat="ficc" href="/assets/ficc/ficc-flyer.jpg" data-lightbox data-caption="Cartel oficial del FICC 2026"><img src="/assets/ficc/ficc-flyer.jpg" alt="Cartel del Festival Internacional del Café Cacahoatán 2026" loading="lazy"><figcaption>Cartel oficial del FICC 2026</figcaption></a>
       <a class="gal-item" data-cat="ficc" href="/assets/ficc/grano-de-oro-2.jpg" data-lightbox data-caption="Concurso Grano de Oro"><img src="/assets/ficc/grano-de-oro-2.jpg" alt="Cartel del Concurso Grano de Oro" loading="lazy"><figcaption>Concurso Grano de Oro</figcaption></a>
       <a class="gal-item" data-cat="ficc" href="/assets/ficc/grano-de-oro.jpg" data-lightbox data-caption="Requisitos del Concurso Grano de Oro"><img src="/assets/ficc/grano-de-oro.jpg" alt="Requisitos del Concurso Grano de Oro" loading="lazy"><figcaption>Requisitos del Concurso Grano de Oro</figcaption></a>
       <a class="gal-item" data-cat="ficc" href="/assets/ficc/ficc-banner.jpg" data-lightbox data-caption="Festival del Café Cacahoatán 2026"><img src="/assets/ficc/ficc-banner.jpg" alt="Portada del Festival del Café Cacahoatán 2026" loading="lazy"><figcaption>Festival del Café Cacahoatán 2026</figcaption></a>
     </div>
+    <p class="gal-rights">© 2026 Revista Volcanes y Raíces. Fotografías protegidas: no se permite descargarlas ni usarlas sin autorización.</p>
   </div>
 </section>
 
@@ -124,5 +190,17 @@
 </footer>
 
 <script src="/assets/js/site.js?v=20261001b"></script>
+<script>
+// Galería: discourage saving the photos (right-click, drag, long-press, Ctrl+S).
+(function(){
+  var guard = function(e){ return e.target.closest && e.target.closest('.gal-item, .lightbox'); };
+  document.addEventListener('contextmenu', function(e){ if(guard(e)) e.preventDefault(); });
+  document.addEventListener('dragstart', function(e){ if(guard(e)) e.preventDefault(); });
+  document.addEventListener('keydown', function(e){
+    if((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S')) e.preventDefault();
+  });
+  document.querySelectorAll('.gal-item img').forEach(function(img){ img.setAttribute('draggable','false'); });
+})();
+</script>
 </body>
 </html>

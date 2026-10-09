@@ -113,44 +113,58 @@
         if(e.key==='ArrowLeft') pageFlip.flipPrev();
       });
 
-      // ---- zoom + pan controls (fully custom, doesn't depend on native scroll) ----
-      const bookStage = document.querySelector('.book-stage');
+      // ---- zoom + pan: only the book viewport is clipped; controls stay put below ----
+      const viewport = document.getElementById('bookViewport') || bookEl.parentElement;
       const zoomInBtn = document.getElementById('zoomInBtn');
       const zoomOutBtn = document.getElementById('zoomOutBtn');
       if(zoomOutBtn) zoomOutBtn.disabled = true;
       const minScale = 1, maxScale = 3.2, zoomStep = 0.5;
 
       let currentScale = 1;
-      let bookNatW = 0, bookNatH = 0;         // #book's natural (unscaled) size
-      let naturalLeft = 0, naturalTop = 0; // #book's resting position relative to the stage (it's centered by flexbox)
-      let offX = 0, offY = 0;           // ABSOLUTE visual position of #book's top-left corner, relative to the stage
-      const activePointers = new Map(); // pointerId -> {x,y}
-      let dragLast = null;
-      let pinchStart = null;
+      let bookNatW = 0, bookNatH = 0;   // #book natural size
+      let naturalLeft = 0, naturalTop = 0; // #book resting position inside the viewport
+      let offX = 0, offY = 0;           // visual top-left of #book inside the viewport
+      const activePointers = new Map();
+      let dragLast = null, pinchStart = null;
 
       function clamp(v, min, max){ return Math.min(max, Math.max(min, v)); }
 
       function measureRest(){
-        const stageRect = bookStage.getBoundingClientRect();
-        const bookRect = bookEl.getBoundingClientRect();
-        naturalLeft = bookRect.left - stageRect.left;
-        naturalTop = bookRect.top - stageRect.top;
-        bookNatW = bookRect.width;
-        bookNatH = bookRect.height;
+        const vr = viewport.getBoundingClientRect();
+        const br = bookEl.getBoundingClientRect();
+        naturalLeft = br.left - vr.left;
+        naturalTop = br.top - vr.top;
+        bookNatW = br.width;
+        bookNatH = br.height;
       }
 
+      function lockViewport(){
+        // freeze the viewport at its resting size so nothing below moves while zoomed
+        viewport.style.height = viewport.offsetHeight + 'px';
+        viewport.classList.add('zoomed');
+      }
+
+      // the part of the book that has a page: cover sits on the right half, back cover on the left
+      function pageSpan(){
+        let landscape = true;
+        try { landscape = pageFlip.getOrientation() === 'landscape'; } catch(e){}
+        if(!landscape) return [0, 1];
+        const i = pageFlip.getCurrentPageIndex();
+        if(i === 0) return [0.5, 1];
+        if(i === totalPages - 1 && totalPages % 2 === 0) return [0, 0.5];
+        return [0, 1];
+      }
+      function visibleFrac(){ const s = pageSpan(); return (s[0] + s[1]) / 2; }
+
+      // keep the visible page(s) filling the view; never pan out onto the empty half of the cover spread
       function clampOffset(x, y, scale){
-        const stageW = bookStage.clientWidth;
-        const stageH = bookStage.clientHeight;
-        const contentW = bookNatW * scale;
-        const contentH = bookNatH * scale;
-        const minX = Math.min(0, stageW - contentW);
-        const maxX = Math.max(0, stageW - contentW);
-        const minY = Math.min(0, stageH - contentH);
-        const maxY = Math.max(0, stageH - contentH);
+        const vw = viewport.clientWidth, vh = viewport.clientHeight;
+        const span = pageSpan();
+        const cw = bookNatW * scale, ch = bookNatH * scale;
+        const lo = span[0] * cw, hi = span[1] * cw, rw = hi - lo;
         return {
-          x: contentW <= stageW ? (stageW - contentW) / 2 : clamp(x, minX, maxX),
-          y: contentH <= stageH ? (stageH - contentH) / 2 : clamp(y, minY, maxY)
+          x: rw <= vw ? (vw - rw) / 2 - lo : clamp(x, vw - hi, -lo),
+          y: ch <= vh ? (vh - ch) / 2 : clamp(y, vh - ch, 0)
         };
       }
 
@@ -161,113 +175,99 @@
       function resetZoom(){
         currentScale = 1;
         bookEl.style.transform = '';
-        bookStage.classList.remove('zoomed');
-        bookStage.style.touchAction = 'pan-y';
+        viewport.classList.remove('zoomed');
+        viewport.style.height = '';
         if(zoomOutBtn) zoomOutBtn.disabled = true;
         if(zoomInBtn) zoomInBtn.disabled = false;
+      }
+
+      function syncButtons(){
+        if(zoomOutBtn) zoomOutBtn.disabled = currentScale <= minScale;
+        if(zoomInBtn) zoomInBtn.disabled = currentScale >= maxScale;
       }
 
       function setZoom(scale, focusClientX, focusClientY){
         const prevScale = currentScale;
         const newScale = clamp(scale, minScale, maxScale);
         if(newScale === prevScale) return;
+        if(newScale === minScale){ resetZoom(); return; }
 
         if(prevScale === 1){
           measureRest();
-          offX = naturalLeft;
-          offY = naturalTop;
+          lockViewport();
+          offX = naturalLeft; offY = naturalTop;
         }
+        const vr = viewport.getBoundingClientRect();
+        const vw = viewport.clientWidth, vh = viewport.clientHeight;
 
-        const stageRect = bookStage.getBoundingClientRect();
-        const fx = focusClientX != null ? focusClientX - stageRect.left : bookStage.clientWidth / 2;
-        const fy = focusClientY != null ? focusClientY - stageRect.top : bookStage.clientHeight / 2;
-
-        if(newScale === minScale){
-          resetZoom();
-          return;
+        if(prevScale === 1 && focusClientX == null){
+          // first zoom from the buttons: bring the visible page to the middle
+          const px = bookNatW * visibleFrac(), py = bookNatH / 2;
+          offX = vw / 2 - px * newScale;
+          offY = vh / 2 - py * newScale;
+        } else {
+          const fx = focusClientX != null ? focusClientX - vr.left : vw / 2;
+          const fy = focusClientY != null ? focusClientY - vr.top : vh / 2;
+          const ratio = newScale / prevScale;
+          offX = fx - ratio * (fx - offX);
+          offY = fy - ratio * (fy - offY);
         }
-
-        bookStage.classList.add('zoomed');
-        bookStage.style.touchAction = 'none';
-        const ratio = newScale / prevScale;
-        offX = fx - ratio * (fx - offX);
-        offY = fy - ratio * (fy - offY);
         currentScale = newScale;
-        const clamped = clampOffset(offX, offY, currentScale);
-        offX = clamped.x; offY = clamped.y;
-        render();
-        if(zoomOutBtn) zoomOutBtn.disabled = false;
-        if(zoomInBtn) zoomInBtn.disabled = currentScale >= maxScale;
+        const c = clampOffset(offX, offY, currentScale);
+        offX = c.x; offY = c.y;
+        render(); syncButtons();
       }
 
       if(zoomInBtn) zoomInBtn.addEventListener('click', ()=>setZoom(currentScale + zoomStep));
       if(zoomOutBtn) zoomOutBtn.addEventListener('click', ()=>setZoom(currentScale - zoomStep));
-      bookStage.addEventListener('dblclick', (e)=>setZoom(currentScale > 1 ? 1 : 2, e.clientX, e.clientY));
-
-      // ctrl/cmd + mouse wheel to zoom (desktop)
-      bookStage.addEventListener('wheel', (e)=>{
+      viewport.addEventListener('dblclick', (e)=>setZoom(currentScale > 1 ? 1 : 2, e.clientX, e.clientY));
+      viewport.addEventListener('wheel', (e)=>{
         if(!e.ctrlKey && !e.metaKey) return;
         e.preventDefault();
         setZoom(currentScale + (e.deltaY > 0 ? -0.3 : 0.3), e.clientX, e.clientY);
       }, {passive:false});
+      // a resize (or fullscreen toggle) changes the book size: start again from the whole view
+      window.addEventListener('resize', ()=>{ if(currentScale > 1) resetZoom(); });
+      pageFlip.on('flip', ()=>{ if(currentScale > 1) resetZoom(); });
 
-      // pointer-based pan (mouse drag or single-finger drag, only while zoomed) + pinch-to-zoom (two fingers)
-      bookStage.style.touchAction = 'pan-y';
-
-      bookStage.addEventListener('pointerdown', (e)=>{
+      viewport.addEventListener('pointerdown', (e)=>{
         activePointers.set(e.pointerId, {x:e.clientX, y:e.clientY});
         if(activePointers.size === 1 && currentScale > 1){
-          bookStage.setPointerCapture(e.pointerId);
+          viewport.setPointerCapture(e.pointerId);
           dragLast = {x:e.clientX, y:e.clientY};
         } else if(activePointers.size === 2){
-          bookStage.setPointerCapture(e.pointerId);
-          bookStage.style.touchAction = 'none';
-          if(currentScale === 1) measureRest();
+          viewport.setPointerCapture(e.pointerId);
+          if(currentScale === 1){ measureRest(); lockViewport(); offX = naturalLeft; offY = naturalTop; }
           const pts = [...activePointers.values()];
-          const dist = Math.hypot(pts[0].x-pts[1].x, pts[0].y-pts[1].y);
           pinchStart = {
-            dist, scale: currentScale,
-            offX: currentScale === 1 ? naturalLeft : offX,
-            offY: currentScale === 1 ? naturalTop : offY,
+            dist: Math.hypot(pts[0].x-pts[1].x, pts[0].y-pts[1].y),
+            scale: currentScale, offX, offY,
             midX:(pts[0].x+pts[1].x)/2, midY:(pts[0].y+pts[1].y)/2
           };
           dragLast = null;
         }
-        // single pointer at scale 1: don't capture — let it pass through to native scroll / page-flip drag
       });
 
-      bookStage.addEventListener('pointermove', (e)=>{
+      viewport.addEventListener('pointermove', (e)=>{
         if(!activePointers.has(e.pointerId)) return;
         activePointers.set(e.pointerId, {x:e.clientX, y:e.clientY});
-
         if(activePointers.size === 2 && pinchStart){
           const pts = [...activePointers.values()];
           const dist = Math.hypot(pts[0].x-pts[1].x, pts[0].y-pts[1].y);
-          const ratio = dist / pinchStart.dist;
-          const newScale = clamp(pinchStart.scale * ratio, minScale, maxScale);
-          if(newScale === minScale){
-            resetZoom();
-          } else {
-            const scaleRatio = newScale / pinchStart.scale;
-            const stageRect = bookStage.getBoundingClientRect();
-            const midX = pinchStart.midX - stageRect.left;
-            const midY = pinchStart.midY - stageRect.top;
-            offX = midX - (midX - pinchStart.offX) * scaleRatio;
-            offY = midY - (midY - pinchStart.offY) * scaleRatio;
-            currentScale = newScale;
-            bookStage.classList.add('zoomed');
-            const clamped = clampOffset(offX, offY, currentScale);
-            offX = clamped.x; offY = clamped.y;
-            render();
-            if(zoomOutBtn) zoomOutBtn.disabled = false;
-            if(zoomInBtn) zoomInBtn.disabled = currentScale >= maxScale;
-          }
+          const newScale = clamp(pinchStart.scale * dist / pinchStart.dist, minScale, maxScale);
+          if(newScale === minScale){ resetZoom(); return; }
+          const vr = viewport.getBoundingClientRect();
+          const mx = pinchStart.midX - vr.left, my = pinchStart.midY - vr.top;
+          const r = newScale / pinchStart.scale;
+          currentScale = newScale;
+          const c = clampOffset(mx - (mx - pinchStart.offX) * r, my - (my - pinchStart.offY) * r, currentScale);
+          offX = c.x; offY = c.y;
+          render(); syncButtons();
         } else if(dragLast && currentScale > 1){
-          const dx = e.clientX - dragLast.x;
-          const dy = e.clientY - dragLast.y;
+          const dx = e.clientX - dragLast.x, dy = e.clientY - dragLast.y;
           dragLast = {x:e.clientX, y:e.clientY};
-          const clamped = clampOffset(offX + dx, offY + dy, currentScale);
-          offX = clamped.x; offY = clamped.y;
+          const c = clampOffset(offX + dx, offY + dy, currentScale);
+          offX = c.x; offY = c.y;
           render();
         }
       });
@@ -278,13 +278,12 @@
         if(activePointers.size === 1 && currentScale > 1){
           const p = [...activePointers.values()][0];
           dragLast = {x:p.x, y:p.y};
-        } else {
-          dragLast = null;
-        }
+        } else dragLast = null;
+        if(activePointers.size === 0 && currentScale === 1) resetZoom();
       }
-      bookStage.addEventListener('pointerup', endPointer);
-      bookStage.addEventListener('pointercancel', endPointer);
-      bookStage.addEventListener('pointerleave', endPointer);
+      viewport.addEventListener('pointerup', endPointer);
+      viewport.addEventListener('pointercancel', endPointer);
+      viewport.addEventListener('pointerleave', endPointer);
 
       // thumbnails (small, cheap renders)
       for(let i=1;i<=totalPages;i++){

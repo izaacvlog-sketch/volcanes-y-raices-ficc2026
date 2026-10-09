@@ -9,6 +9,35 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&family=Alex+Brush&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/site.css?v=20261001b">
+<style>
+  /* zoom de la revista: solo el libro se recorta; los controles se quedan fijos debajo */
+  .book-viewport{position:relative;z-index:1;width:100%;display:flex;flex-direction:column;align-items:center;touch-action:pan-y}
+  .book-viewport.zoomed{overflow:hidden;cursor:grab;touch-action:none;border-radius:8px}
+  .book-viewport.zoomed:active{cursor:grabbing}
+  .book-viewport.zoomed #book{pointer-events:none}
+  /* fondo de la portada de la revista: foto aérea del volcán Tacaná */
+  .hero--revista .hero-bg{
+    background-image:
+      linear-gradient(180deg, rgba(6,26,30,.35) 0%, rgba(6,26,30,.12) 35%, rgba(6,26,30,.55) 70%, rgba(6,26,30,.9) 100%),
+      url("/assets/tacana-dron.jpg");
+    background-image:
+      linear-gradient(180deg, rgba(6,26,30,.35) 0%, rgba(6,26,30,.12) 35%, rgba(6,26,30,.55) 70%, rgba(6,26,30,.9) 100%),
+      image-set(url("/assets/tacana-dron.webp") type("image/webp"), url("/assets/tacana-dron.jpg") type("image/jpeg"));
+    background-position:center 40%;
+  }
+  /* comercio local con logotipos */
+  .neg-strip{grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px}
+  .neg-item{padding:0;overflow:hidden;display:flex;flex-direction:column;text-align:center}
+  .neg-logo{display:block;aspect-ratio:4/3;background:var(--neg-bg,#fff);border-bottom:1px solid var(--line);overflow:hidden}
+  .neg-logo img{display:block;width:100%;height:100%}
+  .neg-logo--contain img{object-fit:contain;padding:12%}
+  .neg-logo--cover img{object-fit:cover}
+  .neg-logo--text{display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#3a2a1f,#1d1510);color:#F4C64A;font-family:'Playfair Display',Georgia,serif;font-weight:800;font-size:1.5rem;letter-spacing:.02em}
+  .neg-logo--tight img{padding:4%}
+  @media (max-width:640px){.neg-strip{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.neg-name{font-size:.76rem;padding:10px 8px 12px}}
+  .neg-name{display:block;padding:12px 10px 14px;font-size:.82rem;font-weight:600;line-height:1.3}
+  .discover-note{display:inline-block;margin-top:22px;font-size:.78rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.78)}
+</style>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Volcanes y Raíces">
 <meta property="og:title" content="Revista Volcanes y Raíces">
@@ -100,7 +129,7 @@
     <div class="edition-card" data-reveal><span><b>Primera edición</b> · Edición actual</span><a class="chip-btn" href="/revista.pdf" data-pdf-link download="Revista-Volcanes-y-Raices.pdf">⬇ Descargar esta edición</a></div>
     <div class="book-stage">
       <div class="book-glow"></div>
-      <div id="book"></div>
+      <div class="book-viewport" id="bookViewport"><div id="book"></div></div>
       <div class="book-loading" id="bookLoading"><span class="spinner"></span> Cargando páginas en alta calidad…</div>
       <div class="book-controls">
         <button class="flip-btn" id="prevBtn" aria-label="Página anterior">‹</button>
@@ -151,7 +180,7 @@
   <div class="discover-bg"></div>
   <div class="wrap">
     <div class="discover-content" data-reveal>
-      <span class="eyebrow">Descubre la portada</span>
+      <span class="eyebrow">Joyas ocultas</span>
       <h2 class="display">Cascada Agua Caliente</h2>
       <p>Más de 100 metros de aguas termales, alimentadas por la actividad geotérmica del volcán Tacaná, en pleno corazón selvático de Cacahoatán.</p>
       <div class="fact-row">
@@ -160,6 +189,7 @@
         <span class="fact-pill">¿Sabías qué?</span>
         <span class="fact-pill">Joyas ocultas</span>
       </div>
+      <span class="discover-note">Descubre la portada</span>
     </div>
   </div>
 </section>
@@ -172,16 +202,16 @@
       <p>Un directorio de emprendimientos cacahoatecos, del bolillo horneado a la construcción de tu próxima casa.</p>
     </div>
     <div class="neg-strip" data-reveal>
-      <div class="neg-item">El Bolillazo de Vero</div>
-      <div class="neg-item">Casa Kakaluta</div>
-      <div class="neg-item">Carnes Asadas Mixcum</div>
-      <div class="neg-item">Abarrotes Faby</div>
-      <div class="neg-item">Azur Fixing</div>
-      <div class="neg-item">Óptica 20/20</div>
-      <div class="neg-item">CAJT Diseño y Construcción</div>
-      <div class="neg-item">Ferretería La Rocka</div>
-      <div class="neg-item">Novedades Thaily</div>
-      <div class="neg-item">Azur Technology</div>
+      <div class="neg-item"><span class="neg-logo neg-logo--contain" style="--neg-bg:#FFFFFF"><img src="/assets/negocios/bolillazo-de-vero.webp" alt="Logo de El Bolillazo de Vero" loading="lazy" decoding="async"></span><span class="neg-name">El Bolillazo de Vero</span></div>
+      <div class="neg-item"><span class="neg-logo neg-logo--contain" style="--neg-bg:#1B0B05"><img src="/assets/negocios/casa-kakaluta.webp" alt="Logo de Casa Kakaluta" loading="lazy" decoding="async"></span><span class="neg-name">Casa Kakaluta</span></div>
+      <div class="neg-item"><span class="neg-logo neg-logo--cover" style="--neg-bg:#120d0b"><img src="/assets/negocios/carnes-asadas-mixcum.webp" alt="Logo de Carnes Asadas Mixcum" loading="lazy" decoding="async"></span><span class="neg-name">Carnes Asadas Mixcum</span></div>
+      <div class="neg-item"><span class="neg-logo neg-logo--contain" style="--neg-bg:#FFFFFF"><img src="/assets/negocios/abarrotes-faby.webp" alt="Logo de Abarrotes Faby" loading="lazy" decoding="async"></span><span class="neg-name">Abarrotes Faby</span></div>
+      <div class="neg-item"><span class="neg-logo neg-logo--contain" style="--neg-bg:#000000"><img src="/assets/negocios/azur-fixing.webp" alt="Logo de Azur Fixing" loading="lazy" decoding="async"></span><span class="neg-name">Azur Fixing</span></div>
+      <div class="neg-item"><span class="neg-logo neg-logo--contain neg-logo--tight" style="--neg-bg:#FFFFFF"><img src="/assets/negocios/optica-20-20.webp" alt="Logo de Óptica 20/20" loading="lazy" decoding="async"></span><span class="neg-name">Óptica 20/20</span></div>
+      <div class="neg-item"><span class="neg-logo neg-logo--contain" style="--neg-bg:#182422"><img src="/assets/negocios/cajt-diseno-y-construccion.webp" alt="Logo de CAJT Diseño y Construcción" loading="lazy" decoding="async"></span><span class="neg-name">CAJT Diseño y Construcción</span></div>
+      <div class="neg-item"><span class="neg-logo neg-logo--text" aria-hidden="true">La Rocka</span><span class="neg-name">Ferretería La Rocka</span></div>
+      <div class="neg-item"><span class="neg-logo neg-logo--contain" style="--neg-bg:#FFFFFF"><img src="/assets/negocios/novedades-thaily.webp" alt="Logo de Novedades Thaily" loading="lazy" decoding="async"></span><span class="neg-name">Novedades Thaily</span></div>
+      <div class="neg-item"><span class="neg-logo neg-logo--cover" style="--neg-bg:#18436A"><img src="/assets/negocios/azur-technology.webp" alt="Logo de Azur Technology" loading="lazy" decoding="async"></span><span class="neg-name">Azur Technology</span></div>
     </div>
   </div>
 </section>
@@ -263,6 +293,6 @@
 <script src="/assets/vendor/pdf.min.js"></script>
 <script src="/assets/vendor/page-flip.browser.js"></script>
 <script src="/assets/js/site.js?v=20261001b"></script>
-<script src="/assets/js/flipbook.js?v=20261001b"></script>
+<script src="/assets/js/flipbook.js?v=20261009"></script>
 </body>
 </html>

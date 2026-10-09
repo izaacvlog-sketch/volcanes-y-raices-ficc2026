@@ -367,9 +367,7 @@
             'Confirma requisitos de la convocatoria': 'Sí'
           });
         }
-        // Embajadora del Café -> correo del organizador del certamen; todo lo demás -> correo del FICC
-        const destino = isEmb() ? 'omarobledoa@gmail.com' : 'ficc.cacahoatan2026@gmail.com';
-        const res = await fetch('https://formsubmit.co/ajax/' + destino, {
+        const res = await fetch('https://formsubmit.co/ajax/ficc.cacahoatan2026@gmail.com', {
           method:'POST',
           headers:{'Content-Type':'application/json','Accept':'application/json'},
           body: JSON.stringify(payload)
