@@ -315,14 +315,51 @@
           <label for="fc-nombre">Nombre completo</label>
           <input type="text" id="fc-nombre" autocomplete="name" required>
         </div>
-        <div class="field-row">
+        <div class="field-row field-row--tel">
           <div class="field">
             <label for="fc-correo">Correo</label>
             <input type="email" id="fc-correo" autocomplete="email" required>
           </div>
           <div class="field">
             <label for="fc-tel">WhatsApp</label>
-            <input type="tel" id="fc-tel" autocomplete="tel" pattern="[0-9+\s()-]{8,20}" required>
+            <div class="tel-group">
+              <select id="fc-lada" aria-label="Lada del país" autocomplete="tel-country-code">
+                <option value="+52" data-pais="México" selected>🇲🇽 +52 México</option>
+                <option value="+502" data-pais="Guatemala">🇬🇹 +502 Guatemala</option>
+                <option value="+1" data-pais="Estados Unidos">🇺🇸 +1 Estados Unidos</option>
+                <option value="+1" data-pais="Canadá">🇨🇦 +1 Canadá</option>
+                <option value="+501" data-pais="Belice">🇧🇿 +501 Belice</option>
+                <option value="+503" data-pais="El Salvador">🇸🇻 +503 El Salvador</option>
+                <option value="+504" data-pais="Honduras">🇭🇳 +504 Honduras</option>
+                <option value="+505" data-pais="Nicaragua">🇳🇮 +505 Nicaragua</option>
+                <option value="+506" data-pais="Costa Rica">🇨🇷 +506 Costa Rica</option>
+                <option value="+507" data-pais="Panamá">🇵🇦 +507 Panamá</option>
+                <option value="+57" data-pais="Colombia">🇨🇴 +57 Colombia</option>
+                <option value="+58" data-pais="Venezuela">🇻🇪 +58 Venezuela</option>
+                <option value="+593" data-pais="Ecuador">🇪🇨 +593 Ecuador</option>
+                <option value="+51" data-pais="Perú">🇵🇪 +51 Perú</option>
+                <option value="+591" data-pais="Bolivia">🇧🇴 +591 Bolivia</option>
+                <option value="+56" data-pais="Chile">🇨🇱 +56 Chile</option>
+                <option value="+54" data-pais="Argentina">🇦🇷 +54 Argentina</option>
+                <option value="+598" data-pais="Uruguay">🇺🇾 +598 Uruguay</option>
+                <option value="+595" data-pais="Paraguay">🇵🇾 +595 Paraguay</option>
+                <option value="+55" data-pais="Brasil">🇧🇷 +55 Brasil</option>
+                <option value="+53" data-pais="Cuba">🇨🇺 +53 Cuba</option>
+                <option value="+1" data-pais="República Dominicana">🇩🇴 +1 República Dominicana</option>
+                <option value="+1" data-pais="Puerto Rico">🇵🇷 +1 Puerto Rico</option>
+                <option value="+34" data-pais="España">🇪🇸 +34 España</option>
+                <option value="+33" data-pais="Francia">🇫🇷 +33 Francia</option>
+                <option value="+49" data-pais="Alemania">🇩🇪 +49 Alemania</option>
+                <option value="+39" data-pais="Italia">🇮🇹 +39 Italia</option>
+                <option value="+44" data-pais="Reino Unido">🇬🇧 +44 Reino Unido</option>
+                <option value="+31" data-pais="Países Bajos">🇳🇱 +31 Países Bajos</option>
+                <option value="+41" data-pais="Suiza">🇨🇭 +41 Suiza</option>
+                <option value="+81" data-pais="Japón">🇯🇵 +81 Japón</option>
+                <option value="+86" data-pais="China">🇨🇳 +86 China</option>
+                <option value="+82" data-pais="Corea del Sur">🇰🇷 +82 Corea del Sur</option>
+              </select>
+              <input type="tel" id="fc-tel" autocomplete="tel-national" inputmode="tel" placeholder="962 000 0000" pattern="[0-9\s()-]{7,16}" required>
+            </div>
           </div>
         </div>
         <fieldset class="gdo-fields" id="gdoFields" hidden>
@@ -489,6 +526,13 @@
   </div>
 </footer>
 
-<script src="/assets/js/site.js?v=20261001b"></script>
+<style>
+/* Registro: lada del país junto al número */
+.reg-form .field-row--tel{grid-template-columns:1fr;gap:0}
+.reg-form .tel-group{display:flex;gap:8px;align-items:stretch}
+.reg-form .tel-group select{flex:0 0 auto;width:142px;padding-left:16px;padding-right:30px;background-position:right 13px center;text-overflow:ellipsis}
+.reg-form .tel-group input{flex:1 1 auto;min-width:0}
+</style>
+<script src="/assets/js/site.js?v=20261009"></script>
 </body>
 </html>

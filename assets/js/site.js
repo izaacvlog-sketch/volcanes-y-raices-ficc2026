@@ -259,6 +259,23 @@
     const okEl = document.getElementById('fcSuccess');
     const checkLabel = document.getElementById('fcCheckLabel');
     const val = (id) => document.getElementById(id).value.trim();
+    // lada del país + número (si la página tiene el selector de lada)
+    const ladaSel = document.getElementById('fc-lada');
+    const telCompleto = () => {
+      const n = val('fc-tel');
+      if(!ladaSel) return n;
+      const op = ladaSel.options[ladaSel.selectedIndex];
+      return `${ladaSel.value} ${n} (${op.dataset.pais || ''})`;
+    };
+    if(ladaSel){
+      const paisInp = document.getElementById('fc-pais');
+      let lastAuto = paisInp ? paisInp.value.trim() : '';
+      ladaSel.addEventListener('change', ()=>{
+        if(!paisInp) return;
+        const p = ladaSel.options[ladaSel.selectedIndex].dataset.pais || '';
+        if(!paisInp.value.trim() || paisInp.value.trim() === lastAuto){ paisInp.value = p; lastAuto = p; }
+      });
+    }
 
     // Concurso Grano de Oro: extra fields appear (and become required) only for contest participants
     const tipoSel = document.getElementById('fc-tipo');
@@ -338,7 +355,7 @@
           'Tipo de registro': tipo,
           'Nombre': nombre,
           'email': val('fc-correo'),
-          'WhatsApp / teléfono': val('fc-tel'),
+          'WhatsApp / teléfono': telCompleto(),
           'Ciudad y estado': val('fc-ciudad') || '—',
           'País': val('fc-pais') || '—',
           'Empresa, finca o marca': val('fc-empresa') || '—',

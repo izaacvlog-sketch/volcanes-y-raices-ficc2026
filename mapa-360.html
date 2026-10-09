@@ -38,6 +38,13 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;fl
 .tag{position:absolute;top:12px;left:12px;background:rgba(20,10,5,.66);color:var(--crema);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;padding:5px 11px;border-radius:999px;pointer-events:none;border:1px solid var(--line)}
 .hint{position:absolute;left:12px;right:12px;bottom:12px;display:flex;justify-content:center;pointer-events:none}
 .hint span{background:rgba(20,10,5,.74);border:1px solid var(--oro);color:var(--crema);font-size:.84rem;padding:6px 14px;border-radius:999px;text-align:center}
+.pano-load{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:#120a05;color:var(--crema);font-size:.85rem;letter-spacing:.04em;z-index:4;pointer-events:none}
+.pano-load[hidden]{display:none}
+.pano-load.soft{inset:auto auto 12px 12px;flex-direction:row;gap:8px;background:rgba(20,10,5,.66);padding:6px 12px;border-radius:999px;font-size:.72rem;border:1px solid var(--line)}
+.pano-load.soft .pl-txt::after{content:" · alta calidad"}
+.pl-spin{width:26px;height:26px;border-radius:50%;border:2px solid rgba(243,227,192,.25);border-top-color:#D9A23A;animation:plspin .8s linear infinite}
+.pano-load.soft .pl-spin{width:12px;height:12px}
+@keyframes plspin{to{transform:rotate(360deg)}}
 .msg{position:absolute;left:50%;top:12px;transform:translateX(-50%);background:var(--crema);color:var(--coffee);padding:6px 14px;border-radius:999px;font-size:.85rem;font-weight:600;pointer-events:none;max-width:calc(100% - 24px);text-align:center;z-index:5}
 .msg.err{background:#F0A08F}
 .panel{display:flex;flex-direction:column;gap:12px;min-width:0}
@@ -168,6 +175,7 @@ html.embed,html.embed body{height:auto}
       </div>
       <div class="hint" id="hint" hidden><span id="hintText"></span></div>
       <div class="msg" id="msg" hidden></div>
+      <div class="pano-load" id="panoLoad" hidden><span class="pl-spin"></span><span class="pl-txt">Cargando vista…</span></div>
     </section>
 
     <aside class="panel">
@@ -455,21 +463,51 @@ state.v = 2;
 state.views.forEach(v => { if (!Array.isArray(v.zones)) v.zones = []; if (!Array.isArray(v.items)) v.items = []; if (!v.name) v.name = 'Vista'; });
 let V = state.views[0];
 
+/* Carga de fotos 360: primero una versión ligera (rápida) y luego la de alta calidad.
+   Mientras no hay foto de la vista nueva, no se muestra nada de la anterior (evita que se mezclen). */
+const texCache = new Map();   // url -> THREE.Texture en alta calidad
+let panoToken = 0;
+const previewUrl = u => (typeof u === 'string' && /^\/assets\/ficc\/360\/vista-\d+\.jpg$/.test(u)) ? u.replace(/\.jpg$/, '-preview.jpg') : null;
+function makeTex(img){ const t = new THREE.Texture(img); t.anisotropy = renderer.capabilities.getMaxAnisotropy(); t.needsUpdate = true; return t; }
+function loadImg(url){ return new Promise((ok, bad) => { const im = new Image(); im.decoding = 'async'; im.onload = () => ok(im); im.onerror = bad; im.src = url; }); }
+function loadHD(url){
+  if (texCache.has(url)) return Promise.resolve(texCache.get(url));
+  return loadImg(url).then(im => { const t = makeTex(im); texCache.set(url, t); return t; });
+}
+function setLoading(on, soft){
+  const l = $('panoLoad'); if (!l) return;
+  l.hidden = !on; l.classList.toggle('soft', !!soft);
+}
 function setPano(){
+  const my = ++panoToken;
   $('tag').hidden = !!V.pano;
   $('tag').textContent = 'Foto de ejemplo · sube la foto 360 de “' + V.name + '”';
-  if (!V.pano) { applyPano(makeSample()); return; }
-  const img = new Image();
-  img.onload = () => applyPano(img);
-  img.onerror = () => showMsg('No se pudo mostrar la foto 360.', true, 5000);
-  img.src = V.pano;
+  if (!V.pano) { setLoading(false); applyPano(makeSample()); scene.visible = true; return; }
+  const url = V.pano;
+  if (texCache.has(url)) { useTex(texCache.get(url)); scene.visible = true; setLoading(false); preloadOthers(); return; }
+  scene.visible = false; setLoading(true);
+  const pv = previewUrl(url);
+  if (pv) loadImg(pv).then(im => {
+    if (my !== panoToken || texCache.has(url)) return;
+    useTex(makeTex(im), true); scene.visible = true; setLoading(true, true);
+  }).catch(() => {});
+  loadHD(url).then(t => {
+    if (my !== panoToken) return;
+    useTex(t); scene.visible = true; setLoading(false); preloadOthers();
+  }).catch(() => { if (my === panoToken) { setLoading(false); scene.visible = true; showMsg('No se pudo mostrar la foto 360.', true, 5000); } });
 }
-function applyPano(src){
-  const t = new THREE.Texture(src);
-  t.anisotropy = renderer.capabilities.getMaxAnisotropy(); t.needsUpdate = true;
-  if (panoMat.map) panoMat.map.dispose();
+let preloading = false;
+function preloadOthers(){
+  if (preloading) return; preloading = true;
+  const urls = state.views.map(v => v.pano).filter(u => typeof u === 'string' && u && !texCache.has(u));
+  (function next(){ const u = urls.shift(); if (!u) { preloading = false; return; } loadHD(u).catch(() => {}).then(() => setTimeout(next, 150)); })();
+}
+function useTex(t, temp){
+  const old = panoMat.map;
   panoMat.map = t; panoMat.needsUpdate = true;
+  if (old && old !== t && ![...texCache.values()].includes(old)) old.dispose();
 }
+function applyPano(src){ useTex(makeTex(src)); }
 
 /* ===== construcción de los letreros 3D ===== */
 const FINISH = {

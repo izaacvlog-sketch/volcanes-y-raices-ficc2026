@@ -9,6 +9,20 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&family=Alex+Brush&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/site.css?v=20261001b">
+<style>
+/* Fondo del inicio: Cacahoatán y el volcán Tacaná desde el dron */
+.hero#top .hero-bg{
+  background-image:
+    linear-gradient(180deg, rgba(6,26,30,.30) 0%, rgba(6,26,30,0) 20%, rgba(6,26,30,.05) 40%, rgba(6,26,30,.45) 60%, rgba(6,26,30,.75) 80%, rgba(6,26,30,.9) 100%),
+    url("/assets/inicio-cacahoatan-tacana.jpg");
+  background-image:
+    linear-gradient(180deg, rgba(6,26,30,.30) 0%, rgba(6,26,30,0) 20%, rgba(6,26,30,.05) 40%, rgba(6,26,30,.45) 60%, rgba(6,26,30,.75) 80%, rgba(6,26,30,.9) 100%),
+    image-set(url("/assets/inicio-cacahoatan-tacana.webp") type("image/webp"), url("/assets/inicio-cacahoatan-tacana.jpg") type("image/jpeg"));
+  background-position:center 35%;
+}
+@media (max-width:640px){ .hero#top .hero-bg{background-position:24% 40%;} }
+</style>
+<link rel="preload" as="image" href="/assets/inicio-cacahoatan-tacana.webp" type="image/webp" fetchpriority="high">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Volcanes y Raíces">
 <meta property="og:title" content="Volcanes y Raíces — Cacahoatán, Chiapas">
@@ -221,6 +235,6 @@
   </div>
 </footer>
 
-<script src="/assets/js/site.js?v=20261001b"></script>
+<script src="/assets/js/site.js?v=20261009"></script>
 </body>
 </html>
