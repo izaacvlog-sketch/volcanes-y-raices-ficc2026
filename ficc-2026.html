@@ -247,7 +247,7 @@
             <li>📅 <b>Domingo 20 de diciembre</b> · 10:00 hrs</li>
             <li>📍 <b>Parque Central Miguel Hidalgo</b> · Cacahoatán, Chiapas</li>
             <li>♟️ Sistema suizo · 5 rondas · 25 min por jugador · Cupo: 60 jugadores</li>
-            <li>⏰ Inscripciones hasta el <b>sábado 12 de diciembre, 20:00 hrs</b></li>
+            <li>⏰ Inscripciones hasta el <b>sábado 19 de diciembre, 20:00 hrs</b></li>
           </ul>
           <div class="ajz-actions">
             <a class="ajz-btn" href="#ajz-registro">Inscribirme al torneo</a>
@@ -260,17 +260,19 @@
       </div>
 
       <div class="ajz-cats" data-reveal>
-        <div class="ajz-cat"><h3>Primera Fuerza</h3><p>Cualquier edad y rating</p><strong>$100</strong></div>
-        <div class="ajz-cat"><h3>Aficionados</h3><p>Nacidos en 2009 o después</p><strong>$100</strong></div>
-        <div class="ajz-cat"><h3>Infantil</h3><p>Nacidos en 2014 o después</p><strong>$80</strong></div>
+        <div class="ajz-cat"><h3>Primera Fuerza</h3><p>Rating libre</p><strong>$100</strong></div>
+        <div class="ajz-cat"><h3>Juvenil</h3><p>Nacidos en 2009 y posteriores</p><strong>$100</strong></div>
+        <div class="ajz-cat"><h3>Infantil</h3><p>Nacidos en 2014 y posteriores</p><strong>$80</strong></div>
       </div>
       <p class="ajz-bases" data-reveal>Premios del 1° al 5° lugar. Pareos en Chess-Results. Rifa de canasta navideña entre los participantes. El pago de la inscripción se realiza con el comité organizador; te contactaremos para confirmarlo.</p>
 
       <div class="ajz-reg" id="ajz-registro">
         <div class="ajz-reg-head" data-reveal>
           <span class="ajz-kicker">Registro del torneo</span>
-          <h3>Inscríbete al Torneo de Ajedrez</h3>
-          <p>Este registro es solo para el torneo de ajedrez. Al enviarlo te llega una confirmación a tu correo y el comité te contactará por WhatsApp.</p>
+          <h3>Formulario de inscripción</h3>
+          <p><em>“Con el sabor del café y la estrategia del ajedrez, Cacahoatán nos invita a crecer.”</em></p>
+          <p>Festival del Café Cacahoatán 2026. Los campos con * son obligatorios.</p>
+          <p>Para dudas o correcciones, comunícate con el Club Rey Blanco: <a class="ajz-link" href="mailto:elreyblancodechiapas@gmail.com">elreyblancodechiapas@gmail.com</a> o por WhatsApp al <a class="ajz-link" href="https://wa.me/529621063615" target="_blank" rel="noopener">962 106 36 15</a>.</p>
         </div>
         <div data-reveal>
           <div class="ajz-closed" id="ajzClosed" hidden>Las inscripciones al torneo ya cerraron. Informes por WhatsApp al <a class="ajz-link" href="https://wa.me/529621063615" target="_blank" rel="noopener">962 106 36 15</a>.</div>
@@ -279,51 +281,49 @@
               <label>No llenar este campo<input type="text" name="_honey" tabindex="-1" autocomplete="off"></label>
             </div>
             <div class="field">
-              <label for="az-cat">Categoría</label>
+              <label for="az-correo">Correo electrónico *</label>
+              <input type="email" id="az-correo" autocomplete="email" required>
+            </div>
+            <div class="field">
+              <label for="az-cat">Categoría a inscribirse *</label>
               <select id="az-cat" required>
                 <option value="" selected disabled>Elige tu categoría</option>
-                <option>Primera Fuerza</option>
-                <option>Aficionados</option>
-                <option>Infantil</option>
+                <option value="Primera Fuerza (rating libre)">Primera Fuerza (rating libre)</option>
+                <option value="Juvenil (nacidos en 2009 y posteriores)">Juvenil · nacidos en 2009 y posteriores</option>
+                <option value="Infantil (nacidos en 2014 y posteriores)">Infantil · nacidos en 2014 y posteriores</option>
               </select>
             </div>
             <div class="field">
-              <label for="az-nombre">Nombre completo del jugador</label>
-              <input type="text" id="az-nombre" autocomplete="name" required>
+              <label for="az-nombre">Apellidos, Nombre(s) *</label>
+              <input type="text" id="az-nombre" autocomplete="name" placeholder="Ej. López Pérez, Juan Carlos" required>
             </div>
             <div class="field-row">
               <div class="field">
-                <label for="az-nac">Fecha de nacimiento</label>
-                <input type="date" id="az-nac" required>
+                <label for="az-genero">Género *</label>
+                <select id="az-genero" required>
+                  <option value="" selected disabled>Elige una opción</option>
+                  <option>Masculino</option>
+                  <option>Femenino</option>
+                </select>
               </div>
               <div class="field">
-                <label for="az-rating">Rating / ELO (opcional)</label>
-                <input type="text" id="az-rating" inputmode="numeric" placeholder="Si no tienes, déjalo vacío">
-              </div>
-            </div>
-            <div class="field-row">
-              <div class="field">
-                <label for="az-tel">WhatsApp</label>
+                <label for="az-tel">Número de teléfono *</label>
                 <input type="tel" id="az-tel" autocomplete="tel" inputmode="tel" placeholder="962 000 0000" pattern="[0-9+\s()-]{7,18}" required>
               </div>
-              <div class="field">
-                <label for="az-correo">Correo</label>
-                <input type="email" id="az-correo" autocomplete="email" required>
-              </div>
             </div>
             <div class="field-row">
               <div class="field">
-                <label for="az-ciudad">Ciudad</label>
-                <input type="text" id="az-ciudad" autocomplete="address-level2" required>
+                <label for="az-nac">Fecha de nacimiento * (DD/MM/AAAA)</label>
+                <input type="text" id="az-nac" inputmode="numeric" placeholder="DD/MM/AAAA" pattern="(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/(19|20)[0-9]{2}" maxlength="10" required>
               </div>
               <div class="field">
-                <label for="az-club">Club o escuela (opcional)</label>
-                <input type="text" id="az-club">
+                <label for="az-edad">Edad cumplida en años *</label>
+                <input type="number" id="az-edad" inputmode="numeric" min="3" max="110" required>
               </div>
             </div>
-            <div class="field" id="azTutorField" hidden>
-              <label for="az-tutor">Nombre del padre, madre o tutor</label>
-              <input type="text" id="az-tutor">
+            <div class="field">
+              <label for="az-club">Club de Ajedrez, Municipio, Estado, País *</label>
+              <textarea id="az-club" rows="3" placeholder="Ej. Club Rey Blanco, Cacahoatán, Chiapas, México" required></textarea>
             </div>
             <label class="ficc-check" id="azCheckLabel">
               <input type="checkbox" id="az-acepto" required>
@@ -342,8 +342,8 @@
       (function(){
         var form = document.getElementById('ajzForm');
         if(!form) return;
-        // inscripciones hasta el sábado 12 de diciembre, 20:00 hrs (hora de México)
-        if(new Date() >= new Date('2026-12-12T20:00:00-06:00')){
+        // inscripciones hasta el sábado 19 de diciembre, 20:00 hrs (hora de México)
+        if(new Date() >= new Date('2026-12-19T20:00:00-06:00')){
           form.hidden = true;
           document.getElementById('ajzClosed').hidden = false;
           return;
@@ -352,18 +352,14 @@
         var errEl = document.getElementById('azError');
         var okEl = document.getElementById('azSuccess');
         var checkLabel = document.getElementById('azCheckLabel');
-        var catSel = document.getElementById('az-cat');
-        var tutorField = document.getElementById('azTutorField');
-        var tutorInp = document.getElementById('az-tutor');
         function val(id){ return document.getElementById(id).value.trim(); }
-        function syncCat(){
-          var infantil = catSel.value === 'Infantil';
-          tutorField.hidden = !infantil;
-          tutorInp.required = infantil;
-        }
-        catSel.addEventListener('change', syncCat);
+        var nac = document.getElementById('az-nac');
+        // pone las diagonales solas al escribir la fecha (DD/MM/AAAA)
+        nac.addEventListener('input', function(){
+          var d = nac.value.replace(/\D/g,'').slice(0,8);
+          nac.value = d.length > 4 ? d.slice(0,2)+'/'+d.slice(2,4)+'/'+d.slice(4) : (d.length > 2 ? d.slice(0,2)+'/'+d.slice(2) : d);
+        });
         document.getElementById('az-acepto').addEventListener('change', function(e){ if(e.target.checked) checkLabel.classList.remove('bad'); });
-        syncCat();
 
         form.addEventListener('submit', async function(e){
           e.preventDefault();
@@ -392,16 +388,15 @@
               _subject: 'Inscripción Torneo de Ajedrez FICC 2026 - ' + cat + ' - ' + nombre,
               _template: 'table',
               _captcha: 'false',
-              _autoresponse: 'Gracias por inscribirte al Torneo de Ajedrez del Festival Internacional del Café Cacahoatán 2026 (domingo 20 de diciembre, 10:00 hrs, Parque Central Miguel Hidalgo). El comité te contactará por WhatsApp para confirmar tu lugar y el pago de la inscripción. Informes: 962 106 36 15.',
-              'Categoría': cat,
-              'Nombre del jugador': nombre,
-              'Fecha de nacimiento': val('az-nac'),
-              'Rating / ELO': val('az-rating') || '—',
-              'WhatsApp': val('az-tel'),
+              _autoresponse: 'Gracias por inscribirte al Torneo de Ajedrez del Festival Internacional del Café Cacahoatán 2026 (domingo 20 de diciembre, 10:00 hrs, Parque Central Miguel Hidalgo). El comité te contactará por WhatsApp para confirmar tu lugar y el pago de la inscripción. Dudas o correcciones: elreyblancodechiapas@gmail.com o WhatsApp 962 106 36 15.',
               'email': val('az-correo'),
-              'Ciudad': val('az-ciudad'),
-              'Club o escuela': val('az-club') || '—',
-              'Padre, madre o tutor': cat === 'Infantil' ? val('az-tutor') : '—',
+              'Categoría': cat,
+              'Apellidos, Nombre(s)': nombre,
+              'Género': val('az-genero'),
+              'Fecha de nacimiento': val('az-nac'),
+              'Edad': val('az-edad'),
+              'Teléfono': val('az-tel'),
+              'Club, Municipio, Estado, País': val('az-club'),
               'Acepta las bases': 'Sí'
             };
             var res = await fetch('https://formsubmit.co/ajax/ajedrezficc@gmail.com', {
