@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FICC 2026 — Festival Internacional del Café Cacahoatán</title>
-<meta name="description" content="Festival Internacional del Café Cacahoatán 2026, del 18 al 22 de diciembre: Concurso Grano de Oro, convocatoria, programa, actividades y registro de participantes.">
+<meta name="description" content="Festival Internacional del Café Cacahoatán 2026, del 18 al 22 de diciembre: Concurso Grano de Oro, Torneo de Ajedrez, convocatoria, programa, actividades y registro de participantes.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&family=Alex+Brush&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -79,6 +79,7 @@
     <a href="#festival">Festival</a>
     <a href="#mapa-360">Mapa 360</a>
     <a href="#grano-de-oro" class="sub-gdo">Grano de Oro</a>
+    <a href="#ajedrez">Ajedrez</a>
     <a href="#embajadora">Embajadora</a>
     <a href="#convocatoria">Convocatoria y bases</a>
     <a href="#programa">Programa</a>
@@ -199,6 +200,232 @@
     </div>
   </section>
 
+  <section class="ficc-block ajz-wrap" id="ajedrez" aria-labelledby="ajz-title">
+    <style>
+      .ajz-wrap{background:#1B110B;color:#F3EAD8;position:relative;overflow:hidden}
+      .ajz-wrap::before{content:"";position:absolute;inset:0;background-image:repeating-conic-gradient(rgba(243,234,216,.035) 0% 25%,transparent 0% 50%);background-size:96px 96px;pointer-events:none}
+      .ajz-wrap .wrap{position:relative}
+      .ajz{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+      .ajz-kicker{display:inline-block;color:#E0A526;font-weight:700;letter-spacing:.16em;text-transform:uppercase;font-size:.8rem}
+      .ajz-title{font-family:'Playfair Display',serif;font-size:clamp(2.6rem,6vw,4.4rem);line-height:1;margin:.3em 0 .25em;color:#F3EAD8}
+      .ajz-title em{color:#E0A526;font-style:italic}
+      .ajz-lead{font-size:1.1rem;color:rgba(243,234,216,.85);max-width:34em}
+      .ajz-prize{display:flex;align-items:baseline;gap:12px;margin:22px 0 6px}
+      .ajz-prize b{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,6vw,4rem);line-height:1;color:#F3EAD8}
+      .ajz-prize span{color:#E0A526;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.85rem}
+      .ajz-facts{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:8px;color:rgba(243,234,216,.9)}
+      .ajz-facts b{color:#F3EAD8}
+      .ajz-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:26px}
+      .ajz-btn{display:inline-block;background:#E0A526;color:#1B110B;font-weight:800;padding:14px 26px;border-radius:999px;text-decoration:none;border:0;cursor:pointer;font-size:1rem}
+      .ajz-btn:hover{background:#F0B83A}
+      .ajz-link{color:#E0A526;font-weight:600;text-decoration:none}
+      .ajz-link:hover{text-decoration:underline}
+      .ajz-poster{display:block;border-radius:16px;overflow:hidden;box-shadow:0 30px 70px -30px rgba(0,0,0,.8)}
+      .ajz-poster img{display:block;width:100%;height:auto}
+      .ajz-cats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
+      .ajz-cat{border:1px solid rgba(224,165,38,.35);border-radius:14px;padding:20px}
+      .ajz-cat h3{margin:0;font-size:1.05rem;letter-spacing:.06em;text-transform:uppercase;color:#F3EAD8}
+      .ajz-cat p{margin:4px 0 10px;color:rgba(243,234,216,.75);font-size:.95rem}
+      .ajz-cat strong{font-family:'Playfair Display',serif;font-size:2rem;color:#E0A526}
+      .ajz-bases{margin-top:28px;color:rgba(243,234,216,.8);font-size:.95rem;line-height:1.6}
+      .ajz-reg{margin-top:56px;display:grid;grid-template-columns:.8fr 1.2fr;gap:40px;align-items:start}
+      .ajz-reg h3{font-family:'Playfair Display',serif;font-size:2rem;margin:.2em 0;color:#F3EAD8}
+      .ajz-reg-head p{color:rgba(243,234,216,.8)}
+      .ajz-reg .reg-form input[type="date"]{color-scheme:dark}
+      .ajz-closed{background:rgba(224,165,38,.12);border:1px solid rgba(224,165,38,.4);border-radius:14px;padding:18px;color:#F3EAD8}
+      @media (max-width:880px){
+        .ajz,.ajz-reg{grid-template-columns:1fr}
+        .ajz-cats{grid-template-columns:1fr}
+      }
+    </style>
+    <div class="wrap">
+      <div class="ajz" data-reveal>
+        <div>
+          <span class="ajz-kicker">Torneo de ajedrez · FICC 2026</span>
+          <h2 class="ajz-title" id="ajz-title">Torneo de <em>Ajedrez</em></h2>
+          <p class="ajz-lead">Festival Nacional e Internacional del Café. Organiza el Club de Ajedrez Rey Blanco de Chiapas.</p>
+          <div class="ajz-prize"><b>$5,000</b><span>MXN en premios garantizados</span></div>
+          <ul class="ajz-facts">
+            <li>📅 <b>Domingo 20 de diciembre</b> · 10:00 hrs</li>
+            <li>📍 <b>Parque Central Miguel Hidalgo</b> · Cacahoatán, Chiapas</li>
+            <li>♟️ Sistema suizo · 5 rondas · 25 min por jugador · Cupo: 60 jugadores</li>
+            <li>⏰ Inscripciones hasta el <b>sábado 12 de diciembre, 20:00 hrs</b></li>
+          </ul>
+          <div class="ajz-actions">
+            <a class="ajz-btn" href="#ajz-registro">Inscribirme al torneo</a>
+            <a class="ajz-link" href="https://wa.me/529621063615" target="_blank" rel="noopener">Informes por WhatsApp: 962 106 36 15</a>
+          </div>
+        </div>
+        <a class="ajz-poster" href="/assets/ficc/ajedrez-flyer.jpg" data-lightbox data-caption="Torneo de Ajedrez · FICC 2026">
+          <img src="/assets/ficc/ajedrez-flyer.jpg" width="1080" height="1350" loading="lazy" alt="Cartel del Torneo de Ajedrez del Festival Internacional del Café Cacahoatán 2026: domingo 20 de diciembre, 10:00 hrs, Parque Central Miguel Hidalgo. Bolsa garantizada de $5,000 MXN. Informes al 962 106 36 15.">
+        </a>
+      </div>
+
+      <div class="ajz-cats" data-reveal>
+        <div class="ajz-cat"><h3>Primera Fuerza</h3><p>Cualquier edad y rating</p><strong>$100</strong></div>
+        <div class="ajz-cat"><h3>Aficionados</h3><p>Nacidos en 2009 o después</p><strong>$100</strong></div>
+        <div class="ajz-cat"><h3>Infantil</h3><p>Nacidos en 2014 o después</p><strong>$80</strong></div>
+      </div>
+      <p class="ajz-bases" data-reveal>Premios del 1° al 5° lugar. Pareos en Chess-Results. Rifa de canasta navideña entre los participantes. El pago de la inscripción se realiza con el comité organizador; te contactaremos para confirmarlo.</p>
+
+      <div class="ajz-reg" id="ajz-registro">
+        <div class="ajz-reg-head" data-reveal>
+          <span class="ajz-kicker">Registro del torneo</span>
+          <h3>Inscríbete al Torneo de Ajedrez</h3>
+          <p>Este registro es solo para el torneo de ajedrez. Al enviarlo te llega una confirmación a tu correo y el comité te contactará por WhatsApp.</p>
+        </div>
+        <div data-reveal>
+          <div class="ajz-closed" id="ajzClosed" hidden>Las inscripciones al torneo ya cerraron. Informes por WhatsApp al <a class="ajz-link" href="https://wa.me/529621063615" target="_blank" rel="noopener">962 106 36 15</a>.</div>
+          <form class="reg-form" id="ajzForm" novalidate>
+            <div style="position:absolute;left:-9999px;top:-9999px;" aria-hidden="true">
+              <label>No llenar este campo<input type="text" name="_honey" tabindex="-1" autocomplete="off"></label>
+            </div>
+            <div class="field">
+              <label for="az-cat">Categoría</label>
+              <select id="az-cat" required>
+                <option value="" selected disabled>Elige tu categoría</option>
+                <option>Primera Fuerza</option>
+                <option>Aficionados</option>
+                <option>Infantil</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="az-nombre">Nombre completo del jugador</label>
+              <input type="text" id="az-nombre" autocomplete="name" required>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="az-nac">Fecha de nacimiento</label>
+                <input type="date" id="az-nac" required>
+              </div>
+              <div class="field">
+                <label for="az-rating">Rating / ELO (opcional)</label>
+                <input type="text" id="az-rating" inputmode="numeric" placeholder="Si no tienes, déjalo vacío">
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="az-tel">WhatsApp</label>
+                <input type="tel" id="az-tel" autocomplete="tel" inputmode="tel" placeholder="962 000 0000" pattern="[0-9+\s()-]{7,18}" required>
+              </div>
+              <div class="field">
+                <label for="az-correo">Correo</label>
+                <input type="email" id="az-correo" autocomplete="email" required>
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="az-ciudad">Ciudad</label>
+                <input type="text" id="az-ciudad" autocomplete="address-level2" required>
+              </div>
+              <div class="field">
+                <label for="az-club">Club o escuela (opcional)</label>
+                <input type="text" id="az-club">
+              </div>
+            </div>
+            <div class="field" id="azTutorField" hidden>
+              <label for="az-tutor">Nombre del padre, madre o tutor</label>
+              <input type="text" id="az-tutor">
+            </div>
+            <label class="ficc-check" id="azCheckLabel">
+              <input type="checkbox" id="az-acepto" required>
+              <span>Acepto las bases del torneo y que me contacten sobre mi inscripción.</span>
+            </label>
+            <button type="submit" class="form-submit" id="azBtn">Enviar inscripción</button>
+            <p class="form-error" id="azError" role="alert" hidden>Revisa los campos marcados.</p>
+            <div class="form-success" id="azSuccess" role="status" hidden>
+              <strong>¡Inscripción recibida!</strong><br>Te contactaremos por WhatsApp para confirmar tu lugar y el pago.
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script>
+      (function(){
+        var form = document.getElementById('ajzForm');
+        if(!form) return;
+        // inscripciones hasta el sábado 12 de diciembre, 20:00 hrs (hora de México)
+        if(new Date() >= new Date('2026-12-12T20:00:00-06:00')){
+          form.hidden = true;
+          document.getElementById('ajzClosed').hidden = false;
+          return;
+        }
+        var btn = document.getElementById('azBtn');
+        var errEl = document.getElementById('azError');
+        var okEl = document.getElementById('azSuccess');
+        var checkLabel = document.getElementById('azCheckLabel');
+        var catSel = document.getElementById('az-cat');
+        var tutorField = document.getElementById('azTutorField');
+        var tutorInp = document.getElementById('az-tutor');
+        function val(id){ return document.getElementById(id).value.trim(); }
+        function syncCat(){
+          var infantil = catSel.value === 'Infantil';
+          tutorField.hidden = !infantil;
+          tutorInp.required = infantil;
+        }
+        catSel.addEventListener('change', syncCat);
+        document.getElementById('az-acepto').addEventListener('change', function(e){ if(e.target.checked) checkLabel.classList.remove('bad'); });
+        syncCat();
+
+        form.addEventListener('submit', async function(e){
+          e.preventDefault();
+          errEl.hidden = true;
+          if(form.querySelector('[name="_honey"]').value) return;
+          var valid = true;
+          form.querySelectorAll('[required]').forEach(function(el){
+            el.classList.add('touched');
+            if(!el.checkValidity()) valid = false;
+          });
+          var accepted = document.getElementById('az-acepto').checked;
+          checkLabel.classList.toggle('bad', !accepted);
+          if(!valid || !accepted){
+            errEl.textContent = 'Revisa los campos marcados.';
+            errEl.hidden = false;
+            var firstBad = form.querySelector('[required]:invalid');
+            if(firstBad) firstBad.focus();
+            return;
+          }
+          var cat = val('az-cat');
+          var nombre = val('az-nombre');
+          btn.disabled = true;
+          btn.textContent = 'Enviando…';
+          try{
+            var payload = {
+              _subject: 'Inscripción Torneo de Ajedrez FICC 2026 - ' + cat + ' - ' + nombre,
+              _template: 'table',
+              _captcha: 'false',
+              _autoresponse: 'Gracias por inscribirte al Torneo de Ajedrez del Festival Internacional del Café Cacahoatán 2026 (domingo 20 de diciembre, 10:00 hrs, Parque Central Miguel Hidalgo). El comité te contactará por WhatsApp para confirmar tu lugar y el pago de la inscripción. Informes: 962 106 36 15.',
+              'Categoría': cat,
+              'Nombre del jugador': nombre,
+              'Fecha de nacimiento': val('az-nac'),
+              'Rating / ELO': val('az-rating') || '—',
+              'WhatsApp': val('az-tel'),
+              'email': val('az-correo'),
+              'Ciudad': val('az-ciudad'),
+              'Club o escuela': val('az-club') || '—',
+              'Padre, madre o tutor': cat === 'Infantil' ? val('az-tutor') : '—',
+              'Acepta las bases': 'Sí'
+            };
+            var res = await fetch('https://formsubmit.co/ajax/ajedrezficc@gmail.com', {
+              method: 'POST',
+              headers: {'Content-Type':'application/json','Accept':'application/json'},
+              body: JSON.stringify(payload)
+            });
+            if(!res.ok) throw new Error('send failed');
+            form.querySelectorAll('.field, .field-row, .ficc-check, .form-submit').forEach(function(el){ el.style.display = 'none'; });
+            okEl.hidden = false;
+            okEl.scrollIntoView({behavior:'smooth', block:'center'});
+          }catch(err){
+            errEl.textContent = 'No se pudo enviar tu inscripción en este momento. Intenta de nuevo o escribe por WhatsApp al 962 106 36 15.';
+            errEl.hidden = false;
+            btn.disabled = false;
+            btn.textContent = 'Enviar inscripción';
+          }
+        });
+      })();
+    </script>
+  </section>
+
   <section class="ficc-block emb-wrap" id="embajadora" aria-labelledby="emb-title">
     <div class="wrap emb" data-reveal>
       <div class="emb-body">
@@ -270,6 +497,12 @@
           <h3>Concurso Grano de Oro</h3>
           <p>Arábica y Robusta, califica el INIFAP.</p>
           <a href="#grano-de-oro">Ver el concurso →</a>
+        </article>
+        <article class="ficc-card" data-reveal>
+          <span class="badge badge--ok">Registro abierto</span>
+          <h3>Torneo de Ajedrez</h3>
+          <p>Domingo 20 de diciembre. Bolsa de $5,000 MXN.</p>
+          <a href="#ajedrez">Inscribirme al torneo →</a>
         </article>
         <article class="ficc-card" data-reveal>
           <span class="badge badge--soon">Muy pronto</span>
@@ -463,6 +696,11 @@
           <p>Regístrate en línea y prepara tus dos muestras.</p>
         </article>
         <article class="news-item" data-reveal>
+          <span class="news-tag">Ajedrez</span>
+          <h3>Abre la inscripción al Torneo de Ajedrez</h3>
+          <p>Domingo 20 de diciembre en el Parque Central. <a href="#ajedrez" style="color:var(--oro);">Inscríbete aquí</a>.</p>
+        </article>
+        <article class="news-item" data-reveal>
           <span class="news-tag">Embajadora</span>
           <h3>Ya tenemos Embajadora del Café 2026</h3>
           <p>Muy pronto la presentaremos.</p>
@@ -498,6 +736,7 @@
         <ul>
           <li><a href="/ficc-2026">Festival Internacional del Café</a></li>
           <li><a href="/ficc-2026#grano-de-oro">Concurso Grano de Oro</a></li>
+          <li><a href="/ficc-2026#ajedrez">Torneo de Ajedrez</a></li>
           <li><a href="/ficc-2026#programa">Programa y actividades</a></li>
           <li><a href="/ficc-2026#participantes">Registro de participantes</a></li>
         </ul>
