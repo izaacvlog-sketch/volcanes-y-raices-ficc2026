@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FICC 2026 — Festival Internacional del Café Cacahoatán</title>
-<meta name="description" content="Festival Internacional del Café Cacahoatán 2026, del 18 al 22 de diciembre: Concurso Grano de Oro, Torneo de Ajedrez, convocatoria, programa, actividades y registro de participantes.">
+<meta name="description" content="Festival Internacional del Café Cacahoatán 2026, del 18 al 22 de diciembre: Concurso Grano de Oro, Competencia de Baristas, Torneo de Ajedrez, Copa de Básquetbol, Carrera Atlética, Juegos Tradicionales, programa, actividades y registro de participantes.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&family=Alex+Brush&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -80,6 +80,7 @@
     <a href="#grano-de-oro" class="sub-gdo">Grano de Oro</a>
     <a href="#ajedrez">Ajedrez</a>
     <a href="#convocatoria">Convocatoria y bases</a>
+    <a href="#convocatorias">Convocatorias</a>
     <a href="#programa">Programa</a>
     <a href="#actividades">Actividades</a>
     <a href="#participantes">Participantes y registro</a>
@@ -157,8 +158,8 @@
           <a class="gdo-link" href="#convocatoria">Ver convocatoria y bases</a>
         </div>
       </div>
-      <a class="gdo-poster" href="/assets/ficc/grano-de-oro-2.jpg" data-lightbox data-caption="Concurso Grano de Oro · FICC 2026">
-        <img src="/assets/ficc/grano-de-oro-2.jpg" width="1024" height="1536" loading="lazy" alt="Cartel del Concurso Grano de Oro: 2 muestras Arábica y Robusta, selladas e identificadas, datos del productor y parcela, evaluación por expertos del INIFAP.">
+      <a class="gdo-poster" href="/assets/ficc/grano-de-oro-convocatoria.jpg" data-lightbox data-caption="Concurso Grano de Oro · FICC 2026">
+        <img src="/assets/ficc/grano-de-oro-convocatoria.jpg" width="1067" height="1600" loading="lazy" alt="Cartel del Concurso Grano de Oro: 2 muestras Arábica y Robusta, selladas e identificadas, datos del productor y parcela, evaluación por expertos del INIFAP.">
       </a>
     </div>
 
@@ -187,6 +188,7 @@
             <li><b>2 muestras:</b> una Arábica y una Robusta.</li>
             <li><b>Entrega:</b> en bolsas de papel selladas e identificadas.</li>
             <li><b>Datos:</b> productor, parcela, altitud, variedad, cosecha y beneficiado.</li>
+            <li><b>Lugar de entrega:</b> INIFAP Campo Experimental Rosario Izapa, Tuxtla Chico. Menciona que es para el Concurso Grano de Oro. <a href="https://share.google/xUpVGnpFwc2qeUczt" target="_blank" rel="noopener" style="color:var(--oro);">Cómo llegar →</a></li>
             <li><b>Jurado:</b> especialistas del INIFAP.</li>
             <li><b>Evaluación:</b> calidad física y sensorial.</li>
           </ol>
@@ -419,20 +421,154 @@
     </script>
   </section>
 
+  <section class="ficc-block cv-wrap" id="convocatorias" aria-labelledby="cv-title">
+    <style>
+      .cv-wrap{background:#F3ECDD;color:#21160E}
+      .cv-head{display:grid;grid-template-columns:1fr auto;align-items:end;gap:24px;border-bottom:2px solid #21160E;padding-bottom:22px;margin-bottom:8px}
+      .cv-head .cv-eyebrow{font-family:'Work Sans',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#8A5E14;margin:0 0 14px}
+      .cv-head h2{margin:0;font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(2.6rem,6vw,4.6rem);line-height:.95;letter-spacing:-.02em;color:#21160E}
+      .cv-head h2 em{font-style:italic;color:#8A5E14}
+      .cv-head p{margin:0;max-width:20em;font-family:'Work Sans',sans-serif;font-size:.95rem;line-height:1.5;color:#5C4836;text-align:right}
+      .cv-list{display:grid;grid-template-columns:repeat(2,1fr);column-gap:56px}
+      .cv-item{display:grid;grid-template-columns:180px 1fr;gap:26px;padding:34px 0;border-bottom:1px solid rgba(33,22,14,.22)}
+      .cv-poster{display:block;align-self:start}
+      .cv-poster img{display:block;width:100%;height:auto;outline:1px solid rgba(33,22,14,.15);transition:transform .35s ease}
+      .cv-poster:hover img{transform:translateY(-4px)}
+      .cv-kicker{margin:0 0 8px;font-family:'Work Sans',sans-serif;font-size:.74rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#8A5E14}
+      .cv-num{font-family:'Playfair Display',serif;font-style:italic;font-weight:500;font-size:1rem;letter-spacing:0;text-transform:none;color:#21160E;margin-right:10px}
+      .cv-body h3{margin:0 0 16px;font-family:'Playfair Display',serif;font-weight:600;font-size:1.85rem;line-height:1.05;letter-spacing:-.01em;color:#21160E}
+      .cv-data{margin:0;display:grid;gap:0;font-family:'Work Sans',sans-serif}
+      .cv-row{display:grid;grid-template-columns:86px 1fr;gap:12px;padding:7px 0;border-top:1px solid rgba(33,22,14,.12)}
+      .cv-row dt{font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#8A7563;padding-top:3px}
+      .cv-row dd{margin:0;font-size:.95rem;line-height:1.4;color:#21160E}
+      .cv-note{margin:12px 0 0;font-family:'Playfair Display',serif;font-style:italic;font-size:.98rem;line-height:1.45;color:#5C4836}
+      .cv-actions{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;margin-top:18px;font-family:'Work Sans',sans-serif}
+      .cv-cta{display:inline-block;background:#21160E;color:#F3ECDD;font-weight:600;font-size:.88rem;letter-spacing:.02em;padding:11px 18px;text-decoration:none}
+      .cv-cta:hover{background:#9E2A1C}
+      .cv-more{color:#21160E;font-weight:600;font-size:.88rem;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+      .cv-more:hover{color:#9E2A1C}
+      @media (max-width:1000px){.cv-list{grid-template-columns:1fr}}
+      @media (max-width:560px){
+        .cv-head{grid-template-columns:1fr}.cv-head p{text-align:left}
+        .cv-item{grid-template-columns:110px 1fr;gap:18px}
+        .cv-body h3{font-size:1.5rem}
+        .cv-row{grid-template-columns:1fr;gap:0}
+      }
+    </style>
+    <div class="wrap">
+      <header class="cv-head" data-reveal>
+        <div>
+          <p class="cv-eyebrow">Convocatorias · FICC 2026</p>
+          <h2 id="cv-title">Concursos, torneos <em>y competencias</em></h2>
+        </div>
+        <p>Seis convocatorias abiertas. Toca cada cartel para verlo completo.</p>
+      </header>
+      <div class="cv-list">
+        <article class="cv-item" data-reveal>
+          <a class="cv-poster" href="/assets/ficc/grano-de-oro-convocatoria.jpg" data-lightbox data-caption="Concurso Grano de Oro · FICC 2026">
+            <img src="/assets/ficc/grano-de-oro-convocatoria.jpg" width="1067" height="1600" loading="lazy" alt="Cartel del Concurso Grano de Oro: requisitos y entrega de muestras en el INIFAP Campo Experimental Rosario Izapa.">
+          </a>
+          <div class="cv-body">
+            <p class="cv-kicker"><span class="cv-num">01</span>Concurso de café</p>
+            <h3>Grano de Oro</h3>
+            <dl class="cv-data"><div class="cv-row"><dt>Muestras</dt><dd>Dos: una Arábica y una Robusta, en bolsa de papel sellada</dd></div><div class="cv-row"><dt>Entrega</dt><dd>INIFAP Campo Experimental Rosario Izapa, Tuxtla Chico</dd></div><div class="cv-row"><dt>Jurado</dt><dd>Especialistas del INIFAP</dd></div></dl>
+            <p class="cv-note">Al entregar, menciona que tus muestras son para el Concurso Grano de Oro del FICC 2026.</p>
+            <div class="cv-actions"><a class="cv-cta" href="#participantes" data-registro="Concurso Grano de Oro">Inscribirme<span aria-hidden="true"> →</span></a><a class="cv-more" href="https://share.google/xUpVGnpFwc2qeUczt" target="_blank" rel="noopener">Cómo llegar<span aria-hidden="true"> →</span></a></div>
+          </div>
+        </article>
+
+        <article class="cv-item" data-reveal>
+          <a class="cv-poster" href="/assets/ficc/baristas.jpg" data-lightbox data-caption="Competencia de Baristas · FICC 2026">
+            <img src="/assets/ficc/baristas.jpg" width="1200" height="1500" loading="lazy" alt="Cartel de la Competencia de Baristas: mayores de 18 años que radiquen en Chiapas, inscripción de 150 pesos con fecha límite el 1 de diciembre, rutina de 30 minutos.">
+          </a>
+          <div class="cv-body">
+            <p class="cv-kicker"><span class="cv-num">02</span>Competencia</p>
+            <h3>Baristas</h3>
+            <dl class="cv-data"><div class="cv-row"><dt>Quién</dt><dd>Profesionales del café, 18+ años, que radiquen en Chiapas</dd></div><div class="cv-row"><dt>Costo</dt><dd>$150 MXN · sin reembolsos</dd></div><div class="cv-row"><dt>Cierre</dt><dd>1 de diciembre</dd></div><div class="cv-row"><dt>Rutina</dt><dd>30 minutos</dd></div></dl>
+            <p class="cv-note">Ponemos máquina, molino y agua. Tú traes utensilios, mandil, báscula, tazas y tu café.</p>
+            <div class="cv-actions"><a class="cv-cta" href="#participantes" data-registro="Barista o catador">Inscribirme<span aria-hidden="true"> →</span></a></div>
+          </div>
+        </article>
+
+        <article class="cv-item" data-reveal>
+          <a class="cv-poster" href="/assets/ficc/ajedrez-flyer.jpg" data-lightbox data-caption="Torneo de Ajedrez · FICC 2026">
+            <img src="/assets/ficc/ajedrez-flyer.jpg" width="1080" height="1350" loading="lazy" alt="Cartel del Torneo de Ajedrez: domingo 20 de diciembre, 10:00 hrs, Parque Central Miguel Hidalgo. Bolsa garantizada de 5,000 pesos.">
+          </a>
+          <div class="cv-body">
+            <p class="cv-kicker"><span class="cv-num">03</span>Deporte</p>
+            <h3>Torneo de Ajedrez</h3>
+            <dl class="cv-data"><div class="cv-row"><dt>Fecha</dt><dd>Domingo 20 de diciembre, 10:00 hrs</dd></div><div class="cv-row"><dt>Lugar</dt><dd>Parque Central Miguel Hidalgo</dd></div><div class="cv-row"><dt>Premios</dt><dd>Bolsa garantizada de $5,000 MXN</dd></div><div class="cv-row"><dt>Cierre</dt><dd>Sábado 19 de diciembre, 20:00 hrs</dd></div></dl>
+            
+            <div class="cv-actions"><a class="cv-cta" href="#ajz-registro" >Inscribirme<span aria-hidden="true"> →</span></a><a class="cv-more" href="#ajedrez" >Ver bases<span aria-hidden="true"> →</span></a></div>
+          </div>
+        </article>
+
+        <article class="cv-item" data-reveal>
+          <a class="cv-poster" href="/assets/ficc/basquetbol.jpg" data-lightbox data-caption="Copa FICC 2026 · Torneo de Básquetbol">
+            <img src="/assets/ficc/basquetbol.jpg" width="1200" height="1500" loading="lazy" alt="Cartel de la Copa FICC 2026, Torneo de Básquetbol: 19, 20 y 21 de diciembre en el Auditorio Municipal de Cacahoatán. Inscripción 50 pesos por atleta, arbitraje 200 pesos por partido. Cierre de inscripciones el 30 de noviembre.">
+          </a>
+          <div class="cv-body">
+            <p class="cv-kicker"><span class="cv-num">04</span>Deporte</p>
+            <h3>Copa FICC de Básquetbol</h3>
+            <dl class="cv-data"><div class="cv-row"><dt>Fechas</dt><dd>19, 20 y 21 de diciembre</dd></div><div class="cv-row"><dt>Lugar</dt><dd>Auditorio Municipal, Cacahoatán</dd></div><div class="cv-row"><dt>Categorías</dt><dd>Pañales, Micro, Infantil, Pasarela y Cadetes</dd></div><div class="cv-row"><dt>Costo</dt><dd>$50 por atleta · $200 arbitraje por partido</dd></div><div class="cv-row"><dt>Cierre</dt><dd>30 de noviembre</dd></div></dl>
+            <p class="cv-note">Medalla para todos. Presenta cédula del equipo y responsivas de jugadores.</p>
+            <div class="cv-actions"><a class="cv-cta" href="https://wa.me/529612432460" target="_blank" rel="noopener">WhatsApp 961 243 24 60<span aria-hidden="true"> →</span></a></div>
+          </div>
+        </article>
+
+        <article class="cv-item" data-reveal>
+          <a class="cv-poster" href="/assets/ficc/carrera-atletica.jpg" data-lightbox data-caption="Carrera Atlética Festival del Café 2026">
+            <img src="/assets/ficc/carrera-atletica.jpg" width="1024" height="1536" loading="lazy" alt="Cartel de la Carrera Atlética Festival del Café 2026: domingo 20 de diciembre, 6 kilómetros, salida 7:00 a.m. del Parque Central. Inscripción 100 pesos.">
+          </a>
+          <div class="cv-body">
+            <p class="cv-kicker"><span class="cv-num">05</span>Deporte</p>
+            <h3>Carrera Atlética 6 km</h3>
+            <dl class="cv-data"><div class="cv-row"><dt>Fecha</dt><dd>Domingo 20 de diciembre, 7:00 a.m.</dd></div><div class="cv-row"><dt>Ruta</dt><dd>Parque Central, Arco, Rosario Izapa y regreso</dd></div><div class="cv-row"><dt>Costo</dt><dd>$100 · categoría libre, ambas ramas</dd></div><div class="cv-row"><dt>Kit</dt><dd>Número, medalla e hidratación</dd></div></dl>
+            <p class="cv-note">Los datos para depósito vienen en el cartel.</p>
+            <div class="cv-actions"><a class="cv-cta" href="https://wa.me/529624484398" target="_blank" rel="noopener">WhatsApp 962 448 4398<span aria-hidden="true"> →</span></a><a class="cv-more" href="https://wa.me/529622192145" target="_blank" rel="noopener">962 219 2145<span aria-hidden="true"> →</span></a></div>
+          </div>
+        </article>
+
+        <article class="cv-item" data-reveal>
+          <a class="cv-poster" href="/assets/ficc/juegos-tradicionales.jpg" data-lightbox data-caption="Gran concurso de Juegos Tradicionales · FICC 2026">
+            <img src="/assets/ficc/juegos-tradicionales.jpg" width="1200" height="1600" loading="lazy" alt="Cartel del Gran concurso de Juegos Tradicionales: yoyo el 18, balero el 19 y trompo el 20 de diciembre, de 9:00 a 10:00 a.m. en el Parque Central.">
+          </a>
+          <div class="cv-body">
+            <p class="cv-kicker"><span class="cv-num">06</span>Cultura</p>
+            <h3>Juegos Tradicionales</h3>
+            <dl class="cv-data"><div class="cv-row"><dt>Vie 18</dt><dd>Yoyo · secundarias</dd></div><div class="cv-row"><dt>Sáb 19</dt><dd>Balero · preparatorias</dd></div><div class="cv-row"><dt>Dom 20</dt><dd>Trompo · primarias</dd></div><div class="cv-row"><dt>Horario</dt><dd>9:00 a 10:00 a.m., Parque Central</dd></div></dl>
+            <p class="cv-note">Demostración de chicharrita de 10:00 a 11:00 a.m. Premio: kit de patrocinadores con trompo conmemorativo.</p>
+            
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
   <section class="ficc-block" id="programa" aria-labelledby="prog-title">
     <div class="wrap">
       <div class="ficc-block-head" data-reveal>
         <span class="eyebrow">Programa</span>
         <h2 id="prog-title">Cinco días de café</h2>
-        <p>Muy pronto el programa completo.</p>
+        <p>Lo confirmado hasta ahora. Iremos agregando horarios.</p>
       </div>
+      <style>
+        .prog-list{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px;font-size:.84rem;line-height:1.35;color:rgba(243,227,192,.88)}
+        .prog-list li{padding-top:8px;border-top:1px solid rgba(243,227,192,.12)}
+        .prog-list li:first-child{border-top:0;padding-top:0}
+        .prog-list i{font-style:normal;color:rgba(243,227,192,.6)}
+        .prog-list .pl-t{font-weight:700;color:#E8C06A}
+        .prog-day{align-self:start}
+      </style>
       <div class="prog-days" data-reveal>
-        <div class="prog-day"><b>18</b><span>Diciembre</span><em>Por anunciar</em></div>
-        <div class="prog-day"><b>19</b><span>Diciembre</span><em>Por anunciar</em></div>
-        <div class="prog-day"><b>20</b><span>Diciembre</span><em>Por anunciar</em></div>
-        <div class="prog-day"><b>21</b><span>Diciembre</span><em>Por anunciar</em></div>
-        <div class="prog-day"><b>22</b><span>Diciembre</span><em>Por anunciar</em></div>
+        <div class="prog-day"><b>18</b><span>Viernes · Dic</span><ul class="prog-list"><li>Juegos tradicionales: <strong class="pl-t">Yoyo</strong><br><i>9:00 a.m. · Parque Central</i></li><li>Inauguración del festival<br><i>Por anunciar</i></li></ul></div>
+        <div class="prog-day"><b>19</b><span>Sábado · Dic</span><ul class="prog-list"><li>Juegos tradicionales: <strong class="pl-t">Balero</strong><br><i>9:00 a.m. · Parque Central</i></li><li><strong class="pl-t">Copa FICC</strong> de básquetbol<br><i>Auditorio Municipal</i></li></ul></div>
+        <div class="prog-day"><b>20</b><span>Domingo · Dic</span><ul class="prog-list"><li><strong class="pl-t">Carrera atlética 6 km</strong><br><i>7:00 a.m. · Parque Central</i></li><li>Juegos tradicionales: <strong class="pl-t">Trompo</strong><br><i>9:00 a.m. · Parque Central</i></li><li><strong class="pl-t">Torneo de ajedrez</strong><br><i>10:00 a.m. · Parque Central</i></li><li><strong class="pl-t">Copa FICC</strong> de básquetbol<br><i>Auditorio Municipal</i></li></ul></div>
+        <div class="prog-day"><b>21</b><span>Lunes · Dic</span><ul class="prog-list"><li><strong class="pl-t">Copa FICC</strong> de básquetbol<br><i>Auditorio Municipal</i></li></ul></div>
+        <div class="prog-day"><b>22</b><span>Martes · Dic</span><ul class="prog-list"><li>Clausura del festival<br><i>Por anunciar</i></li></ul></div>
       </div>
+      <p style="margin:-18px 0 36px;font-size:.85rem;color:rgba(243,227,192,.6)">Grano de Oro, Competencia de Baristas, conferencias y cultura: fechas y horarios por anunciar.</p>
 
       <div class="ficc-block-head" id="actividades" data-reveal>
         <span class="eyebrow">Actividades</span>
@@ -457,15 +593,28 @@
           <p>Aparta tu espacio en el festival.</p>
           <a href="#participantes" data-registro="Expositor / stand comercial">Registrar mi stand →</a>
         </article>
+        <article class="ficc-card" data-reveal>
+          <span class="badge badge--ok">Convocatoria</span>
+          <h3>Competencia de Baristas</h3>
+          <p>18+ años. Inscripción $150 hasta el 1 de diciembre.</p>
+          <a href="#convocatorias">Ver convocatoria →</a>
+        </article>
+        <article class="ficc-card" data-reveal>
+          <span class="badge badge--ok">Deporte</span>
+          <h3>Básquetbol y carrera atlética</h3>
+          <p>Copa FICC del 19 al 21 y carrera de 6 km el 20 de diciembre.</p>
+          <a href="#convocatorias">Ver convocatorias →</a>
+        </article>
         <article class="ficc-card" id="conferencias" data-reveal>
           <span class="badge badge--soon">Por anunciar</span>
           <h3>Conferencias</h3>
           <p>Próximamente.</p>
         </article>
         <article class="ficc-card" id="cultura" data-reveal>
-          <span class="badge badge--soon">Por anunciar</span>
+          <span class="badge badge--ok">Confirmado</span>
           <h3>Cultura</h3>
-          <p>Próximamente.</p>
+          <p>Juegos tradicionales: yoyo, balero y trompo, del 18 al 20 de diciembre.</p>
+          <a href="#convocatorias">Ver más →</a>
         </article>
         <article class="ficc-card" id="turismo" data-reveal>
           <span class="badge badge--ok">Cacahoatán</span>
@@ -673,6 +822,7 @@
           <li><a href="/ficc-2026">Festival Internacional del Café</a></li>
           <li><a href="/ficc-2026#grano-de-oro">Concurso Grano de Oro</a></li>
           <li><a href="/ficc-2026#ajedrez">Torneo de Ajedrez</a></li>
+          <li><a href="/ficc-2026#convocatorias">Todas las convocatorias</a></li>
           <li><a href="/ficc-2026#programa">Programa y actividades</a></li>
           <li><a href="/ficc-2026#participantes">Registro de participantes</a></li>
         </ul>
