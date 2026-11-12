@@ -549,72 +549,96 @@
 
   <section class="ficc-block cf-wrap" id="conferencias" aria-labelledby="cf-title">
     <style>
-      .cf-wrap{background:#1B110B;color:#F3ECDD}
-      .cf-head{display:grid;grid-template-columns:1fr auto;align-items:end;gap:24px;border-bottom:1px solid rgba(232,192,106,.45);padding-bottom:22px}
-      .cf-eyebrow{margin:0 0 14px;font-family:'Work Sans',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#E8C06A}
-      .cf-head h2{margin:0;font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(2.5rem,6vw,4.4rem);line-height:.95;letter-spacing:-.02em;color:#F3ECDD}
-      .cf-head h2 em{font-style:italic;color:#E8C06A}
-      .cf-head p{margin:0;max-width:21em;font-family:'Work Sans',sans-serif;font-size:1rem;line-height:1.5;color:rgba(243,236,221,.72);text-align:right}
-      .cf-tabs{display:grid;grid-template-columns:repeat(5,1fr);border-bottom:1px solid rgba(243,236,221,.18);margin-bottom:6px}
-      .cf-tab{appearance:none;background:none;border:0;border-bottom:3px solid transparent;color:rgba(243,236,221,.55);padding:22px 8px 16px;cursor:pointer;display:flex;align-items:baseline;justify-content:center;gap:10px;font:inherit;transition:color .2s,border-color .2s}
-      .cf-tab b{font-family:'Playfair Display',serif;font-weight:500;font-size:2.4rem;line-height:1}
-      .cf-tab span{font-family:'Work Sans',sans-serif;font-size:.8rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
-      .cf-tab:hover{color:#F3ECDD}
-      .cf-tab[aria-selected="true"]{color:#E8C06A;border-bottom-color:#E8C06A}
-      .cf-tab:focus-visible{outline:2px solid #E8C06A;outline-offset:-2px}
-      .cf-theme{margin:30px 0 4px;font-family:'Playfair Display',serif;font-style:italic;font-size:1.5rem;color:#F3ECDD}
-      .cf-theme span{display:block;font-family:'Work Sans',sans-serif;font-style:normal;font-size:.75rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#E8C06A;margin-bottom:6px}
-      .cf-list{list-style:none;margin:0;padding:0}
-      .cf-row{display:grid;grid-template-columns:150px 1fr;gap:28px;padding:26px 0;border-bottom:1px solid rgba(243,236,221,.14)}
-      .cf-time{font-family:'Playfair Display',serif;font-size:2.1rem;line-height:1;color:#F3ECDD;font-variant-numeric:lining-nums}
-      .cf-time small{font-family:'Work Sans',sans-serif;font-size:.8rem;font-weight:600;letter-spacing:.08em;color:rgba(243,236,221,.6);margin-left:6px}
-      .cf-kind{margin:0 0 6px;font-family:'Work Sans',sans-serif;font-size:.74rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#E8C06A}
-      .cf-body h3{margin:0;font-family:'Playfair Display',serif;font-weight:600;font-size:1.75rem;line-height:1.15;color:#F3ECDD;max-width:30em}
-      .cf-who{margin:10px 0 0;font-family:'Work Sans',sans-serif;font-size:1.08rem;line-height:1.45;color:rgba(243,236,221,.85);display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px}
-      .cf-inst{font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#1B110B;background:#E8C06A;padding:4px 9px}
-      .cf-row--minor .cf-time{font-size:1.6rem;color:rgba(243,236,221,.7)}
-      .cf-row--minor h3{font-size:1.3rem;font-weight:500;color:rgba(243,236,221,.85)}
-      .cf-foot{margin:22px 0 0;font-family:'Work Sans',sans-serif;font-size:.95rem;color:rgba(243,236,221,.65)}
-      @media (max-width:760px){
-        .cf-head{grid-template-columns:1fr}.cf-head p{text-align:left}
-        .cf-tabs{grid-template-columns:repeat(5,minmax(64px,1fr));overflow-x:auto}
-        .cf-tab{flex-direction:column;align-items:center;gap:4px;padding:16px 4px 12px}
-        .cf-tab b{font-size:1.9rem}.cf-tab span{font-size:.68rem;letter-spacing:.08em}
-        .cf-row{grid-template-columns:1fr;gap:8px;padding:22px 0}
-        .cf-time{font-size:1.6rem}
-        .cf-body h3{font-size:1.45rem}
+      .cf-wrap{position:relative;isolation:isolate;color:#F6EEE2;font-family:'Work Sans',sans-serif;background:#120B07}
+      .cf-wrap::before{content:"";position:absolute;inset:0;z-index:-2;background:url(/assets/ficc/conferencias/fondo.jpg) center/cover no-repeat}
+      .cf-wrap::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(18,11,7,.92) 0%,rgba(18,11,7,.72) 35%,rgba(26,14,8,.86) 100%),radial-gradient(120% 70% at 85% 10%,rgba(158,42,28,.28),transparent 60%)}
+      .cf-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px 40px;margin-bottom:36px}
+      .cf-top h2{margin:0 0 10px;font-family:'Work Sans',sans-serif;font-weight:700;font-size:clamp(2.1rem,4.6vw,3.2rem);line-height:1.05;letter-spacing:-.02em;color:#fff}
+      .cf-top p{margin:0;font-size:1.08rem;line-height:1.5;color:rgba(246,238,226,.78);max-width:32em}
+      .cf-jump{display:flex;gap:10px;flex-wrap:wrap}
+      .cf-jump a{display:flex;flex-direction:column;align-items:center;min-width:76px;padding:12px 16px 10px;border-radius:16px;text-decoration:none;color:#F6EEE2;
+        background:linear-gradient(160deg,rgba(255,255,255,.16),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.18);
+        -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 8px 24px rgba(0,0,0,.25);transition:transform .2s ease,background .2s ease,border-color .2s ease}
+      .cf-jump a b{font-size:1.6rem;font-weight:600;line-height:1}
+      .cf-jump a span{margin-top:4px;font-size:.78rem;color:rgba(246,238,226,.75)}
+      .cf-jump a:hover{transform:translateY(-2px);background:linear-gradient(160deg,rgba(232,192,106,.42),rgba(158,42,28,.28));border-color:rgba(232,192,106,.6)}
+      .cf-jump a:focus-visible{outline:2px solid #E8C06A;outline-offset:3px}
+      .cf-days{display:grid;gap:22px}
+      .cf-day{display:grid;grid-template-columns:300px 1fr;gap:0;border-radius:22px;overflow:hidden;scroll-margin-top:150px;
+        background:linear-gradient(135deg,rgba(255,255,255,.11),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.14);
+        -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 20px 50px rgba(0,0,0,.35)}
+      .cf-photo{position:relative;margin:0;min-height:260px}
+      .cf-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+      .cf-photo figcaption{position:absolute;inset:auto 0 0 0;padding:70px 22px 20px;display:grid;gap:2px;background:linear-gradient(180deg,transparent,rgba(18,11,7,.88))}
+      .cf-dn{font-family:'Playfair Display',serif;font-size:4rem;line-height:.9;color:#fff;font-variant-numeric:lining-nums}
+      .cf-dw{font-size:1rem;font-weight:600;color:#fff}
+      .cf-th{font-size:.92rem;line-height:1.35;color:rgba(246,238,226,.8)}
+      .cf-sessions{list-style:none;margin:0;padding:10px 30px}
+      .cf-sessions li{display:grid;grid-template-columns:96px 1fr;gap:20px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+      .cf-sessions li:last-child{border-bottom:0}
+      .cf-t{font-size:1.05rem;font-weight:600;color:#fff;font-variant-numeric:tabular-nums;white-space:nowrap;padding-top:1px}
+      .cf-t small{font-size:.8rem;font-weight:500;color:rgba(246,238,226,.6)}
+      .cf-sessions h3{margin:0;font-family:'Work Sans',sans-serif;font-size:1.2rem;font-weight:600;line-height:1.35;color:#fff}
+      .cf-sessions p{margin:4px 0 0;font-size:1rem;line-height:1.45;color:rgba(246,238,226,.78)}
+      .cf-org{font-weight:600;color:#F0C877}
+      .cf-tag{display:inline-block;vertical-align:2px;margin-left:10px;padding:2px 9px;border-radius:999px;background:rgba(120,190,130,.18);border:1px solid rgba(120,190,130,.45);color:#BFE6C4;font-size:.75rem;font-weight:600}
+      .cf-sessions li.is-minor h3{font-weight:400;font-size:1.05rem;color:rgba(246,238,226,.7)}
+      .cf-sessions li.is-minor .cf-t{font-weight:500;color:rgba(246,238,226,.6)}
+      .cf-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;margin-top:28px;font-size:.95rem;color:rgba(246,238,226,.75)}
+      .cf-btn{display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:999px;font-weight:600;font-size:.95rem;color:#1E120A;text-decoration:none;
+        background:linear-gradient(135deg,#F3D58C,#D9A441 55%,#B9782A);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 10px 26px rgba(217,164,65,.3);transition:transform .2s ease,box-shadow .2s ease}
+      .cf-btn:hover{transform:translateY(-2px);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 14px 32px rgba(217,164,65,.42)}
+      .cf-btn svg{width:18px;height:18px}
+      @media (max-width:860px){
+        .cf-day{grid-template-columns:1fr}
+        .cf-photo{min-height:190px;aspect-ratio:16/9}
+        .cf-sessions{padding:6px 18px}
       }
+      @media (max-width:560px){
+        .cf-jump{width:100%;flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px}
+        .cf-jump a{min-width:64px;padding:10px 12px 8px;flex:1 0 auto}
+        .cf-sessions li{grid-template-columns:72px 1fr;gap:12px}
+        .cf-t{font-size:.98rem}
+        .cf-sessions h3{font-size:1.1rem}
+        .cf-dn{font-size:3.2rem}
+      }
+      @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.cf-day{background:rgba(30,18,11,.88)}}
     </style>
     <div class="wrap">
-      <header class="cf-head" data-reveal>
+      <div class="cf-top" data-reveal>
         <div>
-          <p class="cf-eyebrow">Programa académico · 18 al 22 de diciembre</p>
-          <h2 id="cf-title">Conferencias <em>magistrales</em></h2>
+          <h2 id="cf-title">Conferencias magistrales</h2>
+          <p>Del 18 al 22 de diciembre, con investigadores del INIFAP, ECOSUR y la UNACH.</p>
         </div>
-        <p>Investigadores del INIFAP, ECOSUR y la UNACH hablan de calidad, plagas, roya y el futuro del café.</p>
-      </header>
-      <div class="cf-tabs" role="tablist" aria-label="Días del festival" data-reveal>
-        <button class="cf-tab" role="tab" id="cf-t18" aria-controls="cf-p18" aria-selected="true"><b>18</b><span>Viernes</span></button><button class="cf-tab" role="tab" id="cf-t19" aria-controls="cf-p19" aria-selected="false" tabindex="-1"><b>19</b><span>Sábado</span></button><button class="cf-tab" role="tab" id="cf-t20" aria-controls="cf-p20" aria-selected="false" tabindex="-1"><b>20</b><span>Domingo</span></button><button class="cf-tab" role="tab" id="cf-t21" aria-controls="cf-p21" aria-selected="false" tabindex="-1"><b>21</b><span>Lunes</span></button><button class="cf-tab" role="tab" id="cf-t22" aria-controls="cf-p22" aria-selected="false" tabindex="-1"><b>22</b><span>Martes</span></button>
+        <nav class="cf-jump" aria-label="Ir al día"><a href="#cf-18"><b>18</b><span>Viernes</span></a><a href="#cf-19"><b>19</b><span>Sábado</span></a><a href="#cf-20"><b>20</b><span>Domingo</span></a><a href="#cf-21"><b>21</b><span>Lunes</span></a><a href="#cf-22"><b>22</b><span>Martes</span></a></nav>
       </div>
-      <div class="cf-panel" role="tabpanel" id="cf-p18" aria-labelledby="cf-t18"><p class="cf-theme"><span>Viernes 18 de diciembre</span>Inauguración y variedad Talismán</p><ol class="cf-list"><li class="cf-row cf-row--minor"><time class="cf-time">10:00<small>a.m.</small></time><div class="cf-body"><p class="cf-kind">Acto</p><h3>Inauguración del festival</h3></div></li><li class="cf-row"><time class="cf-time">10:40<small>a.m.</small></time><div class="cf-body"><p class="cf-kind">Presentación</p><h3>Presentación de la variedad de café Talismán</h3><p class="cf-who">Investigadores del INIFAP<span class="cf-inst">INIFAP</span></p></div></li><li class="cf-row cf-row--minor"><time class="cf-time">11:00<small>a.m.</small></time><div class="cf-body"><p class="cf-kind">Recorrido</p><h3>Recorrido por los stands</h3></div></li><li class="cf-row"><time class="cf-time">12:00<small>p.m.</small></time><div class="cf-body"><p class="cf-kind">Ponencia</p><h3>Los beneficios y la calidad del café</h3><p class="cf-who">Dr. Juan Francisco Caballero<span class="cf-inst">INIFAP</span></p></div></li><li class="cf-row"><time class="cf-time">1:00<small>p.m.</small></time><div class="cf-body"><p class="cf-kind">Ponencia</p><h3>Enfermedades de importancia económica del café</h3><p class="cf-who">Misael Martínez Bolaños<span class="cf-inst">INIFAP</span></p></div></li></ol></div><div class="cf-panel" role="tabpanel" id="cf-p19" aria-labelledby="cf-t19" hidden><p class="cf-theme"><span>Sábado 19 de diciembre</span>Plagas y sombra del cafetal</p><ol class="cf-list"><li class="cf-row"><time class="cf-time">12:00<small>p.m.</small></time><div class="cf-body"><p class="cf-kind">Ponencia</p><h3>Manejo de la broca y el taladrador del café</h3><p class="cf-who">Dr. Juan Francisco Barrera<span class="cf-inst">ECOSUR</span></p></div></li><li class="cf-row"><time class="cf-time">1:00<small>p.m.</small></time><div class="cf-body"><p class="cf-kind">Ponencia</p><h3>Importancia de la sombra en un cafetal</h3><p class="cf-who">Dr. Alfredo Castillo Vera<span class="cf-inst">ECOSUR</span></p></div></li></ol></div><div class="cf-panel" role="tabpanel" id="cf-p20" aria-labelledby="cf-t20" hidden><p class="cf-theme"><span>Domingo 20 de diciembre</span>Agua y roya</p><ol class="cf-list"><li class="cf-row"><time class="cf-time">12:00<small>p.m.</small></time><div class="cf-body"><p class="cf-kind">Ponencia</p><h3>Tratamiento de aguas residuales del café</h3><p class="cf-who">M.C. Gamaliel Mejía<span class="cf-inst">ECOSUR</span></p></div></li><li class="cf-row"><time class="cf-time">1:00<small>p.m.</small></time><div class="cf-body"><p class="cf-kind">Ponencia</p><h3>Biotecnología y manejo de la roya del café</h3><p class="cf-who">Dra. Graciela Huerta</p></div></li></ol></div><div class="cf-panel" role="tabpanel" id="cf-p21" aria-labelledby="cf-t21" hidden><p class="cf-theme"><span>Lunes 21 de diciembre</span>Ciencias agrícolas y café robusta</p><ol class="cf-list"><li class="cf-row"><time class="cf-time">12:15<small>p.m.</small></time><div class="cf-body"><p class="cf-kind">Ponencia</p><h3>Ponencia de la Facultad de Ciencias Agrícolas</h3><p class="cf-who">Tema por anunciar<span class="cf-inst">UNACH</span></p></div></li><li class="cf-row"><time class="cf-time">1:00<small>p.m.</small></time><div class="cf-body"><p class="cf-kind">Ponencia</p><h3>Perspectiva del cultivo del café robusta</h3><p class="cf-who">Dr. Alfredo Zamarripa Colmenero</p></div></li></ol></div><div class="cf-panel" role="tabpanel" id="cf-p22" aria-labelledby="cf-t22" hidden><p class="cf-theme"><span>Martes 22 de diciembre</span>Jornada académica UNACH</p><ol class="cf-list"><li class="cf-row cf-row--minor"><time class="cf-time">9:00<small>a.m.</small></time><div class="cf-body"><p class="cf-kind">Apertura</p><h3>Evento a cargo de la Rectoría de la UNACH</h3><p class="cf-who"><span class="cf-inst">UNACH</span></p></div></li><li class="cf-row"><time class="cf-time">10:00<small>a.m.</small></time><div class="cf-body"><p class="cf-kind">Conferencia magistral</p><h3>Conferencia magistral</h3><p class="cf-who">Ponente por anunciar</p></div></li><li class="cf-row"><time class="cf-time">11:00<small>a.m.</small></time><div class="cf-body"><p class="cf-kind">Conferencia magistral virtual</p><h3>Colombia Café Lab</h3><p class="cf-who">Mtro. Elmer Noriel<span class="cf-inst">Colombia</span></p></div></li><li class="cf-row cf-row--minor"><time class="cf-time">11:25<small>a.m.</small></time><div class="cf-body"><p class="cf-kind">Receso</p><h3>Receso y degustación de café de Chiapas</h3></div></li><li class="cf-row"><time class="cf-time">11:40<small>a.m.</small></time><div class="cf-body"><p class="cf-kind">Ponencia</p><h3>Producción de café en México: territorio, sistemas productivos y sostenibilidad</h3><p class="cf-who"><span class="cf-inst">SIAL</span></p></div></li><li class="cf-row"><time class="cf-time">12:40<small>p.m.</small></time><div class="cf-body"><p class="cf-kind">Ponencia</p><h3>Del fruto a la taza: calidad, transformación e innovación</h3><p class="cf-who">Facultad de Ciencias Químicas</p></div></li><li class="cf-row"><time class="cf-time">12:40<small>p.m.</small></time><div class="cf-body"><p class="cf-kind">Conversatorio internacional</p><h3>México – Colombia: voces y experiencias</h3></div></li><li class="cf-row cf-row--minor"><time class="cf-time">1:40<small>p.m.</small></time><div class="cf-body"><p class="cf-kind">Diálogo</p><h3>Diálogo con productores y asistentes</h3><p class="cf-who">Preguntas, intercambio de experiencias y reflexiones</p></div></li><li class="cf-row cf-row--minor"><time class="cf-time">3:00<small>p.m.</small></time><div class="cf-body"><p class="cf-kind">Clausura</p><h3>Conclusiones y mensajes de clausura</h3><p class="cf-who">Reconocimientos y fotografía oficial</p></div></li></ol></div>
-      <p class="cf-foot">Horarios sujetos a cambios. Informes: 962 257 0907.</p>
+      <div class="cf-days">
+      <article class="cf-day" id="cf-18" data-reveal>
+        <figure class="cf-photo"><img src="/assets/ficc/conferencias/dia-18.jpg" alt="" loading="lazy" width="1000" height="1250"><figcaption><span class="cf-dn">18</span><span class="cf-dw">Viernes · diciembre</span><span class="cf-th">Inauguración y variedad Talismán</span></figcaption></figure>
+        <ol class="cf-sessions"><li><span class="cf-t">10:00 <small>a.m.</small></span><div><h3>Inauguración del festival</h3></div></li><li><span class="cf-t">10:40 <small>a.m.</small></span><div><h3>Presentación de la variedad de café Talismán</h3><p>Investigadores del INIFAP</p></div></li><li class="is-minor"><span class="cf-t">11:00 <small>a.m.</small></span><div><h3>Recorrido por los stands</h3></div></li><li><span class="cf-t">12:00 <small>p.m.</small></span><div><h3>Los beneficios y la calidad del café</h3><p>Dr. Juan Francisco Caballero · <span class="cf-org">INIFAP</span></p></div></li><li><span class="cf-t">1:00 <small>p.m.</small></span><div><h3>Enfermedades de importancia económica del café</h3><p>Misael Martínez Bolaños · <span class="cf-org">INIFAP</span></p></div></li></ol>
+      </article>
+      <article class="cf-day" id="cf-19" data-reveal>
+        <figure class="cf-photo"><img src="/assets/ficc/conferencias/dia-19.jpg" alt="" loading="lazy" width="1000" height="1250"><figcaption><span class="cf-dn">19</span><span class="cf-dw">Sábado · diciembre</span><span class="cf-th">Plagas y sombra del cafetal</span></figcaption></figure>
+        <ol class="cf-sessions"><li><span class="cf-t">12:00 <small>p.m.</small></span><div><h3>Manejo de la broca y el taladrador del café</h3><p>Dr. Juan Francisco Barrera · <span class="cf-org">ECOSUR</span></p></div></li><li><span class="cf-t">1:00 <small>p.m.</small></span><div><h3>Importancia de la sombra en un cafetal</h3><p>Dr. Alfredo Castillo Vera · <span class="cf-org">ECOSUR</span></p></div></li></ol>
+      </article>
+      <article class="cf-day" id="cf-20" data-reveal>
+        <figure class="cf-photo"><img src="/assets/ficc/conferencias/dia-20.jpg" alt="" loading="lazy" width="1000" height="1250"><figcaption><span class="cf-dn">20</span><span class="cf-dw">Domingo · diciembre</span><span class="cf-th">Agua y roya</span></figcaption></figure>
+        <ol class="cf-sessions"><li><span class="cf-t">12:00 <small>p.m.</small></span><div><h3>Tratamiento de aguas residuales del café</h3><p>M.C. Gamaliel Mejía · <span class="cf-org">ECOSUR</span></p></div></li><li><span class="cf-t">1:00 <small>p.m.</small></span><div><h3>Biotecnología y manejo de la roya del café</h3><p>Dra. Graciela Huerta</p></div></li></ol>
+      </article>
+      <article class="cf-day" id="cf-21" data-reveal>
+        <figure class="cf-photo"><img src="/assets/ficc/conferencias/dia-21.jpg" alt="" loading="lazy" width="1000" height="1250"><figcaption><span class="cf-dn">21</span><span class="cf-dw">Lunes · diciembre</span><span class="cf-th">Ciencias agrícolas y café robusta</span></figcaption></figure>
+        <ol class="cf-sessions"><li><span class="cf-t">12:15 <small>p.m.</small></span><div><h3>Ponencia de la Facultad de Ciencias Agrícolas</h3><p>Tema por anunciar · <span class="cf-org">UNACH</span></p></div></li><li><span class="cf-t">1:00 <small>p.m.</small></span><div><h3>Perspectiva del cultivo del café robusta</h3><p>Dr. Alfredo Zamarripa Colmenero</p></div></li></ol>
+      </article>
+      <article class="cf-day" id="cf-22" data-reveal>
+        <figure class="cf-photo"><img src="/assets/ficc/conferencias/dia-22.jpg" alt="" loading="lazy" width="1000" height="1250"><figcaption><span class="cf-dn">22</span><span class="cf-dw">Martes · diciembre</span><span class="cf-th">Jornada académica UNACH</span></figcaption></figure>
+        <ol class="cf-sessions"><li><span class="cf-t">9:00 <small>a.m.</small></span><div><h3>Evento a cargo de la Rectoría de la UNACH</h3></div></li><li><span class="cf-t">10:00 <small>a.m.</small></span><div><h3>Conferencia magistral</h3><p>Ponente por anunciar</p></div></li><li><span class="cf-t">11:00 <small>a.m.</small></span><div><h3>Colombia Café Lab<span class="cf-tag">En línea</span></h3><p>Mtro. Elmer Noriel</p></div></li><li class="is-minor"><span class="cf-t">11:25 <small>a.m.</small></span><div><h3>Receso y degustación de café de Chiapas</h3></div></li><li><span class="cf-t">11:40 <small>a.m.</small></span><div><h3>Producción de café en México: territorio, sistemas productivos y sostenibilidad</h3><p><span class="cf-org">SIAL</span></p></div></li><li><span class="cf-t">12:40 <small>p.m.</small></span><div><h3>Del fruto a la taza: calidad, transformación e innovación</h3><p>Facultad de Ciencias Químicas</p></div></li><li><span class="cf-t">12:40 <small>p.m.</small></span><div><h3>Conversatorio internacional México – Colombia: voces y experiencias</h3></div></li><li><span class="cf-t">1:40 <small>p.m.</small></span><div><h3>Diálogo con productores y asistentes</h3><p>Preguntas, intercambio de experiencias y reflexiones</p></div></li><li class="is-minor"><span class="cf-t">3:00 <small>p.m.</small></span><div><h3>Conclusiones y mensajes de clausura</h3><p>Reconocimientos y fotografía oficial</p></div></li></ol>
+      </article>
+      </div>
+      <div class="cf-foot">
+        <span>Los horarios pueden cambiar.</span>
+        <a class="cf-btn" href="https://wa.me/529622570907" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.5 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg>Dudas: 962 257 0907</a>
+      </div>
     </div>
-    <script>
-    (function(){
-      var tabs=[].slice.call(document.querySelectorAll('#conferencias .cf-tab'));
-      function pick(t,focus){
-        tabs.forEach(function(x){var on=x===t;x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;document.getElementById(x.getAttribute('aria-controls')).hidden=!on;});
-        if(focus)t.focus();
-      }
-      tabs.forEach(function(t,i){
-        t.addEventListener('click',function(){pick(t);});
-        t.addEventListener('keydown',function(e){
-          var k=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;
-          if(k){e.preventDefault();pick(tabs[(i+k+tabs.length)%tabs.length],true);}
-        });
-      });
-    })();
-    </script>
   </section>
 
   <section class="ficc-block" id="programa" aria-labelledby="prog-title">
