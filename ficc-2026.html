@@ -68,6 +68,7 @@
           <a class="cta-big cta-green" href="#participantes" data-registro="Concurso Grano de Oro">Inscríbete a Grano de Oro <span aria-hidden="true">☕</span></a>
         </div>
         <div class="ficc-count" id="ficcCount" aria-live="polite"></div>
+        <a class="ficc-asist" id="ficcAsist" href="#participantes" hidden><b>0</b> <span>personas ya registradas</span></a>
       </div>
     </div>
   </div>
@@ -129,6 +130,7 @@
       <div class="mapa360-actions">
         <a href="/mapa-360" target="_blank" rel="noopener">Abrir el mapa en pantalla completa →</a>
         <span>Arrastra para girar · pellizca para acercar</span>
+        <a class="mapa-admin" href="/mapa-360?editar" title="Administrador" aria-label="Acceso de administrador"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></a>
       </div>
     </div>
     <script>
@@ -728,6 +730,10 @@
         <span class="eyebrow">Registro</span>
         <h2 id="part-title">Regístrate al FICC 2026</h2>
         <p>Te contactamos por correo o WhatsApp.</p>
+        <div class="reg-counter" id="regCounter" hidden aria-live="polite">
+          <p class="rc-total"><b id="rcTotal">0</b><span>personas ya confirmaron su asistencia</span></p>
+          <ul class="rc-tipos" id="rcTipos"></ul>
+        </div>
       </header>
       <form class="reg-form" id="ficcForm" novalidate data-reveal>
         <div style="position:absolute;left:-9999px;top:-9999px;" aria-hidden="true">
@@ -950,5 +956,138 @@
 .reg-form .tel-group input{flex:1 1 auto;min-width:0}
 </style>
 <script src="/assets/js/site.js?v=20261009"></script>
+<script>
+/* ===== Contador de asistentes FICC 2026 ===== */
+(function(){
+  var API='/api/registros';
+  function fmt(n){ return Number(n).toLocaleString('es-MX'); }
+  function countUp(el,to){
+    var from=parseInt((el.textContent||'0').replace(/\D/g,''),10)||0, t0=null, d=900;
+    if(from===to){ el.textContent=fmt(to); return; }
+    function step(t){ if(!t0)t0=t; var k=Math.min(1,(t-t0)/d); k=1-Math.pow(1-k,3); el.textContent=fmt(Math.round(from+(to-from)*k)); if(k<1)requestAnimationFrame(step); }
+    requestAnimationFrame(step);
+  }
+  function pintar(d){
+    if(!d||!d.asistentes) return;
+    var hero=document.getElementById('ficcAsist');
+    if(hero){ hero.hidden=false; countUp(hero.querySelector('b'),d.asistentes); hero.querySelector('span').textContent=d.asistentes===1?'persona ya registrada':'personas ya registradas'; }
+    var box=document.getElementById('regCounter');
+    if(box){
+      box.hidden=false; countUp(document.getElementById('rcTotal'),d.asistentes);
+      box.querySelector('.rc-total span').textContent=d.asistentes===1?'persona ya confirmó su asistencia':'personas ya confirmaron su asistencia';
+      var ul=document.getElementById('rcTipos'); ul.innerHTML='';
+      Object.keys(d.porTipo||{}).sort(function(a,b){return d.porTipo[b]-d.porTipo[a];}).forEach(function(k){
+        var li=document.createElement('li'); li.innerHTML='<b></b> <span></span>';
+        li.querySelector('b').textContent=fmt(d.porTipo[k]); li.querySelector('span').textContent=k; ul.appendChild(li);
+      });
+    }
+  }
+  var datos=null;
+  function cargar(){ fetch(API,{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(d){ if(d){datos=d; pintar(d);} }).catch(function(){}); }
+  function sumar(tipo,personas){
+    if(datos){ datos.asistentes+=personas; datos.registros+=1; datos.porTipo=datos.porTipo||{}; datos.porTipo[tipo]=(datos.porTipo[tipo]||0)+personas; }
+    else datos={registros:1,asistentes:personas,porTipo:(function(o){o[tipo]=personas;return o;})({})};
+    pintar(datos);
+    try{ fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({tipo:tipo,personas:personas}),keepalive:true}); }catch(e){}
+  }
+  /* cuando aparece el mensaje de "registro recibido", se suma al contador */
+  function vigilar(id,leer){
+    var el=document.getElementById(id); if(!el) return;
+    var hecho=false;
+    new MutationObserver(function(){
+      if(!hecho && !el.hidden){ hecho=true; var r=leer(); if(r) sumar(r.tipo,r.personas); }
+    }).observe(el,{attributes:true,attributeFilter:['hidden']});
+  }
+  vigilar('fcSuccess',function(){
+    var t=document.getElementById('fc-tipo'); var p=document.getElementById('fc-personas');
+    return {tipo:(t&&t.value)||'Visitante', personas:Math.max(1,Math.min(200,parseInt(p&&p.value,10)||1))};
+  });
+  vigilar('azSuccess',function(){ return {tipo:'Torneo de Ajedrez',personas:1}; });
+  cargar(); setInterval(cargar,60000);
+})();
+</script>
+<style id="ficc-asist">
+.ficc-asist{display:inline-flex;align-items:baseline;gap:8px;margin-top:14px;padding:10px 18px;border-radius:999px;text-decoration:none;color:#F6EEE2;
+  background:linear-gradient(160deg,rgba(255,255,255,.16),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.22);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.ficc-asist b{font-size:1.5rem;color:#F0C877;font-variant-numeric:tabular-nums}
+.ficc-asist span{font-size:.92rem}
+.ficc-asist[hidden],.reg-counter[hidden]{display:none}
+.reg-counter{margin:22px auto 0;max-width:560px;padding:20px 22px;border-radius:20px;text-align:center;
+  background:linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,.035));border:1px solid rgba(255,255,255,.16);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.rc-total{margin:0;display:flex;flex-direction:column;align-items:center;gap:2px}
+.rc-total b{font-family:'Playfair Display',serif;font-size:3.2rem;line-height:1;color:#F0C877;font-variant-numeric:tabular-nums}
+.rc-total span{font-size:1rem;color:rgba(246,238,226,.85)}
+.rc-tipos{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.rc-tipos li{padding:6px 12px;border-radius:999px;font-size:.85rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);color:rgba(246,238,226,.85)}
+.rc-tipos li b{color:#fff}
+</style>
+<style id="ficc-look">
+/* ===== Estilo FICC 2026: fotos reales, vidrio y degradados ===== */
+.page-ficc{--g-bg:linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,.035));--g-br:1px solid rgba(255,255,255,.16);--g-sh:0 18px 44px rgba(0,0,0,.32);--gold-g:linear-gradient(135deg,#F3D58C,#D9A441 55%,#B9782A)}
+/* fondos con foto */
+#festival,#sobre-el-festival,#mapa-360,#grano-de-oro,#ajedrez,#convocatorias,#programa,#participantes,#noticias{position:relative;isolation:isolate;background-color:#140C07 !important;background-size:cover !important;background-position:center !important;color:#F6EEE2}
+#festival{background-image:linear-gradient(100deg,rgba(18,11,7,.94) 0%,rgba(18,11,7,.78) 45%,rgba(18,11,7,.45) 100%),url(/assets/ficc/ficc-bg-hero.jpg) !important}
+#sobre-el-festival{background-image:linear-gradient(180deg,rgba(18,11,7,.9),rgba(18,11,7,.72) 50%,rgba(18,11,7,.9)),url(/assets/ficc/ficc-bg-flores.jpg) !important}
+#mapa-360{background-image:linear-gradient(180deg,rgba(14,20,12,.92),rgba(14,20,12,.8) 50%,rgba(18,11,7,.94)),url(/assets/ficc/ficc-bg-verde.jpg) !important}
+#grano-de-oro{background-image:linear-gradient(180deg,rgba(7,30,15,.9),rgba(7,30,15,.72) 50%,rgba(7,30,15,.92)),url(/assets/ficc/ficc-bg-cerezas.jpg) !important}
+#ajedrez{background-image:linear-gradient(180deg,rgba(18,11,7,.93),rgba(18,11,7,.8) 50%,rgba(18,11,7,.95)),url(/assets/ficc/ficc-bg-tostado.jpg) !important}
+#ajedrez::before{opacity:.5}
+#convocatorias{background-image:linear-gradient(180deg,rgba(18,11,7,.9),rgba(18,11,7,.78) 50%,rgba(18,11,7,.92)),url(/assets/ficc/ficc-bg-granos.jpg) !important}
+#programa{background-image:linear-gradient(180deg,rgba(18,11,7,.92),rgba(30,12,8,.8) 50%,rgba(18,11,7,.94)),url(/assets/ficc/ficc-bg-cosecha.jpg) !important}
+#participantes{background-image:linear-gradient(180deg,rgba(18,11,7,.88),rgba(60,14,10,.7) 50%,rgba(18,11,7,.92)),url(/assets/ficc/ficc-bg-manos.jpg) !important}
+#noticias{background-image:linear-gradient(180deg,rgba(18,11,7,.92),rgba(18,11,7,.8)),url(/assets/ficc/ficc-bg-semillero.jpg) !important}
+
+/* tarjetas de vidrio */
+.page-ficc .gdo,.page-ficc .gdo-card,.page-ficc .ajz-cat,.page-ficc .prog-day,.page-ficc .ficc-card,.page-ficc .news-item,.page-ficc .reg-form,.page-ficc .cv-item,.page-ficc .ficc-fact,.page-ficc #ajzForm,.page-ficc .mapa360-frame{
+  background:var(--g-bg) !important;border:var(--g-br) !important;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:var(--g-sh);border-radius:20px}
+.page-ficc .ficc-fact{border-radius:999px;box-shadow:none}
+.page-ficc .gdo{border:1px solid rgba(240,200,119,.35) !important}
+.page-ficc .ficc-card{color:#F6EEE2;transition:transform .25s ease,border-color .25s ease}
+.page-ficc .ficc-card:hover{transform:translateY(-4px);border-color:rgba(240,200,119,.5) !important}
+.page-ficc .ficc-card h3{color:#fff}
+.page-ficc .ficc-card p{color:rgba(246,238,226,.78)}
+.page-ficc .ficc-card a{color:#F0C877}
+.page-ficc .badge{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#F6EEE2}
+.page-ficc .badge--ok{background:rgba(120,190,130,.16);border-color:rgba(120,190,130,.45);color:#BFE6C4}
+.page-ficc .prog-day{padding:18px 16px}
+.page-ficc .news-item{padding:24px}
+
+/* convocatorias sobre fondo oscuro */
+.page-ficc .cv-wrap{color:#F6EEE2}
+.page-ficc .cv-head{border-bottom-color:rgba(255,255,255,.25)}
+.page-ficc .cv-head h2,.page-ficc .cv-body h3,.page-ficc .cv-num,.page-ficc .cv-row dd{color:#fff}
+.page-ficc .cv-head h2 em,.page-ficc .cv-kicker,.page-ficc .cv-head .cv-eyebrow{color:#F0C877}
+.page-ficc .cv-head p,.page-ficc .cv-note{color:rgba(246,238,226,.75)}
+.page-ficc .cv-row{border-top-color:rgba(255,255,255,.12)}
+.page-ficc .cv-row dt{color:rgba(246,238,226,.6)}
+.page-ficc .cv-list{gap:22px;margin-top:28px}
+.page-ficc .cv-item{padding:24px;border-bottom:var(--g-br) !important}
+.page-ficc .cv-poster img{border-radius:12px;outline:0}
+.page-ficc .cv-more{color:#F0C877}
+.page-ficc .cv-more:hover{color:#fff}
+
+/* botones principales: degradado dorado */
+.page-ficc .cta-gold,.page-ficc .gdo-btn,.page-ficc .cv-cta,.page-ficc .form-submit,.page-ficc #ajzForm button[type=submit],.page-ficc .reg-form button[type=submit]{
+  background:var(--gold-g) !important;color:#1E120A !important;border:0 !important;border-radius:999px !important;font-weight:700;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 10px 26px rgba(217,164,65,.3) !important;transition:transform .2s ease,box-shadow .2s ease}
+.page-ficc .cta-gold:hover,.page-ficc .gdo-btn:hover,.page-ficc .cv-cta:hover,.page-ficc .form-submit:hover,.page-ficc #ajzForm button[type=submit]:hover{transform:translateY(-2px);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 14px 32px rgba(217,164,65,.45) !important}
+.page-ficc .cv-cta{padding:11px 20px}
+/* botones secundarios: vidrio */
+.page-ficc .cta-green,.page-ficc .btn-wine,.page-ficc .btn-ghost,.page-ficc .mapa360-actions a:first-child{
+  background:linear-gradient(160deg,rgba(255,255,255,.16),rgba(255,255,255,.04)) !important;color:#fff !important;border:1px solid rgba(255,255,255,.24) !important;border-radius:999px !important;
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 8px 22px rgba(0,0,0,.25) !important;transition:transform .2s ease,background .2s ease}
+.page-ficc .cta-green:hover,.page-ficc .btn-wine:hover,.page-ficc .btn-ghost:hover{transform:translateY(-2px);background:linear-gradient(160deg,rgba(240,200,119,.4),rgba(158,42,28,.28)) !important;border-color:rgba(240,200,119,.6) !important}
+.page-ficc .cta-green{background:linear-gradient(160deg,rgba(80,170,100,.35),rgba(20,90,45,.25)) !important}
+
+/* campos de formulario en vidrio */
+.page-ficc .reg-form input:not([type=checkbox]):not([type=radio]),.page-ficc .reg-form select,.page-ficc .reg-form textarea,
+.page-ficc #ajzForm input:not([type=checkbox]):not([type=radio]),.page-ficc #ajzForm select,.page-ficc #ajzForm textarea{
+  background:rgba(255,255,255,.07) !important;border:1px solid rgba(255,255,255,.2) !important;color:#fff !important;border-radius:12px !important}
+.page-ficc .reg-form input:focus,.page-ficc .reg-form select:focus,.page-ficc #ajzForm input:focus,.page-ficc #ajzForm select:focus{border-color:#F0C877 !important;outline:0;box-shadow:0 0 0 3px rgba(240,200,119,.2)}
+.page-ficc .reg-form select option,.page-ficc #ajzForm select option{background:#22150D;color:#fff}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.page-ficc .gdo,.page-ficc .ficc-card,.page-ficc .reg-form,.page-ficc .cv-item,.page-ficc .prog-day,.page-ficc .news-item{background:rgba(34,21,13,.9) !important}}
+.page-ficc .mapa-admin{margin-left:auto;display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;color:#F6EEE2 !important;opacity:.22;transition:opacity .2s}
+.page-ficc .mapa-admin:hover,.page-ficc .mapa-admin:focus-visible{opacity:.8}
+</style>
 </body>
 </html>
