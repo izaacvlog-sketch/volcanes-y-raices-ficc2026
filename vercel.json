@@ -18,6 +18,11 @@
       "permanent": true
     },
     {
+      "source": "/barismo",
+      "destination": "/ficc-2026#barismo",
+      "permanent": false
+    },
+    {
       "source": "/ficc",
       "destination": "/ficc-2026",
       "permanent": true
