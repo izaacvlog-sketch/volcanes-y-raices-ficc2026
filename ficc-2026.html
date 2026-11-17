@@ -940,7 +940,7 @@
           <span class="badge badge--ok">Registro abierto</span>
           <h3>Renta de espacio</h3>
           <p>Aparta tu lugar para vender o exponer en el festival. Se renta solo el espacio; el costo depende del tamaño y la ubicación.</p>
-          <a href="#participantes" data-registro="Quiero rentar un espacio">Quiero rentar un espacio →</a>
+          <a href="#participantes" data-registro="Rentar espacio para stand">Quiero rentar un espacio →</a>
         </article>
         <article class="ficc-card" data-reveal>
           <span class="badge badge--ok">Registro abierto</span>
@@ -998,7 +998,7 @@
             <option value="Concurso Grano de Oro">Concurso Grano de Oro</option>
             <option>Visitante</option>
             <option>Productor de café</option>
-            <option value="Quiero rentar un espacio">Quiero rentar un espacio · tiene costo</option>
+            <option value="Rentar espacio para stand">Rentar espacio para stand</option>
             <option>Medio de comunicación</option>
             <option>Patrocinador</option>
           </select>
@@ -1317,7 +1317,7 @@ document.addEventListener('click',function(e){
 (function(){
   var sel=document.getElementById('fc-tipo'), note=document.getElementById('fcStandNote');
   if(!sel||!note) return;
-  function upd(){ note.hidden = !/^Quiero rentar un espacio/.test(sel.value); }
+  function upd(){ note.hidden = !/^Rentar espacio para stand/.test(sel.value); }
   sel.addEventListener('change',upd); setInterval(upd,800); upd();
 })();
 </script>
