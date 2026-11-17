@@ -269,7 +269,7 @@
         <div class="ajz-cat"><h3>Aficionados</h3><p>Nacidos en 2009 y posteriores</p><strong>$100</strong></div>
         <div class="ajz-cat"><h3>Infantil</h3><p>Nacidos en 2014 y posteriores</p><strong>$80</strong></div>
       </div>
-      <p class="ajz-bases" data-reveal>Premios del 1° al 5° lugar. Pareos en Chess-Results. Rifa de canasta navideña entre los participantes. El pago de la inscripción es por depósito o transferencia a Banorte: al enviar tu inscripción te mostramos los datos y también te llegan por correo.</p>
+      <p class="ajz-bases" data-reveal>Premios del 1° al 5° lugar. Pareos en Chess-Results. Rifa de canasta navideña entre los participantes. El pago de la inscripción es por depósito o transferencia a Banorte: al enviar tu inscripción te mostramos los datos.</p>
 
       <div class="ajz-reg" id="ajz-registro">
         <div class="ajz-reg-head" data-reveal>
@@ -350,7 +350,7 @@
                 <div><dt>CLABE</dt><dd><span class="az-num">072133012941022098</span> <button type="button" class="az-copy" data-copy="072133012941022098">Copiar</button></dd></div>
                 <div><dt>Concepto</dt><dd id="azConcepto">Nombre completo del competidor</dd></div>
               </dl>
-              <p class="az-pay-note">Después de pagar, envía tu comprobante para confirmar la inscripción. Estos datos también te llegan a tu correo.</p>
+              <p class="az-pay-note">Después de pagar, envía tu comprobante para confirmar la inscripción. Guarda o toma captura de estos datos.</p>
               <p class="az-pay-note"><a class="ajz-link" href="/assets/ficc/convocatoria-ajedrez-ficc2026.pdf" download="Convocatoria_Torneo_Ajedrez_FICC2026.pdf" target="_blank" rel="noopener">Descarga aquí la convocatoria completa (PDF)</a></p>
               <a class="cta-big cta-gold az-wa" id="azWa" href="https://wa.me/529621063615" target="_blank" rel="noopener">Enviar comprobante por WhatsApp</a>
             </div>
@@ -403,13 +403,15 @@
           function monto(c){ return /^Infantil/.test(c) ? '$80' : '$100'; }
           var nombre = val('az-nombre');
           btn.disabled = true;
-          btn.textContent = 'Enviando…';
+          btn.innerHTML = '<span class="az-spin" aria-hidden="true"></span> Enviando tu inscripción…';
+          var slowT = setTimeout(function(){ btn.innerHTML = '<span class="az-spin" aria-hidden="true"></span> Ya casi… no cierres la página'; }, 4000);
+          var ctl = ('AbortController' in window) ? new AbortController() : null;
+          var killT = setTimeout(function(){ if(ctl) ctl.abort(); }, 30000);
           try{
             var payload = {
               _subject: 'Inscripción Torneo de Ajedrez FICC 2026 - ' + cat + ' - ' + nombre,
               _template: 'table',
               _captcha: 'false',
-              _autoresponse: 'Gracias por inscribirte al Torneo de Ajedrez del Festival Internacional del Café Cacahoatán 2026 (domingo 20 de diciembre, 10:00 hrs, Parque Central Miguel Hidalgo). Para confirmar tu lugar realiza el pago de tu inscripción (' + monto(cat) + ') por depósito o transferencia. Banco: Banorte, sucursal Tapachula Las Lomas. Titular: Humberto Blanco Guillén. Cuenta: 4189 1400 5432 1152. CLABE interbancaria: 072133012941022098. Concepto de pago: ' + nombre + '. Una vez realizado el pago, envía tu comprobante por WhatsApp al 962 106 36 15 o a elreyblancodechiapas@gmail.com para confirmar la inscripción.',
               'email': val('az-correo'),
               'Categoría': cat,
               'Apellidos, Nombre(s)': nombre,
@@ -423,9 +425,12 @@
             var res = await fetch('https://formsubmit.co/ajax/ajedrezficc@gmail.com', {
               method: 'POST',
               headers: {'Content-Type':'application/json','Accept':'application/json'},
-              body: JSON.stringify(payload)
+              body: JSON.stringify(payload),
+              signal: ctl ? ctl.signal : undefined
             });
-            if(!res.ok) throw new Error('send failed');
+            clearTimeout(slowT); clearTimeout(killT);
+            var out = await res.json().catch(function(){ return {}; });
+            if(!res.ok || String(out.success) === 'false'){ console.error('FormSubmit:', res.status, out); throw new Error(out.message || 'send failed'); }
             form.querySelectorAll('.field, .field-row, .ficc-check, .form-submit').forEach(function(el){ el.style.display = 'none'; });
             document.getElementById('azMonto').textContent = monto(cat);
             document.getElementById('azConcepto').textContent = nombre;
@@ -433,7 +438,10 @@
             okEl.hidden = false;
             okEl.scrollIntoView({behavior:'smooth', block:'center'});
           }catch(err){
-            errEl.textContent = 'No se pudo enviar tu inscripción en este momento. Intenta de nuevo o escribe por WhatsApp al 962 106 36 15.';
+            clearTimeout(slowT); clearTimeout(killT);
+            errEl.textContent = (err && err.name === 'AbortError')
+              ? 'El envío está tardando demasiado por la conexión. Intenta de nuevo en un momento o escribe por WhatsApp al 962 106 36 15.'
+              : 'No se pudo enviar tu inscripción en este momento. Intenta de nuevo o escribe por WhatsApp al 962 106 36 15.';
             errEl.hidden = false;
             btn.disabled = false;
             btn.textContent = 'Enviar inscripción';
@@ -1048,6 +1056,8 @@ document.addEventListener('click',function(e){
 });
 </script>
 <style id="az-pay">
+.az-spin{display:inline-block;width:16px;height:16px;margin-right:8px;vertical-align:-3px;border:2.5px solid rgba(30,18,10,.25);border-top-color:#1E120A;border-radius:50%;animation:azspin .8s linear infinite}
+@keyframes azspin{to{transform:rotate(360deg)}}
 .ajz-doc{display:flex;align-items:center;gap:14px;margin:16px 0 12px;padding:14px 18px;border-radius:16px;text-decoration:none;color:#fff;
   background:linear-gradient(135deg,rgba(240,200,119,.22),rgba(255,255,255,.05));border:1px solid rgba(240,200,119,.45);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);transition:transform .2s ease,background .2s ease}
 .ajz-doc:hover{transform:translateY(-2px);background:linear-gradient(135deg,rgba(240,200,119,.38),rgba(255,255,255,.08))}
