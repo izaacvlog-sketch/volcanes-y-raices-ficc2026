@@ -1214,6 +1214,37 @@
 .reg-form .tel-group select{flex:0 0 auto;width:142px;padding-left:16px;padding-right:30px;background-position:right 13px center;text-overflow:ellipsis}
 .reg-form .tel-group input{flex:1 1 auto;min-width:0}
 </style>
+<script>
+/* Enlaces a los registros: llevan directo al formulario (no al texto de arriba)
+   y corrigen la posición cuando la página termina de cargar imágenes y letras. */
+(function(){
+  var MAP = {'brs-registro':'brsForm','ajz-registro':'ajzForm'};
+  function destino(id){ return document.getElementById(MAP[id] || id); }
+  var tocado = false;
+  ['wheel','touchstart','keydown'].forEach(function(ev){ window.addEventListener(ev, function(){ tocado = true; }, {passive:true}); });
+  /* offsetTop no cuenta la animación de entrada (transform), así la posición final es exacta */
+  function arriba(el){ var y = 0; while(el){ y += el.offsetTop; el = el.offsetParent; } return y; }
+  function ir(id, suave){ var el = destino(id); if(el) window.scrollTo({top: Math.max(0, arriba(el) - 140), behavior: suave ? 'smooth' : 'auto'}); }
+  var h = location.hash.slice(1);
+  if(h && MAP[h]){
+    ir(h);
+    window.addEventListener('load', function(){
+      [0, 500, 1200].forEach(function(t){ setTimeout(function(){ if(!tocado) ir(h); }, t); });
+    });
+  }
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if(!a) return;
+    var id = a.getAttribute('href').slice(1);
+    if(!MAP[id] || !destino(id)) return;
+    e.preventDefault();
+    history.replaceState(null, '', '#' + id);
+    tocado = false;
+    ir(id, true);
+    setTimeout(function(){ if(!tocado) ir(id, true); }, 800);
+  });
+})();
+</script>
 <script src="/assets/js/site.js?v=20261117b"></script>
 <script>
 /* ===== Contador de asistentes FICC 2026 ===== */
