@@ -471,7 +471,7 @@
       .brs-steps{list-style:none;padding:0;margin:14px 0 0;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
       .brs-steps li{border:1px solid rgba(224,165,38,.35);border-radius:12px;padding:10px 12px;font-size:.9rem;color:rgba(243,234,216,.85)}
       .brs-steps b{display:block;font-family:'Playfair Display',serif;font-size:1.5rem;color:#E0A526;line-height:1.1}
-      .brs-docs{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+      .brs-docs{display:grid;grid-template-columns:1fr;gap:12px;max-width:420px}
       .brs-docs .ajz-doc{margin:0}
       .page-ficc #brsForm{background:var(--g-bg) !important;border:var(--g-br) !important;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:var(--g-sh);border-radius:20px}
       @media (max-width:880px){.brs-docs{grid-template-columns:1fr}}
@@ -522,11 +522,7 @@
           <div class="brs-docs">
             <a class="ajz-doc" href="/assets/ficc/convocatoria-barismo-ficc2026.pdf" download="Convocatoria_Competencia_Baristas_FICC2026.pdf" target="_blank" rel="noopener">
               <span class="ajz-doc-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M12 11v6"/><path d="M9.5 14.5 12 17l2.5-2.5"/></svg></span>
-              <span class="ajz-doc-tx"><b>Convocatoria</b><small>Requisitos y datos de pago · PDF</small></span>
-            </a>
-            <a class="ajz-doc" href="/assets/ficc/reglamento-barismo-ficc2026.pdf" download="Reglamento_Competencia_Baristas_FICC2026.pdf" target="_blank" rel="noopener">
-              <span class="ajz-doc-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M12 11v6"/><path d="M9.5 14.5 12 17l2.5-2.5"/></svg></span>
-              <span class="ajz-doc-tx"><b>Reglamento</b><small>Evaluación y obligaciones · PDF</small></span>
+              <span class="ajz-doc-tx"><b>Descarga la convocatoria</b><small>Requisitos y datos de pago · PDF</small></span>
             </a>
           </div>
           <p>Dudas: <a class="ajz-link" href="mailto:barismo.ficc2026@gmail.com">barismo.ficc2026@gmail.com</a> o WhatsApp <a class="ajz-link" href="https://wa.me/529622570907" target="_blank" rel="noopener">962 257 09 07</a>.</p>
@@ -567,7 +563,7 @@
             </div>
             <label class="ficc-check" id="brsCheckLabel">
               <input type="checkbox" id="br-acepto" required>
-              <span>Soy mayor de 18 años y acepto la convocatoria y el reglamento de la competencia.</span>
+              <span>Soy mayor de 18 años y acepto la convocatoria de la competencia.</span>
             </label>
             <button type="submit" class="form-submit" id="brsBtn">Enviar inscripción</button>
             <p class="form-error" id="brsError" role="alert" hidden>Revisa los campos marcados.</p>
@@ -580,7 +576,7 @@
                 <div><dt>CLABE</dt><dd><span class="az-num">1271 0502 1421 9284 47</span> <button type="button" class="az-copy" data-copy="127105021421928447">Copiar</button></dd></div>
                 <div><dt>Concepto</dt><dd id="brsConcepto">Barismo + tu nombre</dd></div>
               </dl>
-              <p class="az-pay-note">Después de pagar, envía la captura de tu transferencia por WhatsApp. Cuando cierre la convocatoria te agregaremos al grupo de participantes, donde recibirás tu fecha y horario.</p>
+              <p class="az-pay-note">Después de pagar, envía la captura de tu transferencia por WhatsApp. Cuando cierre la convocatoria te agregaremos al grupo de WhatsApp de participantes, donde recibirás el reglamento, tu fecha y tu horario.</p>
               <a class="cta-big cta-gold az-wa" id="brsWa" href="https://wa.me/529622570907" target="_blank" rel="noopener">Enviar comprobante por WhatsApp</a>
             </div>
           </form>
@@ -636,7 +632,7 @@
             'Edad': val('br-edad'),
             'Municipio y estado': val('br-ciudad'),
             'Representa a': repr,
-            'Acepta convocatoria y reglamento': 'Sí'
+            'Acepta la convocatoria': 'Sí'
           };
           var slowT = setTimeout(function(){ btn.innerHTML = '<span class="az-spin" aria-hidden="true"></span> Ya casi… no cierres la página'; }, 3000);
           function mostrarOk(){
@@ -745,7 +741,7 @@
             <h3>Baristas</h3>
             <dl class="cv-data"><div class="cv-row"><dt>Fechas</dt><dd>19, 20 y 21 de diciembre, 9:00 a 15:00 hrs</dd></div><div class="cv-row"><dt>Quién</dt><dd>Profesionales del café, 18+ años</dd></div><div class="cv-row"><dt>Premios</dt><dd>$7,000 · $5,000 · $3,000</dd></div><div class="cv-row"><dt>Costo</dt><dd>$150 MXN · pago antes del 1 de diciembre</dd></div></dl>
             <p class="cv-note">Ponemos máquina, molino y agua. Tú traes utensilios, mandil, báscula y tazas.</p>
-            <div class="cv-actions"><a class="cv-cta" href="#brs-registro">Inscribirme<span aria-hidden="true"> →</span></a><a class="cv-more" href="/assets/ficc/convocatoria-barismo-ficc2026.pdf" download="Convocatoria_Competencia_Baristas_FICC2026.pdf" target="_blank" rel="noopener">Convocatoria (PDF)<span aria-hidden="true"> ↓</span></a><a class="cv-more" href="/assets/ficc/reglamento-barismo-ficc2026.pdf" download="Reglamento_Competencia_Baristas_FICC2026.pdf" target="_blank" rel="noopener">Reglamento (PDF)<span aria-hidden="true"> ↓</span></a></div>
+            <div class="cv-actions"><a class="cv-cta" href="#brs-registro">Inscribirme<span aria-hidden="true"> →</span></a><a class="cv-more" href="/assets/ficc/convocatoria-barismo-ficc2026.pdf" download="Convocatoria_Competencia_Baristas_FICC2026.pdf" target="_blank" rel="noopener">Convocatoria (PDF)<span aria-hidden="true"> ↓</span></a></div>
           </div>
         </article>
 
