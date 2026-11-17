@@ -65,7 +65,7 @@
         </div>
         <div class="ficc-cta">
           <a class="cta-big cta-gold" href="#participantes">Inscríbete al festival <span aria-hidden="true">→</span></a>
-          <a class="cta-big cta-green" href="#participantes" data-registro="Concurso Grano de Oro">Inscríbete a Grano de Oro <span aria-hidden="true">☕</span></a>
+          <a class="cta-big cta-green" href="#participantes" data-registro="Concurso Grano de Oro">Inscríbete a Grano de Oro <span aria-hidden="true">→</span></a>
         </div>
         <div class="ficc-count" id="ficcCount" aria-live="polite"></div>
         <a class="ficc-asist" id="ficcAsist" href="#participantes" hidden><b>0</b> <span>personas ya registradas</span></a>
@@ -1390,6 +1390,56 @@ document.addEventListener('click',function(e){
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.page-ficc .gdo,.page-ficc .ficc-card,.page-ficc .reg-form,.page-ficc .cv-item,.page-ficc .prog-day,.page-ficc .news-item{background:rgba(34,21,13,.9) !important}}
 .page-ficc .mapa-admin{margin-left:auto;display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;color:#F6EEE2 !important;opacity:.22;transition:opacity .2s}
 .page-ficc .mapa-admin:hover,.page-ficc .mapa-admin:focus-visible{opacity:.8}
+</style>
+<style id="ficc-btns">
+/* ===== Botones FICC 2026: oro con textura y espresso con grano ===== */
+.page-ficc{--grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+/* principal: oro cepillado */
+.page-ficc .cta-gold,.page-ficc .gdo-btn,.page-ficc .cv-cta,.page-ficc .form-submit,.page-ficc .ajz-btn,.page-ficc .cf-btn,.page-ficc .az-wa,
+.page-ficc #ajzForm button[type=submit],.page-ficc #brsForm button[type=submit],.page-ficc .reg-form button[type=submit]{
+  display:inline-flex !important;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 26px !important;
+  border-radius:12px !important;border:1px solid #8A5A1C !important;color:#2A1607 !important;
+  font-family:'Work Sans',sans-serif;font-weight:700 !important;letter-spacing:.015em;text-decoration:none;text-shadow:0 1px 0 rgba(255,236,190,.55);
+  background:var(--grain),linear-gradient(180deg,#F8E2A6 0%,#E9BE63 46%,#D49E3E 54%,#B9822F 100%) !important;
+  background-size:160px 160px,100% 100% !important;background-blend-mode:soft-light,normal;
+  box-shadow:inset 0 1px 0 rgba(255,250,230,.75),inset 0 -2px 0 rgba(110,62,14,.35),0 1px 0 rgba(0,0,0,.35),0 10px 22px -10px rgba(0,0,0,.7) !important;
+  transition:transform .15s ease,filter .2s ease,box-shadow .2s ease !important;cursor:pointer}
+.page-ficc .cta-gold:hover,.page-ficc .gdo-btn:hover,.page-ficc .cv-cta:hover,.page-ficc .form-submit:hover,.page-ficc .ajz-btn:hover,.page-ficc .cf-btn:hover,.page-ficc .az-wa:hover,
+.page-ficc #ajzForm button[type=submit]:hover,.page-ficc #brsForm button[type=submit]:hover{
+  filter:brightness(1.06) saturate(1.05);transform:translateY(-1px);
+  box-shadow:inset 0 1px 0 rgba(255,250,230,.85),inset 0 -2px 0 rgba(110,62,14,.35),0 1px 0 rgba(0,0,0,.35),0 14px 26px -10px rgba(0,0,0,.75) !important}
+.page-ficc .cta-gold:active,.page-ficc .gdo-btn:active,.page-ficc .cv-cta:active,.page-ficc .form-submit:active,.page-ficc .ajz-btn:active,.page-ficc .cf-btn:active,.page-ficc .az-wa:active,
+.page-ficc #ajzForm button[type=submit]:active,.page-ficc #brsForm button[type=submit]:active{
+  transform:translateY(1px);filter:brightness(.97);box-shadow:inset 0 2px 6px rgba(90,50,10,.45),0 1px 0 rgba(0,0,0,.3) !important}
+.page-ficc .form-submit:disabled,.page-ficc button[type=submit]:disabled{filter:saturate(.6) brightness(.9);cursor:progress}
+.page-ficc .cv-cta{min-height:42px;padding:0 18px !important;font-size:.9rem}
+.page-ficc .form-submit,.page-ficc #ajzForm button[type=submit],.page-ficc #brsForm button[type=submit]{width:100%;min-height:54px;font-size:1.02rem}
+
+/* secundario: espresso con grano y filo dorado */
+.page-ficc .cta-green,.page-ficc .btn-wine,.page-ficc .mapa360-actions a:not(.mapa-admin){
+  display:inline-flex !important;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 24px !important;border-radius:12px !important;
+  color:#F6EEE2 !important;font-weight:600 !important;text-decoration:none;
+  background:var(--grain),linear-gradient(180deg,rgba(74,46,28,.92),rgba(40,24,14,.94)) !important;background-size:160px 160px,100% 100% !important;background-blend-mode:overlay,normal;
+  border:1px solid rgba(232,192,106,.55) !important;
+  box-shadow:inset 0 1px 0 rgba(255,230,180,.18),inset 0 -1px 0 rgba(0,0,0,.4),0 10px 22px -12px rgba(0,0,0,.8) !important;
+  -webkit-backdrop-filter:none;backdrop-filter:none;transition:transform .15s ease,border-color .2s ease,color .2s ease !important}
+.page-ficc .cta-green{background:var(--grain),linear-gradient(180deg,rgba(38,92,52,.95),rgba(18,56,30,.96)) !important;background-size:160px 160px,100% 100% !important;border-color:rgba(160,220,170,.5) !important}
+.page-ficc .cta-green:hover,.page-ficc .btn-wine:hover,.page-ficc .mapa360-actions a:not(.mapa-admin):hover{transform:translateY(-1px);border-color:#E9BE63 !important;color:#fff !important;background-color:transparent !important}
+.page-ficc .cta-green:active,.page-ficc .btn-wine:active{transform:translateY(1px)}
+
+/* botones de día (conferencias) */
+.page-ficc .cf-jump a{border-radius:12px;background:var(--grain),linear-gradient(180deg,rgba(74,46,28,.75),rgba(40,24,14,.85));background-size:160px 160px,100% 100%;background-blend-mode:overlay,normal;
+  border:1px solid rgba(232,192,106,.4);box-shadow:inset 0 1px 0 rgba(255,230,180,.15),0 8px 18px -10px rgba(0,0,0,.8);-webkit-backdrop-filter:none;backdrop-filter:none}
+.page-ficc .cf-jump a:hover{background:var(--grain),linear-gradient(180deg,#F8E2A6,#D49E3E);background-size:160px 160px,100% 100%;background-blend-mode:soft-light,normal;color:#2A1607;border-color:#8A5A1C}
+.page-ficc .cf-jump a:hover span{color:#5A3412}.page-ficc .cf-jump a:hover b{color:#2A1607}
+/* copiar */
+.page-ficc .az-copy{border-radius:8px;background:var(--grain),linear-gradient(180deg,rgba(74,46,28,.9),rgba(40,24,14,.95));background-size:120px 120px,100% 100%;border:1px solid rgba(232,192,106,.55);color:#F0C877}
+/* enlaces de texto */
+.page-ficc .cv-more{text-decoration:underline;text-decoration-color:rgba(240,200,119,.45);text-underline-offset:4px;text-decoration-thickness:1px}
+.page-ficc .cv-more:hover{text-decoration-color:#F0C877}
+/* foco accesible */
+.page-ficc .cta-gold:focus-visible,.page-ficc .gdo-btn:focus-visible,.page-ficc .cv-cta:focus-visible,.page-ficc .form-submit:focus-visible,.page-ficc .ajz-btn:focus-visible,.page-ficc .cf-btn:focus-visible,.page-ficc .cta-green:focus-visible,.page-ficc .btn-wine:focus-visible,.page-ficc button[type=submit]:focus-visible{outline:2px solid #F8E2A6;outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.page-ficc .cta-gold,.page-ficc .cta-green,.page-ficc .form-submit,.page-ficc .cv-cta{transition:none !important}}
 </style>
 </body>
 </html>
