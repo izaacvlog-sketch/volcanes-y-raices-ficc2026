@@ -444,22 +444,21 @@
             btn.disabled = false;
             btn.textContent = 'Enviar inscripción';
           }
-          /* El servicio de correo a veces tarda más de un minuto en responder.
-             Si en 8 s no contesta, mostramos la confirmación y el envío sigue en segundo plano. */
-          var listo = false;
-          var envio = fetch('https://formsubmit.co/ajax/ajedrezficc@gmail.com', {
+          /* Confirmación inmediata: la inscripción se envía por correo en segundo plano (keepalive sigue aunque cierren la página). */
+          clearTimeout(slowT);
+          var fd = new FormData();
+          Object.keys(payload).forEach(function(k){ fd.append(k, payload[k]); });
+          mostrarOk();
+          fetch('https://formsubmit.co/ajax/ajedrezficc@gmail.com', {
             method: 'POST',
-            headers: {'Content-Type':'application/json','Accept':'application/json'},
-            body: JSON.stringify(payload)
+            headers: {'Accept':'application/json'},
+            body: fd,
+            keepalive: true
           }).then(function(res){
             return res.json().catch(function(){ return {}; }).then(function(out){
               if(!res.ok || String(out.success) === 'false'){ console.error('FormSubmit:', res.status, out); throw new Error(out.message || 'send failed'); }
-              return true;
             });
-          });
-          envio.then(function(){ listo = true; clearTimeout(slowT); if(okEl.hidden) mostrarOk(); }, mostrarError);
-          setTimeout(function(){ if(!listo && errEl.hidden && okEl.hidden){ clearTimeout(slowT); mostrarOk(); } }, 8000);
-          window.addEventListener('beforeunload', function(e){ if(!listo && !okEl.hidden){ e.preventDefault(); e.returnValue = ''; } });
+          }).catch(mostrarError);
         });
       })();
     </script>
@@ -658,21 +657,21 @@
             btn.disabled = false;
             btn.textContent = 'Enviar inscripción';
           }
-          /* Si el servicio de correo tarda más de 8 s, mostramos la confirmación y el envío sigue en segundo plano. */
-          var listo = false;
-          var envio = fetch('https://formsubmit.co/ajax/barismo.ficc2026@gmail.com', {
+          /* Confirmación inmediata: la inscripción se envía por correo en segundo plano (keepalive sigue aunque cierren la página). */
+          clearTimeout(slowT);
+          var fd = new FormData();
+          Object.keys(payload).forEach(function(k){ fd.append(k, payload[k]); });
+          mostrarOk();
+          fetch('https://formsubmit.co/ajax/barismo.ficc2026@gmail.com', {
             method: 'POST',
-            headers: {'Content-Type':'application/json','Accept':'application/json'},
-            body: JSON.stringify(payload)
+            headers: {'Accept':'application/json'},
+            body: fd,
+            keepalive: true
           }).then(function(res){
             return res.json().catch(function(){ return {}; }).then(function(out){
               if(!res.ok || String(out.success) === 'false'){ console.error('FormSubmit:', res.status, out); throw new Error(out.message || 'send failed'); }
-              return true;
             });
-          });
-          envio.then(function(){ listo = true; clearTimeout(slowT); if(okEl.hidden) mostrarOk(); }, mostrarError);
-          setTimeout(function(){ if(!listo && errEl.hidden && okEl.hidden){ clearTimeout(slowT); mostrarOk(); } }, 8000);
-          window.addEventListener('beforeunload', function(e){ if(!listo && !okEl.hidden){ e.preventDefault(); e.returnValue = ''; } });
+          }).catch(mostrarError);
         });
       })();
     </script>
