@@ -9,7 +9,7 @@ const PREFIX = 'ficc2026-registros/';
 const TIPOS = {
   'Concurso Grano de Oro': 'grano-de-oro',
   'Visitante': 'visitante',
-  'Me interesa un stand (espacio con costo)': 'stand',
+  'Quiero rentar un espacio': 'espacio',
   'Expositor / stand comercial': 'expositor',
   'Productor de café': 'productor',
   'Barista o catador': 'barista',

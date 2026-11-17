@@ -938,9 +938,9 @@
         </article>
         <article class="ficc-card" data-reveal>
           <span class="badge badge--ok">Registro abierto</span>
-          <h3>Expositores y stands</h3>
-          <p>Aparta tu espacio en el festival. Los espacios tienen costo según tamaño y ubicación.</p>
-          <a href="#participantes" data-registro="Me interesa un stand (espacio con costo)">Me interesa un stand →</a>
+          <h3>Renta de espacio</h3>
+          <p>Aparta tu lugar para vender o exponer en el festival. Se renta solo el espacio; el costo depende del tamaño y la ubicación.</p>
+          <a href="#participantes" data-registro="Quiero rentar un espacio">Quiero rentar un espacio →</a>
         </article>
         <article class="ficc-card" data-reveal>
           <span class="badge badge--ok">Registro abierto</span>
@@ -998,11 +998,11 @@
             <option value="Concurso Grano de Oro">Concurso Grano de Oro</option>
             <option>Visitante</option>
             <option>Productor de café</option>
-            <option value="Me interesa un stand (espacio con costo)">Me interesa un stand · espacio con costo</option>
+            <option value="Quiero rentar un espacio">Quiero rentar un espacio · tiene costo</option>
             <option>Medio de comunicación</option>
             <option>Patrocinador</option>
           </select>
-          <p class="fc-stand-note" id="fcStandNote" hidden>Los espacios para stand <b>tienen costo</b> según tamaño y ubicación. Al registrarte te enviamos precios y disponibilidad por WhatsApp.</p>
+          <p class="fc-stand-note" id="fcStandNote" hidden>Se renta <b>solo el espacio</b> (sin stand ni mobiliario) y <b>tiene costo</b> según tamaño y ubicación. Al registrarte te enviamos precios y disponibilidad por WhatsApp.</p>
         </div>
         <div class="field">
           <label for="fc-nombre">Nombre completo</label>
@@ -1317,7 +1317,7 @@ document.addEventListener('click',function(e){
 (function(){
   var sel=document.getElementById('fc-tipo'), note=document.getElementById('fcStandNote');
   if(!sel||!note) return;
-  function upd(){ note.hidden = !/^Me interesa un stand/.test(sel.value); }
+  function upd(){ note.hidden = !/^Quiero rentar un espacio/.test(sel.value); }
   sel.addEventListener('change',upd); setInterval(upd,800); upd();
 })();
 </script>
