@@ -384,17 +384,18 @@
             'Confirma requisitos de la convocatoria': 'Sí'
           });
         }
-        const res = await fetch('https://formsubmit.co/ajax/ficc.cacahoatan2026@gmail.com', {
-          method:'POST',
-          headers:{'Content-Type':'application/json','Accept':'application/json'},
-          body: JSON.stringify(payload)
-        });
-        if(!res.ok) throw new Error('send failed');
+        // Confirmación inmediata; el correo se envía en segundo plano (keepalive sigue aunque cierren la página)
         form.querySelectorAll('.field, .field-row, .ficc-check, .form-submit, .form-intro, .gdo-fields, .reg-more').forEach(el=>el.style.display='none');
         if(isEmb()) okEl.innerHTML = '<strong>¡Inscripción recibida!</strong><br>Ya estás registrada como aspirante a Embajadora del Café. Te contactaremos pronto.';
         if(gdo) okEl.innerHTML = '<strong>¡Inscripción recibida!</strong><br>Te avisaremos dónde y cuándo entregar tus muestras.';
         okEl.hidden = false;
         okEl.scrollIntoView({behavior:'smooth', block:'center'});
+        enviarSegundoPlano('https://formsubmit.co/ajax/ficc.cacahoatan2026@gmail.com', payload, ()=>{
+          const w = document.createElement('p');
+          w.className = 'az-warn';
+          w.textContent = 'No pudimos confirmar que tu registro llegó. Por favor manda una captura de esta pantalla por WhatsApp al 962 257 0907.';
+          okEl.appendChild(w);
+        });
       }catch(err){
         errEl.textContent = 'No se pudo enviar tu registro en este momento. Intenta de nuevo o escribe por WhatsApp al 962 257 0907.';
         errEl.hidden = false;
@@ -403,6 +404,16 @@
       }
     });
   })();
+  // Envía a FormSubmit sin hacer esperar a la persona: FormData (sin preflight) + keepalive.
+  function enviarSegundoPlano(url, payload, onFail){
+    const fd = new FormData();
+    Object.keys(payload).forEach(k=>fd.append(k, payload[k]));
+    fetch(url, { method:'POST', headers:{'Accept':'application/json'}, body: fd, keepalive: true })
+      .then(res=>res.json().catch(()=>({})).then(out=>{
+        if(!res.ok || String(out.success) === 'false'){ console.error('FormSubmit:', res.status, out); throw new Error(out.message || 'send failed'); }
+      }))
+      .catch(()=>{ if(onFail) onFail(); });
+  }
   // ---- contact form (FormSubmit AJAX: no backend needed, sends straight to the magazine's email) ----
   const infoForm = document.getElementById('infoForm');
   if(infoForm){
@@ -445,14 +456,14 @@
           'Tipo de interes': document.getElementById('cf-interes').value,
           'Mensaje': document.getElementById('cf-mensaje').value.trim()
         };
-        const res = await fetch('https://formsubmit.co/ajax/revista.volcanesyraices@gmail.com', {
-          method:'POST',
-          headers:{'Content-Type':'application/json','Accept':'application/json'},
-          body: JSON.stringify(payload)
-        });
-        if(!res.ok) throw new Error('send failed');
         infoForm.querySelectorAll('.field, .field-row, .form-submit').forEach(el=>el.style.display='none');
         formSuccess.hidden = false;
+        enviarSegundoPlano('https://formsubmit.co/ajax/revista.volcanesyraices@gmail.com', payload, ()=>{
+          const w = document.createElement('p');
+          w.className = 'form-error';
+          w.textContent = 'No pudimos confirmar que tu mensaje llegó. Escríbenos directo a revista.volcanesyraices@gmail.com';
+          formSuccess.appendChild(w);
+        });
       }catch(err){
         formError.textContent = 'No se pudo enviar en este momento. Intenta de nuevo o escríbenos directo a revista.volcanesyraices@gmail.com';
         formError.hidden = false;
