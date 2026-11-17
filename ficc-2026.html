@@ -939,8 +939,8 @@
         <article class="ficc-card" data-reveal>
           <span class="badge badge--ok">Registro abierto</span>
           <h3>Expositores y stands</h3>
-          <p>Aparta tu espacio en el festival.</p>
-          <a href="#participantes" data-registro="Expositor / stand comercial">Registrar mi stand →</a>
+          <p>Aparta tu espacio en el festival. Los espacios tienen costo según tamaño y ubicación.</p>
+          <a href="#participantes" data-registro="Me interesa un stand (espacio con costo)">Me interesa un stand →</a>
         </article>
         <article class="ficc-card" data-reveal>
           <span class="badge badge--ok">Registro abierto</span>
@@ -997,12 +997,12 @@
             <option value="" selected disabled>Elige una opción</option>
             <option value="Concurso Grano de Oro">Concurso Grano de Oro</option>
             <option>Visitante</option>
-            <option>Expositor / stand comercial</option>
             <option>Productor de café</option>
-            <option>Barista o catador</option>
+            <option value="Me interesa un stand (espacio con costo)">Me interesa un stand · espacio con costo</option>
             <option>Medio de comunicación</option>
             <option>Patrocinador</option>
           </select>
+          <p class="fc-stand-note" id="fcStandNote" hidden>Los espacios para stand <b>tienen costo</b> según tamaño y ubicación. Al registrarte te enviamos precios y disponibilidad por WhatsApp.</p>
         </div>
         <div class="field">
           <label for="fc-nombre">Nombre completo</label>
@@ -1313,6 +1313,15 @@ document.addEventListener('click',function(e){
 .az-wa{display:inline-flex}
 @media (max-width:480px){.az-pay div{grid-template-columns:1fr;gap:2px}}
 </style>
+<script>
+(function(){
+  var sel=document.getElementById('fc-tipo'), note=document.getElementById('fcStandNote');
+  if(!sel||!note) return;
+  function upd(){ note.hidden = !/^Me interesa un stand/.test(sel.value); }
+  sel.addEventListener('change',upd); setInterval(upd,800); upd();
+})();
+</script>
+<style>.fc-stand-note{margin:10px 0 0;padding:10px 14px;border-radius:12px;font-size:.92rem;line-height:1.45;background:rgba(240,200,119,.14);border:1px solid rgba(240,200,119,.45);color:#F6EEE2}.fc-stand-note b{color:#F0C877}.fc-stand-note[hidden]{display:none}</style>
 <style id="ficc-look">
 /* ===== Estilo FICC 2026: fotos reales, vidrio y degradados ===== */
 .page-ficc{--g-bg:linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,.035));--g-br:1px solid rgba(255,255,255,.16);--g-sh:0 18px 44px rgba(0,0,0,.32);--gold-g:linear-gradient(135deg,#F3D58C,#D9A441 55%,#B9782A)}
