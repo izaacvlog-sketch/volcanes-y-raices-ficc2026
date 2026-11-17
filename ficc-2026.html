@@ -404,48 +404,60 @@
           var nombre = val('az-nombre');
           btn.disabled = true;
           btn.innerHTML = '<span class="az-spin" aria-hidden="true"></span> Enviando tu inscripción…';
-          var slowT = setTimeout(function(){ btn.innerHTML = '<span class="az-spin" aria-hidden="true"></span> Ya casi… no cierres la página'; }, 4000);
-          var ctl = ('AbortController' in window) ? new AbortController() : null;
-          var killT = setTimeout(function(){ if(ctl) ctl.abort(); }, 30000);
-          try{
             var payload = {
-              _subject: 'Inscripción Torneo de Ajedrez FICC 2026 - ' + cat + ' - ' + nombre,
-              _template: 'table',
-              _captcha: 'false',
-              'email': val('az-correo'),
-              'Categoría': cat,
-              'Apellidos, Nombre(s)': nombre,
-              'Género': val('az-genero'),
-              'Fecha de nacimiento': val('az-nac'),
-              'Edad': val('az-edad'),
-              'Teléfono': val('az-tel'),
-              'Club, Municipio, Estado, País': val('az-club'),
-              'Acepta las bases': 'Sí'
-            };
-            var res = await fetch('https://formsubmit.co/ajax/ajedrezficc@gmail.com', {
-              method: 'POST',
-              headers: {'Content-Type':'application/json','Accept':'application/json'},
-              body: JSON.stringify(payload),
-              signal: ctl ? ctl.signal : undefined
-            });
-            clearTimeout(slowT); clearTimeout(killT);
-            var out = await res.json().catch(function(){ return {}; });
-            if(!res.ok || String(out.success) === 'false'){ console.error('FormSubmit:', res.status, out); throw new Error(out.message || 'send failed'); }
+            _subject: 'Inscripción Torneo de Ajedrez FICC 2026 - ' + cat + ' - ' + nombre,
+            _template: 'table',
+            _captcha: 'false',
+            'email': val('az-correo'),
+            'Categoría': cat,
+            'Apellidos, Nombre(s)': nombre,
+            'Género': val('az-genero'),
+            'Fecha de nacimiento': val('az-nac'),
+            'Edad': val('az-edad'),
+            'Teléfono': val('az-tel'),
+            'Club, Municipio, Estado, País': val('az-club'),
+            'Acepta las bases': 'Sí'
+          };
+          var slowT = setTimeout(function(){ btn.innerHTML = '<span class="az-spin" aria-hidden="true"></span> Ya casi… no cierres la página'; }, 3000);
+          function mostrarOk(){
             form.querySelectorAll('.field, .field-row, .ficc-check, .form-submit').forEach(function(el){ el.style.display = 'none'; });
+            errEl.hidden = true;
             document.getElementById('azMonto').textContent = monto(cat);
             document.getElementById('azConcepto').textContent = nombre;
             document.getElementById('azWa').href = 'https://wa.me/529621063615?text=' + encodeURIComponent('Hola, envío mi comprobante de pago de la inscripción al Torneo de Ajedrez FICC 2026. Nombre: ' + nombre + ' · Categoría: ' + cat);
             okEl.hidden = false;
             okEl.scrollIntoView({behavior:'smooth', block:'center'});
-          }catch(err){
-            clearTimeout(slowT); clearTimeout(killT);
-            errEl.textContent = (err && err.name === 'AbortError')
-              ? 'El envío está tardando demasiado por la conexión. Intenta de nuevo en un momento o escribe por WhatsApp al 962 106 36 15.'
-              : 'No se pudo enviar tu inscripción en este momento. Intenta de nuevo o escribe por WhatsApp al 962 106 36 15.';
+          }
+          function mostrarError(){
+            clearTimeout(slowT);
+            if(!okEl.hidden){
+              /* ya se mostró la confirmación: avisar sin borrar los datos de pago */
+              var w = document.getElementById('azWarn');
+              if(!w){ w = document.createElement('p'); w.id = 'azWarn'; w.className = 'az-warn'; okEl.insertBefore(w, okEl.children[1]); }
+              w.textContent = 'No pudimos confirmar que tu inscripción llegó. Por favor manda una captura de esta pantalla por WhatsApp al 962 106 36 15.';
+              return;
+            }
+            errEl.textContent = 'No se pudo enviar tu inscripción en este momento. Intenta de nuevo o escribe por WhatsApp al 962 106 36 15.';
             errEl.hidden = false;
             btn.disabled = false;
             btn.textContent = 'Enviar inscripción';
           }
+          /* El servicio de correo a veces tarda más de un minuto en responder.
+             Si en 8 s no contesta, mostramos la confirmación y el envío sigue en segundo plano. */
+          var listo = false;
+          var envio = fetch('https://formsubmit.co/ajax/ajedrezficc@gmail.com', {
+            method: 'POST',
+            headers: {'Content-Type':'application/json','Accept':'application/json'},
+            body: JSON.stringify(payload)
+          }).then(function(res){
+            return res.json().catch(function(){ return {}; }).then(function(out){
+              if(!res.ok || String(out.success) === 'false'){ console.error('FormSubmit:', res.status, out); throw new Error(out.message || 'send failed'); }
+              return true;
+            });
+          });
+          envio.then(function(){ listo = true; clearTimeout(slowT); if(okEl.hidden) mostrarOk(); }, mostrarError);
+          setTimeout(function(){ if(!listo && errEl.hidden && okEl.hidden){ clearTimeout(slowT); mostrarOk(); } }, 8000);
+          window.addEventListener('beforeunload', function(e){ if(!listo && !okEl.hidden){ e.preventDefault(); e.returnValue = ''; } });
         });
       })();
     </script>
@@ -1056,6 +1068,7 @@ document.addEventListener('click',function(e){
 });
 </script>
 <style id="az-pay">
+.az-warn{margin:0 0 12px;padding:10px 14px;border-radius:12px;background:rgba(192,38,27,.22);border:1px solid rgba(255,120,100,.5);color:#FFD9D2;font-weight:600}
 .az-spin{display:inline-block;width:16px;height:16px;margin-right:8px;vertical-align:-3px;border:2.5px solid rgba(30,18,10,.25);border-top-color:#1E120A;border-radius:50%;animation:azspin .8s linear infinite}
 @keyframes azspin{to{transform:rotate(360deg)}}
 .ajz-doc{display:flex;align-items:center;gap:14px;margin:16px 0 12px;padding:14px 18px;border-radius:16px;text-decoration:none;color:#fff;
