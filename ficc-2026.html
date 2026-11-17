@@ -247,11 +247,11 @@
           <span class="ajz-kicker">Torneo de ajedrez · FICC 2026</span>
           <h2 class="ajz-title" id="ajz-title">Torneo de <em>Ajedrez</em></h2>
           <p class="ajz-lead">Festival Nacional e Internacional del Café. Organiza el Club de Ajedrez Rey Blanco de Chiapas.</p>
-          <div class="ajz-prize"><b>$5,000</b><span>MXN en premios garantizados</span></div>
+          <div class="ajz-prize"><b>$6,600</b><span>MXN en premios garantizados</span></div>
           <ul class="ajz-facts">
             <li>📅 <b>Domingo 20 de diciembre</b> · 10:00 hrs</li>
             <li>📍 <b>Parque Central Miguel Hidalgo</b> · Cacahoatán, Chiapas</li>
-            <li>♟️ Sistema suizo · 5 rondas · 25 min por jugador · Cupo: 60 jugadores</li>
+            <li>♟️ Sistema suizo · 5 rondas · 25 min por jugador · Cupo: 100 jugadores</li>
             <li>⏰ Inscripciones hasta el <b>sábado 19 de diciembre, 20:00 hrs</b></li>
           </ul>
           <div class="ajz-actions">
@@ -260,22 +260,26 @@
           </div>
         </div>
         <a class="ajz-poster" href="/assets/ficc/ajedrez-flyer.jpg" data-lightbox data-caption="Torneo de Ajedrez · FICC 2026">
-          <img src="/assets/ficc/ajedrez-flyer.jpg" width="1080" height="1350" loading="lazy" alt="Cartel del Torneo de Ajedrez del Festival Internacional del Café Cacahoatán 2026: domingo 20 de diciembre, 10:00 hrs, Parque Central Miguel Hidalgo. Bolsa garantizada de $5,000 MXN. Informes al 962 106 36 15.">
+          <img src="/assets/ficc/ajedrez-flyer.jpg" width="1080" height="1350" loading="lazy" alt="Cartel del Torneo de Ajedrez del Festival Internacional del Café Cacahoatán 2026: domingo 20 de diciembre, 10:00 hrs, Parque Central Miguel Hidalgo. Bolsa garantizada de $6,600 MXN. Informes al 962 106 36 15.">
         </a>
       </div>
 
       <div class="ajz-cats" data-reveal>
         <div class="ajz-cat"><h3>Primera Fuerza</h3><p>Rating libre</p><strong>$100</strong></div>
-        <div class="ajz-cat"><h3>Juvenil</h3><p>Nacidos en 2009 y posteriores</p><strong>$100</strong></div>
+        <div class="ajz-cat"><h3>Aficionados</h3><p>Nacidos en 2009 y posteriores</p><strong>$100</strong></div>
         <div class="ajz-cat"><h3>Infantil</h3><p>Nacidos en 2014 y posteriores</p><strong>$80</strong></div>
       </div>
-      <p class="ajz-bases" data-reveal>Premios del 1° al 5° lugar. Pareos en Chess-Results. Rifa de canasta navideña entre los participantes. El pago de la inscripción se realiza con el comité organizador; te contactaremos para confirmarlo.</p>
+      <p class="ajz-bases" data-reveal>Premios del 1° al 5° lugar. Pareos en Chess-Results. Rifa de canasta navideña entre los participantes. El pago de la inscripción es por depósito o transferencia a Banorte: al enviar tu inscripción te mostramos los datos y también te llegan por correo.</p>
 
       <div class="ajz-reg" id="ajz-registro">
         <div class="ajz-reg-head" data-reveal>
           <span class="ajz-kicker">Registro del torneo</span>
           <h3>Formulario de inscripción</h3>
           <p><em>“Con el sabor del café y la estrategia del ajedrez, Cacahoatán nos invita a crecer.”</em></p>
+          <a class="ajz-doc" href="/assets/ficc/convocatoria-ajedrez-ficc2026.pdf" download="Convocatoria_Torneo_Ajedrez_FICC2026.pdf" target="_blank" rel="noopener">
+            <span class="ajz-doc-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M12 11v6"/><path d="M9.5 14.5 12 17l2.5-2.5"/></svg></span>
+            <span class="ajz-doc-tx"><b>Descarga la convocatoria</b><small>Bases completas del torneo · PDF, 6 páginas</small></span>
+          </a>
           <p>Festival del Café Cacahoatán 2026. Los campos con * son obligatorios.</p>
           <p>Para dudas o correcciones, comunícate con el Club Rey Blanco: <a class="ajz-link" href="mailto:elreyblancodechiapas@gmail.com">elreyblancodechiapas@gmail.com</a> o por WhatsApp al <a class="ajz-link" href="https://wa.me/529621063615" target="_blank" rel="noopener">962 106 36 15</a>.</p>
         </div>
@@ -294,7 +298,7 @@
               <select id="az-cat" required>
                 <option value="" selected disabled>Elige tu categoría</option>
                 <option value="Primera Fuerza (rating libre)">Primera Fuerza (rating libre)</option>
-                <option value="Juvenil (nacidos en 2009 y posteriores)">Juvenil · nacidos en 2009 y posteriores</option>
+                <option value="Aficionados (nacidos en 2009 y posteriores)">Aficionados · nacidos en 2009 y posteriores</option>
                 <option value="Infantil (nacidos en 2014 y posteriores)">Infantil · nacidos en 2014 y posteriores</option>
               </select>
             </div>
@@ -336,8 +340,19 @@
             </label>
             <button type="submit" class="form-submit" id="azBtn">Enviar inscripción</button>
             <p class="form-error" id="azError" role="alert" hidden>Revisa los campos marcados.</p>
-            <div class="form-success" id="azSuccess" role="status" hidden>
-              <strong>¡Inscripción recibida!</strong><br>Te contactaremos por WhatsApp para confirmar tu lugar y el pago.
+            <div class="form-success az-pay-ok" id="azSuccess" role="status" hidden>
+              <strong>¡Inscripción recibida!</strong>
+              <p class="az-pay-lead">Para confirmar tu lugar, paga <b id="azMonto">tu inscripción</b> por depósito o transferencia:</p>
+              <dl class="az-pay">
+                <div><dt>Banco</dt><dd>Banorte · sucursal Tapachula Las Lomas</dd></div>
+                <div><dt>Titular</dt><dd>Humberto Blanco Guillén</dd></div>
+                <div><dt>Cuenta</dt><dd><span class="az-num">4189 1400 5432 1152</span> <button type="button" class="az-copy" data-copy="4189140054321152">Copiar</button></dd></div>
+                <div><dt>CLABE</dt><dd><span class="az-num">072133012941022098</span> <button type="button" class="az-copy" data-copy="072133012941022098">Copiar</button></dd></div>
+                <div><dt>Concepto</dt><dd id="azConcepto">Nombre completo del competidor</dd></div>
+              </dl>
+              <p class="az-pay-note">Después de pagar, envía tu comprobante para confirmar la inscripción. Estos datos también te llegan a tu correo.</p>
+              <p class="az-pay-note"><a class="ajz-link" href="/assets/ficc/convocatoria-ajedrez-ficc2026.pdf" download="Convocatoria_Torneo_Ajedrez_FICC2026.pdf" target="_blank" rel="noopener">Descarga aquí la convocatoria completa (PDF)</a></p>
+              <a class="cta-big cta-gold az-wa" id="azWa" href="https://wa.me/529621063615" target="_blank" rel="noopener">Enviar comprobante por WhatsApp</a>
             </div>
           </form>
         </div>
@@ -385,6 +400,7 @@
             return;
           }
           var cat = val('az-cat');
+          function monto(c){ return /^Infantil/.test(c) ? '$80' : '$100'; }
           var nombre = val('az-nombre');
           btn.disabled = true;
           btn.textContent = 'Enviando…';
@@ -393,7 +409,7 @@
               _subject: 'Inscripción Torneo de Ajedrez FICC 2026 - ' + cat + ' - ' + nombre,
               _template: 'table',
               _captcha: 'false',
-              _autoresponse: 'Gracias por inscribirte al Torneo de Ajedrez del Festival Internacional del Café Cacahoatán 2026 (domingo 20 de diciembre, 10:00 hrs, Parque Central Miguel Hidalgo). El comité te contactará por WhatsApp para confirmar tu lugar y el pago de la inscripción. Dudas o correcciones: elreyblancodechiapas@gmail.com o WhatsApp 962 106 36 15.',
+              _autoresponse: 'Gracias por inscribirte al Torneo de Ajedrez del Festival Internacional del Café Cacahoatán 2026 (domingo 20 de diciembre, 10:00 hrs, Parque Central Miguel Hidalgo). Para confirmar tu lugar realiza el pago de tu inscripción (' + monto(cat) + ') por depósito o transferencia. Banco: Banorte, sucursal Tapachula Las Lomas. Titular: Humberto Blanco Guillén. Cuenta: 4189 1400 5432 1152. CLABE interbancaria: 072133012941022098. Concepto de pago: ' + nombre + '. Una vez realizado el pago, envía tu comprobante por WhatsApp al 962 106 36 15 o a elreyblancodechiapas@gmail.com para confirmar la inscripción.',
               'email': val('az-correo'),
               'Categoría': cat,
               'Apellidos, Nombre(s)': nombre,
@@ -411,6 +427,9 @@
             });
             if(!res.ok) throw new Error('send failed');
             form.querySelectorAll('.field, .field-row, .ficc-check, .form-submit').forEach(function(el){ el.style.display = 'none'; });
+            document.getElementById('azMonto').textContent = monto(cat);
+            document.getElementById('azConcepto').textContent = nombre;
+            document.getElementById('azWa').href = 'https://wa.me/529621063615?text=' + encodeURIComponent('Hola, envío mi comprobante de pago de la inscripción al Torneo de Ajedrez FICC 2026. Nombre: ' + nombre + ' · Categoría: ' + cat);
             okEl.hidden = false;
             okEl.scrollIntoView({behavior:'smooth', block:'center'});
           }catch(err){
@@ -495,14 +514,14 @@
 
         <article class="cv-item" data-reveal>
           <a class="cv-poster" href="/assets/ficc/ajedrez-flyer.jpg" data-lightbox data-caption="Torneo de Ajedrez · FICC 2026">
-            <img src="/assets/ficc/ajedrez-flyer.jpg" width="1080" height="1350" loading="lazy" alt="Cartel del Torneo de Ajedrez: domingo 20 de diciembre, 10:00 hrs, Parque Central Miguel Hidalgo. Bolsa garantizada de 5,000 pesos.">
+            <img src="/assets/ficc/ajedrez-flyer.jpg" width="1080" height="1350" loading="lazy" alt="Cartel del Torneo de Ajedrez: domingo 20 de diciembre, 10:00 hrs, Parque Central Miguel Hidalgo. Bolsa garantizada de 6,600 pesos.">
           </a>
           <div class="cv-body">
             <p class="cv-kicker"><span class="cv-num">03</span>Deporte</p>
             <h3>Torneo de Ajedrez</h3>
-            <dl class="cv-data"><div class="cv-row"><dt>Fecha</dt><dd>Domingo 20 de diciembre, 10:00 hrs</dd></div><div class="cv-row"><dt>Lugar</dt><dd>Parque Central Miguel Hidalgo</dd></div><div class="cv-row"><dt>Premios</dt><dd>Bolsa garantizada de $5,000 MXN</dd></div><div class="cv-row"><dt>Cierre</dt><dd>Sábado 19 de diciembre, 20:00 hrs</dd></div></dl>
+            <dl class="cv-data"><div class="cv-row"><dt>Fecha</dt><dd>Domingo 20 de diciembre, 10:00 hrs</dd></div><div class="cv-row"><dt>Lugar</dt><dd>Parque Central Miguel Hidalgo</dd></div><div class="cv-row"><dt>Premios</dt><dd>Bolsa garantizada de $6,600 MXN</dd></div><div class="cv-row"><dt>Cierre</dt><dd>Sábado 19 de diciembre, 20:00 hrs</dd></div></dl>
             
-            <div class="cv-actions"><a class="cv-cta" href="#ajz-registro" >Inscribirme<span aria-hidden="true"> →</span></a><a class="cv-more" href="#ajedrez" >Ver bases<span aria-hidden="true"> →</span></a></div>
+            <div class="cv-actions"><a class="cv-cta" href="#ajz-registro" >Inscribirme<span aria-hidden="true"> →</span></a><a class="cv-more" href="/assets/ficc/convocatoria-ajedrez-ficc2026.pdf" download="Convocatoria_Torneo_Ajedrez_FICC2026.pdf" target="_blank" rel="noopener">Descargar convocatoria (PDF)<span aria-hidden="true"> ↓</span></a></div>
           </div>
         </article>
 
@@ -681,7 +700,7 @@
         <article class="ficc-card" data-reveal>
           <span class="badge badge--ok">Registro abierto</span>
           <h3>Torneo de Ajedrez</h3>
-          <p>Domingo 20 de diciembre. Bolsa de $5,000 MXN.</p>
+          <p>Domingo 20 de diciembre. Bolsa de $6,600 MXN.</p>
           <a href="#ajedrez">Inscribirme al torneo →</a>
         </article>
         <article class="ficc-card" data-reveal>
@@ -1020,6 +1039,37 @@
 .rc-tipos{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
 .rc-tipos li{padding:6px 12px;border-radius:999px;font-size:.85rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);color:rgba(246,238,226,.85)}
 .rc-tipos li b{color:#fff}
+</style>
+<script>
+document.addEventListener('click',function(e){
+  var b=e.target.closest('.az-copy'); if(!b) return;
+  var t=b.getAttribute('data-copy'), done=function(){ b.textContent='¡Copiado!'; setTimeout(function(){ b.textContent='Copiar'; },1800); };
+  if(navigator.clipboard) navigator.clipboard.writeText(t).then(done,function(){}); else { var x=document.createElement('textarea'); x.value=t; document.body.appendChild(x); x.select(); try{document.execCommand('copy');done();}catch(_){} x.remove(); }
+});
+</script>
+<style id="az-pay">
+.ajz-doc{display:flex;align-items:center;gap:14px;margin:16px 0 12px;padding:14px 18px;border-radius:16px;text-decoration:none;color:#fff;
+  background:linear-gradient(135deg,rgba(240,200,119,.22),rgba(255,255,255,.05));border:1px solid rgba(240,200,119,.45);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);transition:transform .2s ease,background .2s ease}
+.ajz-doc:hover{transform:translateY(-2px);background:linear-gradient(135deg,rgba(240,200,119,.38),rgba(255,255,255,.08))}
+.ajz-doc-ic{flex:none;display:grid;place-items:center;width:46px;height:46px;border-radius:12px;color:#1E120A;background:linear-gradient(135deg,#F3D58C,#D9A441 55%,#B9782A)}
+.ajz-doc-tx{display:flex;flex-direction:column;gap:2px}
+.ajz-doc-tx b{font-size:1.05rem}
+.ajz-doc-tx small{font-size:.85rem;color:rgba(246,238,226,.75)}
+.az-pay-ok{text-align:left}
+.az-pay-ok>strong{display:block;font-size:1.3rem;margin-bottom:6px}
+.az-pay-lead{margin:0 0 12px;line-height:1.5}
+.az-pay-lead b{color:#F0C877;font-size:1.1em}
+.az-pay{margin:0 0 14px;padding:6px 16px;border-radius:14px;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.14)}
+.az-pay div{display:grid;grid-template-columns:90px 1fr;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+.az-pay div:last-child{border-bottom:0}
+.az-pay dt{margin:0;font-size:.85rem;color:rgba(246,238,226,.65)}
+.az-pay dd{margin:0;font-weight:600;color:#fff;display:flex;flex-wrap:wrap;align-items:center;gap:8px;word-break:break-word}
+.az-num{font-size:1.12rem;letter-spacing:.04em;font-variant-numeric:tabular-nums}
+.az-copy{padding:4px 12px;border-radius:999px;border:1px solid rgba(240,200,119,.5);background:rgba(240,200,119,.12);color:#F0C877;font:600 .8rem 'Work Sans',sans-serif;cursor:pointer}
+.az-copy:hover{background:rgba(240,200,119,.25)}
+.az-pay-note{margin:0 0 14px;font-size:.92rem;color:rgba(246,238,226,.8)}
+.az-wa{display:inline-flex}
+@media (max-width:480px){.az-pay div{grid-template-columns:1fr;gap:2px}}
 </style>
 <style id="ficc-look">
 /* ===== Estilo FICC 2026: fotos reales, vidrio y degradados ===== */
