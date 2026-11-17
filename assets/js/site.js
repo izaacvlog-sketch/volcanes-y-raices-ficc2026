@@ -385,7 +385,7 @@
           });
         }
         // Confirmación inmediata; el correo se envía en segundo plano (keepalive sigue aunque cierren la página)
-        form.querySelectorAll('.field, .field-row, .ficc-check, .form-submit, .form-intro, .gdo-fields, .reg-more').forEach(el=>el.style.display='none');
+        form.querySelectorAll('.field, .field-row, .ficc-check, .form-submit, .form-intro, .gdo-fields, .reg-more').forEach(el=>el.style.setProperty('display','none','important'));
         if(isEmb()) okEl.innerHTML = '<strong>¡Inscripción recibida!</strong><br>Ya estás registrada como aspirante a Embajadora del Café. Te contactaremos pronto.';
         if(gdo) okEl.innerHTML = '<strong>¡Inscripción recibida!</strong><br>Te avisaremos dónde y cuándo entregar tus muestras.';
         okEl.hidden = false;
@@ -456,7 +456,7 @@
           'Tipo de interes': document.getElementById('cf-interes').value,
           'Mensaje': document.getElementById('cf-mensaje').value.trim()
         };
-        infoForm.querySelectorAll('.field, .field-row, .form-submit').forEach(el=>el.style.display='none');
+        infoForm.querySelectorAll('.field, .field-row, .form-submit').forEach(el=>el.style.setProperty('display','none','important'));
         formSuccess.hidden = false;
         enviarSegundoPlano('https://formsubmit.co/ajax/revista.volcanesyraices@gmail.com', payload, ()=>{
           const w = document.createElement('p');

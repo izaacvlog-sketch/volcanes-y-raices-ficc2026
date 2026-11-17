@@ -422,7 +422,7 @@
           };
           var slowT = setTimeout(function(){ btn.innerHTML = '<span class="az-spin" aria-hidden="true"></span> Ya casi… no cierres la página'; }, 3000);
           function mostrarOk(){
-            form.querySelectorAll('.field, .field-row, .ficc-check, .form-submit').forEach(function(el){ el.style.display = 'none'; });
+            form.querySelectorAll('.field, .field-row, .ficc-check, .form-submit').forEach(function(el){ el.style.setProperty('display', 'none', 'important'); });
             errEl.hidden = true;
             document.getElementById('azMonto').textContent = monto(cat);
             document.getElementById('azConcepto').textContent = nombre;
@@ -637,7 +637,7 @@
           };
           var slowT = setTimeout(function(){ btn.innerHTML = '<span class="az-spin" aria-hidden="true"></span> Ya casi… no cierres la página'; }, 3000);
           function mostrarOk(){
-            form.querySelectorAll('.field, .field-row, .ficc-check, .form-submit').forEach(function(el){ el.style.display = 'none'; });
+            form.querySelectorAll('.field, .field-row, .ficc-check, .form-submit').forEach(function(el){ el.style.setProperty('display', 'none', 'important'); });
             errEl.hidden = true;
             document.getElementById('brsConcepto').textContent = 'Barismo ' + nombre;
             document.getElementById('brsWa').href = 'https://wa.me/529622570907?text=' + encodeURIComponent('Hola, envío mi comprobante de pago de la inscripción a la Competencia de Baristas FICC 2026. Nombre: ' + nombre + ' · Representa a: ' + repr);
@@ -1214,7 +1214,7 @@
 .reg-form .tel-group select{flex:0 0 auto;width:142px;padding-left:16px;padding-right:30px;background-position:right 13px center;text-overflow:ellipsis}
 .reg-form .tel-group input{flex:1 1 auto;min-width:0}
 </style>
-<script src="/assets/js/site.js?v=20261117"></script>
+<script src="/assets/js/site.js?v=20261117b"></script>
 <script>
 /* ===== Contador de asistentes FICC 2026 ===== */
 (function(){
