@@ -1562,54 +1562,60 @@ document.addEventListener('click',function(e){
 <style id="brs-premios">.brs-premios{list-style:none;margin:10px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:520px}.brs-premios li{display:flex;flex-direction:column;gap:2px;padding:12px 14px;border-radius:12px;border:1px solid rgba(232,192,106,.4);background:rgba(255,255,255,.05)}.brs-premios b{font-size:.85rem;font-weight:600;color:rgba(246,238,226,.75)}.brs-premios sup{font-size:.65em}.brs-premios span{font-family:"Playfair Display",serif;font-size:1.6rem;line-height:1.1;color:#F0C877}.brs-premios li:first-child{border-color:#E9BE63;background:rgba(240,200,119,.12)}@media (max-width:480px){.brs-premios{grid-template-columns:1fr}.brs-premios li{flex-direction:row;justify-content:space-between;align-items:baseline}}</style>
 <style id="ajz-premios">.ajz-premios{width:100%;max-width:520px;margin:12px 0 4px;border-collapse:separate;border-spacing:0;font-size:.95rem;border:1px solid rgba(232,192,106,.4);border-radius:12px;overflow:hidden;background:rgba(0,0,0,.25)}.ajz-premios caption{text-align:left;font-size:.82rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#F0C877;padding:0 0 6px}.ajz-premios th,.ajz-premios td{padding:8px 12px;text-align:right;border-bottom:1px solid rgba(255,255,255,.08)}.ajz-premios thead th{font-size:.8rem;font-weight:600;color:rgba(246,238,226,.7);background:rgba(255,255,255,.05)}.ajz-premios th[scope=row],.ajz-premios thead th:first-child{text-align:left;color:#F6EEE2}.ajz-premios td{color:#fff;font-variant-numeric:tabular-nums;font-weight:600}.ajz-premios tbody tr:first-child td{color:#F0C877}.ajz-premios tbody tr:last-child th,.ajz-premios tbody tr:last-child td{border-bottom:0}@media (max-width:420px){.ajz-premios th,.ajz-premios td{padding:7px 8px;font-size:.88rem}}</style>
 <style id="ficc-btns">
-/* ===== Botones FICC 2026: oro con textura y espresso con grano ===== */
-.page-ficc{--grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-/* principal: oro cepillado */
+/* ===== Botones FICC 2026 · inspirados en Apple, Stripe y Nespresso =====
+   Principal: píldora sólida color crema-dorado, flecha que avanza (Stripe).
+   Secundario: contorno fino que se rellena al pasar (Nespresso / Aesop).
+   Enlaces: subrayado que se dibuja (Apple). */
+.page-ficc{--b-gold:#E3B45C;--b-gold-h:#F0C878;--b-ink:#1E120A;--b-cream:#F6EEE2}
 .page-ficc .cta-gold,.page-ficc .gdo-btn,.page-ficc .cv-cta,.page-ficc .form-submit,.page-ficc .ajz-btn,.page-ficc .cf-btn,.page-ficc .az-wa,
-.page-ficc #ajzForm button[type=submit],.page-ficc #brsForm button[type=submit],.page-ficc .reg-form button[type=submit]{
-  display:inline-flex !important;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 26px !important;
-  border-radius:12px !important;border:1px solid #8A5A1C !important;color:#2A1607 !important;
-  font-family:'Work Sans',sans-serif;font-weight:700 !important;letter-spacing:.015em;text-decoration:none;text-shadow:0 1px 0 rgba(255,236,190,.55);
-  background:var(--grain),linear-gradient(180deg,#F8E2A6 0%,#E9BE63 46%,#D49E3E 54%,#B9822F 100%) !important;
-  background-size:160px 160px,100% 100% !important;background-blend-mode:soft-light,normal;
-  box-shadow:inset 0 1px 0 rgba(255,250,230,.75),inset 0 -2px 0 rgba(110,62,14,.35),0 1px 0 rgba(0,0,0,.35),0 10px 22px -10px rgba(0,0,0,.7) !important;
-  transition:transform .15s ease,filter .2s ease,box-shadow .2s ease !important;cursor:pointer}
+.page-ficc #ajzForm button[type=submit],.page-ficc #brsForm button[type=submit],.page-ficc #gdoForm button[type=submit],.page-ficc .reg-form button[type=submit]{
+  position:relative;display:inline-flex !important;align-items:center;justify-content:center;gap:10px;
+  min-height:50px;padding:0 28px !important;border-radius:999px !important;border:0 !important;
+  background:var(--b-gold) !important;color:var(--b-ink) !important;text-shadow:none;filter:none;
+  font-weight:700 !important;font-size:.98rem;letter-spacing:.005em;text-decoration:none;cursor:pointer;isolation:isolate;overflow:hidden;
+  box-shadow:0 1px 0 rgba(255,255,255,.35) inset,0 8px 20px -8px rgba(227,180,92,.55),0 2px 6px rgba(0,0,0,.25) !important;
+  transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s ease,background-color .2s ease !important}
+.page-ficc .cta-gold::after,.page-ficc .gdo-btn::after,.page-ficc .ajz-btn::after,.page-ficc .form-submit::after,.page-ficc button[type=submit]::after{
+  content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);transform:translateX(-120%);transition:transform .7s ease}
+.page-ficc .cta-gold:hover::after,.page-ficc .gdo-btn:hover::after,.page-ficc .ajz-btn:hover::after,.page-ficc .form-submit:hover::after,.page-ficc button[type=submit]:hover::after{transform:translateX(120%)}
 .page-ficc .cta-gold:hover,.page-ficc .gdo-btn:hover,.page-ficc .cv-cta:hover,.page-ficc .form-submit:hover,.page-ficc .ajz-btn:hover,.page-ficc .cf-btn:hover,.page-ficc .az-wa:hover,
-.page-ficc #ajzForm button[type=submit]:hover,.page-ficc #brsForm button[type=submit]:hover{
-  filter:brightness(1.06) saturate(1.05);transform:translateY(-1px);
-  box-shadow:inset 0 1px 0 rgba(255,250,230,.85),inset 0 -2px 0 rgba(110,62,14,.35),0 1px 0 rgba(0,0,0,.35),0 14px 26px -10px rgba(0,0,0,.75) !important}
-.page-ficc .cta-gold:active,.page-ficc .gdo-btn:active,.page-ficc .cv-cta:active,.page-ficc .form-submit:active,.page-ficc .ajz-btn:active,.page-ficc .cf-btn:active,.page-ficc .az-wa:active,
-.page-ficc #ajzForm button[type=submit]:active,.page-ficc #brsForm button[type=submit]:active{
-  transform:translateY(1px);filter:brightness(.97);box-shadow:inset 0 2px 6px rgba(90,50,10,.45),0 1px 0 rgba(0,0,0,.3) !important}
-.page-ficc .form-submit:disabled,.page-ficc button[type=submit]:disabled{filter:saturate(.6) brightness(.9);cursor:progress}
-.page-ficc .cv-cta{min-height:42px;padding:0 18px !important;font-size:.9rem}
-.page-ficc .form-submit,.page-ficc #ajzForm button[type=submit],.page-ficc #brsForm button[type=submit]{width:100%;min-height:54px;font-size:1.02rem}
-
-/* secundario: espresso con grano y filo dorado */
+.page-ficc #ajzForm button[type=submit]:hover,.page-ficc #brsForm button[type=submit]:hover,.page-ficc #gdoForm button[type=submit]:hover{
+  background:var(--b-gold-h) !important;transform:translateY(-2px);
+  box-shadow:0 1px 0 rgba(255,255,255,.4) inset,0 14px 28px -10px rgba(227,180,92,.65),0 4px 10px rgba(0,0,0,.25) !important}
+.page-ficc .cta-gold:active,.page-ficc .gdo-btn:active,.page-ficc .cv-cta:active,.page-ficc .form-submit:active,.page-ficc .ajz-btn:active,.page-ficc button[type=submit]:active{
+  transform:translateY(0) scale(.98);box-shadow:0 2px 6px rgba(0,0,0,.3) !important}
+/* flecha que avanza */
+.page-ficc .cta-gold span[aria-hidden],.page-ficc .cv-cta span[aria-hidden],.page-ficc .cta-green span[aria-hidden],.page-ficc .btn-wine span[aria-hidden]{display:inline-block;transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+.page-ficc .cta-gold:hover span[aria-hidden],.page-ficc .cv-cta:hover span[aria-hidden],.page-ficc .cta-green:hover span[aria-hidden],.page-ficc .btn-wine:hover span[aria-hidden]{transform:translateX(5px)}
+.page-ficc .form-submit,.page-ficc #ajzForm button[type=submit],.page-ficc #brsForm button[type=submit],.page-ficc #gdoForm button[type=submit]{width:100%;min-height:56px;font-size:1.04rem}
+.page-ficc .form-submit:disabled,.page-ficc button[type=submit]:disabled{opacity:.7;transform:none;cursor:progress}
+.page-ficc .cv-cta{min-height:44px;padding:0 20px !important;font-size:.9rem}
+.page-ficc .cf-btn svg{width:18px;height:18px}
+/* secundario: contorno que se rellena */
 .page-ficc .cta-green,.page-ficc .btn-wine,.page-ficc .mapa360-actions a:not(.mapa-admin){
-  display:inline-flex !important;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 24px !important;border-radius:12px !important;
-  color:#F6EEE2 !important;font-weight:600 !important;text-decoration:none;
-  background:var(--grain),linear-gradient(180deg,rgba(74,46,28,.92),rgba(40,24,14,.94)) !important;background-size:160px 160px,100% 100% !important;background-blend-mode:overlay,normal;
-  border:1px solid rgba(232,192,106,.55) !important;
-  box-shadow:inset 0 1px 0 rgba(255,230,180,.18),inset 0 -1px 0 rgba(0,0,0,.4),0 10px 22px -12px rgba(0,0,0,.8) !important;
-  -webkit-backdrop-filter:none;backdrop-filter:none;transition:transform .15s ease,border-color .2s ease,color .2s ease !important}
-.page-ficc .cta-green{background:var(--grain),linear-gradient(180deg,rgba(38,92,52,.95),rgba(18,56,30,.96)) !important;background-size:160px 160px,100% 100% !important;border-color:rgba(160,220,170,.5) !important}
-.page-ficc .cta-green:hover,.page-ficc .btn-wine:hover,.page-ficc .mapa360-actions a:not(.mapa-admin):hover{transform:translateY(-1px);border-color:#E9BE63 !important;color:#fff !important;background-color:transparent !important}
-.page-ficc .cta-green:active,.page-ficc .btn-wine:active{transform:translateY(1px)}
-
-/* botones de día (conferencias) */
-.page-ficc .cf-jump a{border-radius:12px;background:var(--grain),linear-gradient(180deg,rgba(74,46,28,.75),rgba(40,24,14,.85));background-size:160px 160px,100% 100%;background-blend-mode:overlay,normal;
-  border:1px solid rgba(232,192,106,.4);box-shadow:inset 0 1px 0 rgba(255,230,180,.15),0 8px 18px -10px rgba(0,0,0,.8);-webkit-backdrop-filter:none;backdrop-filter:none}
-.page-ficc .cf-jump a:hover{background:var(--grain),linear-gradient(180deg,#F8E2A6,#D49E3E);background-size:160px 160px,100% 100%;background-blend-mode:soft-light,normal;color:#2A1607;border-color:#8A5A1C}
-.page-ficc .cf-jump a:hover span{color:#5A3412}.page-ficc .cf-jump a:hover b{color:#2A1607}
+  position:relative;display:inline-flex !important;align-items:center;justify-content:center;gap:10px;min-height:50px;padding:0 26px !important;
+  border-radius:999px !important;border:1.5px solid rgba(246,238,226,.55) !important;background:transparent !important;color:var(--b-cream) !important;
+  font-weight:600 !important;text-decoration:none;overflow:hidden;isolation:isolate;box-shadow:none !important;
+  transition:color .3s ease,border-color .3s ease,transform .25s ease !important}
+.page-ficc .cta-green::before,.page-ficc .btn-wine::before,.page-ficc .mapa360-actions a:not(.mapa-admin)::before{
+  content:"";position:absolute;inset:0;z-index:-1;background:var(--b-cream);transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.page-ficc .cta-green:hover,.page-ficc .btn-wine:hover,.page-ficc .mapa360-actions a:not(.mapa-admin):hover{color:var(--b-ink) !important;border-color:var(--b-cream) !important}
+.page-ficc .cta-green:hover::before,.page-ficc .btn-wine:hover::before,.page-ficc .mapa360-actions a:not(.mapa-admin):hover::before{transform:scaleX(1)}
+.page-ficc .cta-green{border-color:rgba(156,214,166,.65) !important}
+.page-ficc .cta-green::before{background:#9CD6A6}
+/* pestañas de día (conferencias) */
+.page-ficc .cf-jump a{border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);transition:transform .2s ease,background-color .2s ease,border-color .2s ease;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:none}
+.page-ficc .cf-jump a:hover{background:var(--b-cream);border-color:var(--b-cream);color:var(--b-ink);transform:translateY(-2px)}
+.page-ficc .cf-jump a:hover b,.page-ficc .cf-jump a:hover span{color:var(--b-ink)}
 /* copiar */
-.page-ficc .az-copy{border-radius:8px;background:var(--grain),linear-gradient(180deg,rgba(74,46,28,.9),rgba(40,24,14,.95));background-size:120px 120px,100% 100%;border:1px solid rgba(232,192,106,.55);color:#F0C877}
-/* enlaces de texto */
-.page-ficc .cv-more{text-decoration:underline;text-decoration-color:rgba(240,200,119,.45);text-underline-offset:4px;text-decoration-thickness:1px}
-.page-ficc .cv-more:hover{text-decoration-color:#F0C877}
+.page-ficc .az-copy{border-radius:999px;background:transparent;border:1px solid rgba(227,180,92,.6);color:var(--b-gold);transition:background-color .2s ease,color .2s ease}
+.page-ficc .az-copy:hover{background:var(--b-gold);color:var(--b-ink)}
+/* enlaces de texto: subrayado que se dibuja */
+.page-ficc .cv-more,.page-ficc .gdo-link{text-decoration:none !important;background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;padding-bottom:2px;transition:background-size .35s ease}
+.page-ficc .cv-more:hover,.page-ficc .gdo-link:hover{background-size:100% 1px}
 /* foco accesible */
-.page-ficc .cta-gold:focus-visible,.page-ficc .gdo-btn:focus-visible,.page-ficc .cv-cta:focus-visible,.page-ficc .form-submit:focus-visible,.page-ficc .ajz-btn:focus-visible,.page-ficc .cf-btn:focus-visible,.page-ficc .cta-green:focus-visible,.page-ficc .btn-wine:focus-visible,.page-ficc button[type=submit]:focus-visible{outline:2px solid #F8E2A6;outline-offset:3px}
-@media (prefers-reduced-motion:reduce){.page-ficc .cta-gold,.page-ficc .cta-green,.page-ficc .form-submit,.page-ficc .cv-cta{transition:none !important}}
+.page-ficc .cta-gold:focus-visible,.page-ficc .gdo-btn:focus-visible,.page-ficc .cv-cta:focus-visible,.page-ficc .form-submit:focus-visible,.page-ficc .ajz-btn:focus-visible,.page-ficc .cf-btn:focus-visible,.page-ficc .cta-green:focus-visible,.page-ficc .btn-wine:focus-visible,.page-ficc button[type=submit]:focus-visible{outline:2px solid var(--b-cream);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.page-ficc .cta-gold,.page-ficc .cta-green,.page-ficc .form-submit,.page-ficc .cv-cta,.page-ficc .gdo-btn{transition:none !important}.page-ficc .cta-gold::after,.page-ficc .gdo-btn::after,.page-ficc button[type=submit]::after{display:none}}
 </style>
 <style id="ficc-fonts">
 /* Tipografía: Cormorant Garamond (títulos) + Manrope (texto) */
