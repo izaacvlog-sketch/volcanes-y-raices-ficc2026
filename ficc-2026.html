@@ -58,11 +58,11 @@
         <span class="eyebrow">Evento especial · FICC 2026</span>
         <h1 id="ficc-title">Festival Internacional del Café <em>Cacahoatán 2026</em></h1>
         <p class="ficc-lead">Café, tradición y sabor a las faldas del Tacaná.</p>
-        <div class="ficc-facts">
-          <span class="ficc-fact">📅 <b>18 al 22</b> de diciembre de 2026</span>
-          <span class="ficc-fact">📍 Parque Central · Cacahoatán, Chiapas</span>
-          <a class="ficc-fact" href="https://wa.me/529622570907" target="_blank" rel="noopener">💬 WhatsApp <b>962 257 0907</b></a>
-        </div>
+        <dl class="ficc-facts hero-info">
+          <div><dt>Fechas</dt><dd>18 al 22 de diciembre, 2026</dd></div>
+          <div><dt>Lugar</dt><dd>Parque Central, Cacahoatán, Chiapas</dd></div>
+          <div><dt>Informes</dt><dd><a href="https://wa.me/529622570907" target="_blank" rel="noopener">WhatsApp 962 257 0907</a></dd></div>
+        </dl>
         <div class="ficc-cta">
           <a class="cta-big cta-gold" href="#participantes">Inscríbete al festival <span aria-hidden="true">→</span></a>
           <a class="cta-big cta-green" href="#gdo-registro">Inscríbete a Grano de Oro <span aria-hidden="true">→</span></a>
@@ -1640,6 +1640,34 @@ document.addEventListener('click',function(e){
 .page-ficc .subnav--ficc a:hover{color:#F6EEE2 !important;border-color:rgba(227,180,92,.55) !important;background:rgba(227,180,92,.1) !important}
 .page-ficc .subnav--ficc a.active,.page-ficc .subnav--ficc a.sub-gdo.active{background:#E3B45C !important;color:#1E120A !important;border-color:#E3B45C !important;box-shadow:none !important}
 @media (max-width:640px){.page-ficc .subnav--ficc .subnav-scroll{padding:8px 14px;gap:6px}.page-ficc .subnav--ficc a{font-size:.78rem !important;padding:7px 12px !important}}
+</style>
+<style id="ficc-hero">
+/* Portada editorial (sin pastillas ni emojis) */
+.page-ficc .ficc::before{display:none !important}
+.page-ficc #festival .ficc-asist{background:none !important;border:0 !important;border-left:1px solid rgba(246,238,226,.25) !important;border-radius:0 !important;padding:0 0 0 16px !important;margin-left:16px}
+.page-ficc #festival .ficc-asist span{font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(246,238,226,.75)}
+@media (max-width:900px){.page-ficc #festival .ficc-asist{border-left:0 !important;padding:0 !important;margin:6px 0 0}}
+.page-ficc #festival h1 em{font-family:'Cormorant Garamond',Georgia,serif !important;font-style:italic;font-weight:600}
+.page-ficc #festival .ficc-lead{font-size:1.1rem;color:rgba(246,238,226,.85)}
+.page-ficc .hero-info{display:grid !important;grid-template-columns:repeat(3,auto);justify-content:start;gap:0;margin:26px 0 30px !important;padding:0;border-top:1px solid rgba(246,238,226,.22);border-bottom:1px solid rgba(246,238,226,.22)}
+.page-ficc .hero-info>div{padding:14px 26px 14px 0;margin-right:26px;border-right:1px solid rgba(246,238,226,.18)}
+.page-ficc .hero-info>div:last-child{border-right:0;margin-right:0}
+.page-ficc .hero-info dt{font-size:.68rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#E3B45C;margin:0 0 4px}
+.page-ficc .hero-info dd{margin:0;font-size:.95rem;font-weight:600;color:#F6EEE2}
+.page-ficc .hero-info a{color:#F6EEE2;text-decoration:underline;text-decoration-color:rgba(227,180,92,.6);text-underline-offset:4px}
+@media (max-width:900px){
+  .page-ficc #festival .ficc-head{text-align:left !important;justify-items:start !important}
+  .page-ficc #festival .ficc-logo{width:118px !important;height:auto}
+  .page-ficc #festival h1{font-size:2.7rem !important;line-height:1 !important}
+  .page-ficc .hero-info{grid-template-columns:1fr;width:100%}
+  .page-ficc .hero-info>div{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:12px 0;margin:0;border-right:0;border-bottom:1px solid rgba(246,238,226,.14)}
+  .page-ficc .hero-info>div:last-child{border-bottom:0}
+  .page-ficc .hero-info dt{margin:0}
+  .page-ficc .hero-info dd{text-align:right;font-size:.92rem}
+  .page-ficc #festival .ficc-cta{display:grid;grid-template-columns:1fr;gap:10px;justify-items:stretch}
+  .page-ficc #festival .ficc-cta a{min-height:50px;font-size:.95rem}
+  .page-ficc #festival .ficc-count{justify-content:flex-start}
+}
 </style>
 </body>
 </html>
