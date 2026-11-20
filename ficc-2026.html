@@ -1522,7 +1522,7 @@ document.addEventListener('click',function(e){
 
 /* sin efectos sintéticos */
 .page-ficc *{text-shadow:none !important}
-.page-ficc main *, .page-ficc section *{box-shadow:none !important;-webkit-backdrop-filter:none !important;backdrop-filter:none !important}
+.page-ficc main *, .page-ficc section *{-webkit-backdrop-filter:none !important;backdrop-filter:none !important}
 .page-ficc .ficc::before,.page-ficc .cf-wrap::before,.page-ficc .cf-wrap::after,.page-ficc .ajz-wrap::before{display:none !important}
 
 /* secciones: fondos sólidos con ritmo editorial */
@@ -1634,5 +1634,108 @@ document.addEventListener('click',function(e){
   .page-ficc .cta-gold,.page-ficc .cta-green{width:100%}
 }
 </style>
+<style id="ficc-depth">
+/* ===== Profundidad y relieve (capa 3D) ===== */
+.page-ficc{--sh-1:0 1px 2px rgba(0,0,0,.35),0 6px 14px -6px rgba(0,0,0,.45);
+  --sh-2:0 2px 4px rgba(0,0,0,.3),0 22px 44px -18px rgba(0,0,0,.75);
+  --sh-3:0 4px 8px rgba(0,0,0,.3),0 40px 70px -24px rgba(0,0,0,.85);
+  --sh-l1:0 1px 2px rgba(33,21,15,.12),0 10px 24px -12px rgba(33,21,15,.28);
+  --sh-l2:0 2px 4px rgba(33,21,15,.12),0 26px 50px -22px rgba(33,21,15,.42)}
+/* tarjetas con elevación real */
+.page-ficc main .ficc-card,.page-ficc section .ficc-card,.page-ficc section .gdo-card,.page-ficc section .ajz-cat,.page-ficc section .news-item,
+.page-ficc section .reg-form,.page-ficc section .gdo-reg,.page-ficc section .pg-panel,.page-ficc section .pg-feature,.page-ficc section .reg-counter,
+.page-ficc section .brs-premios li,.page-ficc section .ajz-premios,.page-ficc section .gdo,.page-ficc section .mapa360-frame{
+  box-shadow:inset 0 1px 0 rgba(240,232,217,.06),var(--sh-2) !important;
+  background:linear-gradient(180deg,#33241A 0%,#271A12 100%) !important}
+.page-ficc section .ficc-card,.page-ficc section .gdo-card,.page-ficc section .ajz-cat,.page-ficc section .news-item{
+  transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease,border-color .3s ease !important}
+.page-ficc section .ficc-card:hover,.page-ficc section .gdo-card:hover,.page-ficc section .ajz-cat:hover,.page-ficc section .news-item:hover{
+  transform:translateY(-6px) !important;box-shadow:inset 0 1px 0 rgba(240,232,217,.08),var(--sh-3) !important;border-color:rgba(182,138,69,.55) !important}
+.page-ficc section .ficc-card{position:relative;overflow:hidden}
+.page-ficc section .ficc-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--ed-oro);transform:scaleY(0);transform-origin:top;transition:transform .35s ease}
+.page-ficc section .ficc-card:hover::before{transform:scaleY(1)}
+/* secciones marfil */
+.page-ficc #conferencias .cf-day{box-shadow:var(--sh-l2) !important;transition:transform .35s ease,box-shadow .35s ease}
+.page-ficc #conferencias .cf-day:hover{transform:translateY(-4px)}
+.page-ficc #convocatorias .cv-item{transition:background-color .3s ease}
+/* carteles y fotos: marco desplazado + inclinación 3D */
+.page-ficc .cv-poster,.page-ficc .gdo-poster,.page-ficc .ajz-poster,.page-ficc .ficc-flyer,.page-ficc .pg-feature-img{
+  position:relative;display:block;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.2,.7,.2,1);will-change:transform}
+.page-ficc .gdo-poster,.page-ficc .ajz-poster,.page-ficc .ficc-flyer,.page-ficc .pg-feature-img{margin-right:14px;margin-bottom:14px}
+.page-ficc .gdo-poster::before,.page-ficc .ajz-poster::before,.page-ficc .ficc-flyer::before,.page-ficc .pg-feature-img::before{
+  content:"";position:absolute;inset:14px -14px -14px 14px;border:1px solid rgba(182,138,69,.7);border-radius:6px;transform:translateZ(-30px);pointer-events:none;transition:inset .5s ease}
+.page-ficc .gdo-poster:hover::before,.page-ficc .ajz-poster:hover::before,.page-ficc .ficc-flyer:hover::before,.page-ficc .pg-feature-img:hover::before{inset:20px -20px -20px 20px}
+.page-ficc .cv-poster img,.page-ficc .gdo-poster img,.page-ficc .ajz-poster img,.page-ficc .ficc-flyer img,.page-ficc .pg-feature-img img{
+  position:relative;border-radius:4px !important;box-shadow:var(--sh-3) !important}
+.page-ficc #convocatorias .cv-poster img{box-shadow:var(--sh-l2) !important;outline:0 !important}
+.page-ficc .cf-photo img{transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.page-ficc .cf-day:hover .cf-photo img{transform:scale(1.05)}
+.page-ficc .cf-photo{overflow:hidden}
+/* botones con relieve (sin brillos) */
+.page-ficc .cta-gold,.page-ficc .gdo-btn,.page-ficc .cv-cta,.page-ficc .form-submit,.page-ficc .ajz-btn,.page-ficc .cf-btn,.page-ficc .az-wa,.page-ficc button[type=submit]{
+  box-shadow:inset 0 -3px 0 rgba(33,21,15,.22),0 10px 20px -10px rgba(0,0,0,.7) !important;
+  transition:transform .18s ease,box-shadow .18s ease,background-color .2s ease !important}
+.page-ficc .cta-gold:hover,.page-ficc .gdo-btn:hover,.page-ficc .cv-cta:hover,.page-ficc .form-submit:hover,.page-ficc .ajz-btn:hover,.page-ficc .cf-btn:hover,.page-ficc .az-wa:hover,.page-ficc button[type=submit]:hover{
+  transform:translateY(-2px) !important;box-shadow:inset 0 -3px 0 rgba(33,21,15,.22),0 16px 26px -12px rgba(0,0,0,.75) !important}
+.page-ficc .cta-gold:active,.page-ficc .gdo-btn:active,.page-ficc .cv-cta:active,.page-ficc .form-submit:active,.page-ficc button[type=submit]:active{
+  transform:translateY(1px) !important;box-shadow:inset 0 2px 4px rgba(33,21,15,.3) !important}
+.page-ficc #convocatorias .cv-cta{box-shadow:inset 0 -3px 0 rgba(33,21,15,.22),0 8px 16px -8px rgba(33,21,15,.5) !important}
+.page-ficc .cta-green,.page-ficc .btn-wine,.page-ficc .ficc-cta a:not(.cta-gold),.page-ficc .mapa360-actions a:not(.mapa-admin){
+  box-shadow:inset 0 1px 0 rgba(240,232,217,.08),0 10px 20px -12px rgba(0,0,0,.7) !important;background:rgba(33,21,15,.55) !important}
+.page-ficc .cta-green:hover,.page-ficc .btn-wine:hover,.page-ficc .ficc-cta a:not(.cta-gold):hover{transform:translateY(-2px) !important}
+/* pestañas del programa con volumen */
+.page-ficc .pg-tab{box-shadow:var(--sh-1) !important;background:linear-gradient(180deg,#33241A,#271A12) !important;transition:transform .2s ease,box-shadow .2s ease !important}
+.page-ficc .pg-tab:hover{transform:translateY(-2px) !important}
+.page-ficc .pg-tab[aria-selected="true"]{background:var(--ed-marfil) !important;box-shadow:0 14px 26px -12px rgba(0,0,0,.8) !important;transform:translateY(-3px) !important}
+.page-ficc .pg-list li{transition:background-color .2s ease;border-radius:4px}
+.page-ficc .pg-list li:hover{background:rgba(240,232,217,.04)}
+/* portada con capas */
+.page-ficc #festival{perspective:1200px}
+.page-ficc #festival .ficc-logo{filter:drop-shadow(0 18px 24px rgba(0,0,0,.6));transition:transform .2s ease-out;will-change:transform}
+.page-ficc #festival h1{position:relative}
+.page-ficc #festival .ficc-fact{box-shadow:var(--sh-1) !important;background:rgba(33,21,15,.75) !important;border-radius:4px !important}
+/* separadores editoriales entre secciones */
+.page-ficc .ficc-block-head h2::after,.page-ficc .cv-head h2::after{content:"";display:block;width:56px;height:2px;background:var(--ed-oro);margin-top:16px}
+.page-ficc .cv-head h2::after{background:#8A6326}
+@media (prefers-reduced-motion:reduce){
+  .page-ficc .cv-poster,.page-ficc .gdo-poster,.page-ficc .ajz-poster,.page-ficc .ficc-flyer,.page-ficc .pg-feature-img,.page-ficc #festival .ficc-logo{transform:none !important}}
+@media (max-width:640px){
+  .page-ficc .gdo-poster::before,.page-ficc .ajz-poster::before,.page-ficc .ficc-flyer::before,.page-ficc .pg-feature-img::before{inset:10px -10px -10px 10px}}
+</style>
+<script id="ficc-depth-js">
+(function(){
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var fine=window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+  if(fine){
+    document.querySelectorAll('.page-ficc .cv-poster,.page-ficc .gdo-poster,.page-ficc .ajz-poster,.page-ficc .ficc-flyer,.page-ficc .pg-feature-img').forEach(function(el){
+      el.style.perspective='900px';
+      el.addEventListener('pointermove',function(e){
+        var r=el.getBoundingClientRect(), x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+        el.style.transform='perspective(900px) rotateY('+(x*9).toFixed(2)+'deg) rotateX('+(-y*9).toFixed(2)+'deg) translateZ(10px)';
+      });
+      el.addEventListener('pointerleave',function(){ el.style.transform=''; });
+    });
+  }
+  var hero=document.getElementById('festival'), logo=hero&&hero.querySelector('.ficc-logo');
+  if(hero){
+    var tick=false;
+    window.addEventListener('scroll',function(){
+      if(tick) return; tick=true;
+      requestAnimationFrame(function(){
+        var y=Math.min(window.scrollY,900);
+        hero.style.backgroundPosition='center '+(50+y*0.03).toFixed(1)+'%';
+        tick=false;
+      });
+    },{passive:true});
+    if(fine&&logo){
+      hero.addEventListener('pointermove',function(e){
+        var r=hero.getBoundingClientRect(), x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+        logo.style.transform='perspective(800px) rotateY('+(x*10).toFixed(1)+'deg) rotateX('+(-y*8).toFixed(1)+'deg) translateZ(20px)';
+      });
+      hero.addEventListener('pointerleave',function(){ logo.style.transform=''; });
+    }
+  }
+})();
+</script>
 </body>
 </html>
