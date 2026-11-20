@@ -1627,5 +1627,19 @@ document.addEventListener('click',function(e){
   font-family:'Cormorant Garamond',Georgia,serif !important;font-weight:600 !important;letter-spacing:-.005em}
 .page-ficc h1{line-height:1 !important}
 </style>
+<style id="ficc-subnav">
+/* Barra de secciones: chips compactos */
+.page-ficc .subnav--ficc{background:#1A100A !important;border-bottom:1px solid rgba(227,180,92,.22) !important;box-shadow:0 8px 20px -14px rgba(0,0,0,.8)}
+.page-ficc .subnav--ficc::before,.page-ficc .subnav--ficc::after{content:"";position:absolute;top:0;bottom:0;width:28px;pointer-events:none;z-index:2}
+.page-ficc .subnav--ficc::before{left:0;background:linear-gradient(90deg,#1A100A,rgba(26,16,10,0))}
+.page-ficc .subnav--ficc::after{right:0;background:linear-gradient(270deg,#1A100A,rgba(26,16,10,0))}
+.page-ficc .subnav--ficc .subnav-scroll{max-width:none;justify-content:safe center;gap:6px;padding:9px clamp(16px,4vw,56px);align-items:center;scroll-behavior:smooth;scroll-padding:0 40px}
+.page-ficc .subnav--ficc a{flex:none;font-size:.8rem !important;font-weight:600 !important;letter-spacing:.01em;line-height:1;padding:8px 14px !important;border-radius:999px !important;
+  color:rgba(246,238,226,.72) !important;background:rgba(246,238,226,.05) !important;border:1px solid rgba(246,238,226,.12) !important;box-shadow:none !important;
+  transition:background-color .2s ease,color .2s ease,border-color .2s ease}
+.page-ficc .subnav--ficc a:hover{color:#F6EEE2 !important;border-color:rgba(227,180,92,.55) !important;background:rgba(227,180,92,.1) !important}
+.page-ficc .subnav--ficc a.active,.page-ficc .subnav--ficc a.sub-gdo.active{background:#E3B45C !important;color:#1E120A !important;border-color:#E3B45C !important;box-shadow:none !important}
+@media (max-width:640px){.page-ficc .subnav--ficc .subnav-scroll{padding:8px 14px;gap:6px}.page-ficc .subnav--ficc a{font-size:.78rem !important;padding:7px 12px !important}}
+</style>
 </body>
 </html>
