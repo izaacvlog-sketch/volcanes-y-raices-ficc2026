@@ -65,7 +65,7 @@
         </div>
         <div class="ficc-cta">
           <a class="cta-big cta-gold" href="#participantes">Inscríbete al festival <span aria-hidden="true">→</span></a>
-          <a class="cta-big cta-green" href="#participantes" data-registro="Concurso Grano de Oro">Inscríbete a Grano de Oro <span aria-hidden="true">→</span></a>
+          <a class="cta-big cta-green" href="#gdo-registro">Inscríbete a Grano de Oro <span aria-hidden="true">→</span></a>
         </div>
         <div class="ficc-count" id="ficcCount" aria-live="polite"></div>
         <a class="ficc-asist" id="ficcAsist" href="#participantes" hidden><b>0</b> <span>personas ya registradas</span></a>
@@ -158,7 +158,7 @@
         <h2 class="gdo-title" id="gdo-title">Grano de Oro</h2>
         <p class="gdo-lead">Participa con tus mejores granos Arábica y Robusta. Califica el INIFAP.</p>
         <div class="gdo-actions">
-          <button type="button" class="gdo-btn" id="gdoJoin">Inscribirme al concurso</button>
+          <a class="gdo-btn" href="#gdo-registro">Inscribirme al concurso</a>
           <a class="gdo-link" href="#convocatoria">Ver convocatoria y bases</a>
         </div>
       </div>
@@ -197,10 +197,102 @@
             <li><b>Evaluación:</b> calidad física y sensorial.</li>
           </ol>
           <div class="gdo-actions">
-            <a class="gdo-btn" href="#participantes" data-registro="Concurso Grano de Oro">Inscribirme al concurso</a>
+            <a class="gdo-btn" href="#gdo-registro">Inscribirme al concurso</a>
           </div>
         </div>
       </div>
+      <div class="gdo-reg" id="gdo-registro" data-reveal>
+        <div class="gdo-reg-head">
+          <span class="gdo-kicker">Inscripción al concurso</span>
+          <h3>Registra tus muestras</h3>
+          <p>Llena tus datos y los de tu parcela. Después entrega tus 2 muestras en el INIFAP Campo Experimental Rosario Izapa.</p>
+        </div>
+        <form class="reg-form" id="gdoForm" novalidate>
+          <div style="position:absolute;left:-9999px;top:-9999px;" aria-hidden="true"><label>No llenar este campo<input type="text" name="_honey" tabindex="-1" autocomplete="off"></label></div>
+          <div class="field">
+            <label for="gr-nombre">Nombre del productor *</label>
+            <input type="text" id="gr-nombre" autocomplete="name" placeholder="Nombre completo" required>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="gr-tel">WhatsApp *</label>
+              <input type="tel" id="gr-tel" autocomplete="tel" inputmode="tel" placeholder="962 000 0000" required pattern="[0-9 +()-]{10,}">
+            </div>
+            <div class="field">
+              <label for="gr-correo">Correo electrónico</label>
+              <input type="email" id="gr-correo" autocomplete="email" placeholder="tu@correo.com">
+            </div>
+          </div>
+          <div class="field">
+            <label for="gr-parcela">Ubicación de la parcela *</label>
+            <input type="text" id="gr-parcela" placeholder="Comunidad y municipio" required>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="gr-altitud">Altitud (msnm) *</label>
+              <input type="number" id="gr-altitud" min="0" max="5000" inputmode="numeric" required>
+            </div>
+            <div class="field">
+              <label for="gr-cosecha">Fecha de cosecha *</label>
+              <input type="month" id="gr-cosecha" required>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="gr-variedad">Variedades que entregas *</label>
+              <input type="text" id="gr-variedad" placeholder="Ej. Arábica Bourbon y Robusta" required>
+            </div>
+            <div class="field">
+              <label for="gr-beneficio">Beneficiado *</label>
+              <select id="gr-beneficio" required>
+                <option value="" selected disabled>Elige una opción</option>
+                <option>Lavado (húmedo)</option><option>Natural (seco)</option><option>Honey</option><option>Semilavado</option><option>Otro</option>
+              </select>
+            </div>
+          </div>
+          <label class="ficc-check" id="grCheckLabel"><input type="checkbox" id="gr-acepto"><span>Entregaré una muestra Arábica y una Robusta en bolsas de papel selladas e identificadas.</span></label>
+          <button type="submit" class="form-submit" id="grBtn">Enviar inscripción</button>
+          <p class="form-error" id="grError" role="alert" hidden></p>
+          <div class="form-success" id="gdoSuccess" role="status" hidden>
+            <strong>¡Inscripción recibida!</strong><br>Ahora entrega tus 2 muestras en el <b>INIFAP Campo Experimental Rosario Izapa</b>, Tuxtla Chico, y menciona que son para el Concurso Grano de Oro. <a href="https://share.google/xUpVGnpFwc2qeUczt" target="_blank" rel="noopener" style="color:var(--oro);">Cómo llegar →</a>
+          </div>
+        </form>
+      </div>
+      <style>
+        .gdo-reg{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:clamp(20px,4vw,48px);align-items:start;margin-top:40px;padding:clamp(20px,3vw,36px);border-radius:22px;background:linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,.035));border:1px solid rgba(240,200,119,.4);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);scroll-margin-top:130px}
+        .gdo-reg-head h3{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,3vw,2.3rem);color:#FFE9A3;margin:8px 0 10px}
+        .gdo-reg-head p{margin:0;color:rgba(246,238,226,.82);line-height:1.55}
+        .page-ficc .gdo-reg .reg-form{background:none !important;border:0 !important;box-shadow:none !important;padding:0 !important;-webkit-backdrop-filter:none;backdrop-filter:none}
+        @media (max-width:860px){.gdo-reg{grid-template-columns:1fr}}
+      </style>
+      <script>
+      (function(){
+        var form=document.getElementById('gdoForm'); if(!form) return;
+        var btn=document.getElementById('grBtn'), errEl=document.getElementById('grError'), okEl=document.getElementById('gdoSuccess'), chk=document.getElementById('grCheckLabel');
+        function val(id){ return document.getElementById(id).value.trim(); }
+        document.getElementById('gr-acepto').addEventListener('change',function(e){ if(e.target.checked) chk.classList.remove('bad'); });
+        form.addEventListener('submit',function(e){
+          e.preventDefault(); errEl.hidden=true;
+          if(form.querySelector('[name="_honey"]').value) return;
+          var ok=true; form.querySelectorAll('[required]').forEach(function(el){ el.classList.add('touched'); if(!el.checkValidity()) ok=false; });
+          var acc=document.getElementById('gr-acepto').checked; chk.classList.toggle('bad',!acc);
+          if(!ok||!acc){ errEl.textContent='Revisa los campos marcados.'; errEl.hidden=false; var f=form.querySelector('[required]:invalid'); if(f) f.focus(); return; }
+          var nombre=val('gr-nombre');
+          var payload={_subject:'Registro Concurso Grano de Oro - '+nombre,_template:'table',_captcha:'false',
+            'Tipo de registro':'Concurso Grano de Oro','Productor':nombre,'WhatsApp':val('gr-tel'),'email':val('gr-correo')||'—',
+            'Ubicación de la parcela':val('gr-parcela'),'Altitud (msnm)':val('gr-altitud'),'Fecha de cosecha':val('gr-cosecha'),
+            'Variedades':val('gr-variedad'),'Tipo de beneficiado':val('gr-beneficio'),'Confirma entrega de 2 muestras':'Sí'};
+          btn.disabled=true;
+          form.querySelectorAll('.field, .field-row, .ficc-check, .form-submit').forEach(function(el){ el.style.setProperty('display','none','important'); });
+          okEl.hidden=false; okEl.scrollIntoView({behavior:'smooth',block:'center'});
+          var fd=new FormData(); Object.keys(payload).forEach(function(k){ fd.append(k,payload[k]); });
+          fetch('https://formsubmit.co/ajax/ficc.cacahoatan2026@gmail.com',{method:'POST',headers:{'Accept':'application/json'},body:fd,keepalive:true})
+          .then(function(r){ return r.json().catch(function(){return {};}).then(function(o){ if(!r.ok||String(o.success)==='false') throw new Error('x'); }); })
+          .catch(function(){ var w=document.createElement('p'); w.className='az-warn'; w.textContent='No pudimos confirmar que tu registro llegó. Manda una captura de esta pantalla por WhatsApp al 962 257 0907.'; okEl.appendChild(w); });
+        });
+      })();
+      </script>
+
     </div>
   </section>
 
@@ -729,7 +821,7 @@
             <h3>Grano de Oro</h3>
             <dl class="cv-data"><div class="cv-row"><dt>Muestras</dt><dd>Dos: una Arábica y una Robusta, en bolsa de papel sellada</dd></div><div class="cv-row"><dt>Entrega</dt><dd>INIFAP Campo Experimental Rosario Izapa, Tuxtla Chico</dd></div><div class="cv-row"><dt>Jurado</dt><dd>Especialistas del INIFAP</dd></div></dl>
             <p class="cv-note">Al entregar, menciona que tus muestras son para el Concurso Grano de Oro del FICC 2026.</p>
-            <div class="cv-actions"><a class="cv-cta" href="#participantes" data-registro="Concurso Grano de Oro">Inscribirme<span aria-hidden="true"> →</span></a><a class="cv-more" href="https://share.google/xUpVGnpFwc2qeUczt" target="_blank" rel="noopener">Cómo llegar<span aria-hidden="true"> →</span></a></div>
+            <div class="cv-actions"><a class="cv-cta" href="#gdo-registro">Inscribirme<span aria-hidden="true"> →</span></a><a class="cv-more" href="https://share.google/xUpVGnpFwc2qeUczt" target="_blank" rel="noopener">Cómo llegar<span aria-hidden="true"> →</span></a></div>
           </div>
         </article>
 
@@ -932,6 +1024,25 @@
           .pg-list li{grid-template-columns:72px 1fr;gap:10px}.pg-a{grid-column:2;justify-self:start}
         }
       </style>
+      <div class="pg-feature" data-reveal>
+        <a class="pg-feature-img" href="/assets/ficc/orquesta-marina.jpg" data-lightbox data-caption="Orquesta Sinfónica de la Marina · Viernes 18 de diciembre, 8:00 p.m.">
+          <img src="/assets/ficc/orquesta-marina.jpg" width="1080" height="1350" loading="lazy" alt="Cartel: Orquesta Sinfónica de la Marina, concierto de apertura del FICC 2026, viernes 18 de diciembre a las 8:00 p.m. en el Parque Central de Cacahoatán">
+        </a>
+        <div>
+          <span class="eyebrow">Concierto de apertura</span>
+          <h3>Orquesta Sinfónica de la Marina</h3>
+          <p><b>Viernes 18 de diciembre · 8:00 p.m.</b><br>Parque Central de Cacahoatán</p>
+          <p>La noche de inauguración del festival cierra con la orquesta en el escenario principal.</p>
+        </div>
+      </div>
+      <style>
+        .pg-feature{display:grid;grid-template-columns:minmax(0,320px) 1fr;gap:clamp(18px,3vw,36px);align-items:center;margin:0 0 28px;padding:18px;border-radius:20px;background:linear-gradient(135deg,rgba(255,255,255,.1),rgba(255,255,255,.03));border:1px solid rgba(240,200,119,.4)}
+        .pg-feature-img img{display:block;width:100%;height:auto;border-radius:12px}
+        .pg-feature h3{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,3vw,2.4rem);color:#fff;margin:6px 0 10px}
+        .pg-feature p{margin:0 0 10px;color:rgba(246,238,226,.82);line-height:1.5}
+        .pg-feature p b{color:#F0C877}
+        @media (max-width:700px){.pg-feature{grid-template-columns:1fr}}
+      </style>
       <div class="pg-tabs" role="tablist" aria-label="Días del festival" data-reveal><button class="pg-tab" role="tab" id="pg-t18" aria-controls="pg-p18" aria-selected="true"><b>18</b><span>Viernes</span></button><button class="pg-tab" role="tab" id="pg-t19" aria-controls="pg-p19" aria-selected="false" tabindex="-1"><b>19</b><span>Sábado</span></button><button class="pg-tab" role="tab" id="pg-t20" aria-controls="pg-p20" aria-selected="false" tabindex="-1"><b>20</b><span>Domingo</span></button><button class="pg-tab" role="tab" id="pg-t21" aria-controls="pg-p21" aria-selected="false" tabindex="-1"><b>21</b><span>Lunes</span></button><button class="pg-tab" role="tab" id="pg-t22" aria-controls="pg-p22" aria-selected="false" tabindex="-1"><b>22</b><span>Martes</span></button></div>
       <div class="pg-panel" role="tabpanel" id="pg-p18" aria-labelledby="pg-t18"><p class="pg-day"><b>Viernes 18 de diciembre</b> · Inauguración</p><ol class="pg-list"><li class=""><span class="pg-h">9:00 <small>a.m.</small></span><div class="pg-b"><p class="pg-t">Juegos tradicionales: yoyo</p><p class="pg-s">Con Giovany</p></div><span class="pg-a">Infantil</span></li><li class="is-hi"><span class="pg-h">10:00 <small>a.m.</small></span><div class="pg-b"><p class="pg-t">Inauguración del festival</p></div><span class="pg-a">Principal</span></li><li class=""><span class="pg-h">10:40 <small>a.m.</small></span><div class="pg-b"><p class="pg-t">Presentación de la variedad de café Talismán</p><p class="pg-s">Investigadores del INIFAP</p></div><span class="pg-a">Conferencias</span></li><li class=""><span class="pg-h">11:00 <small>a.m.</small></span><div class="pg-b"><p class="pg-t">Recorrido de stands</p></div><span class="pg-a">Principal</span></li><li class=""><span class="pg-h">12:00 <small>p.m.</small></span><div class="pg-b"><p class="pg-t">Ponencia: Recomendaciones prácticas durante el beneficiado del café para mantener su calidad</p><p class="pg-s">Dr. Juan Francisco Caballero Pérez · INIFAP, Campo Experimental Rosario Izapa</p></div><span class="pg-a">Conferencias</span></li><li class=""><span class="pg-h">12:00 <small>p.m.</small></span><div class="pg-b"><p class="pg-t">Comida a los invitados de honor</p></div><span class="pg-a">Principal</span></li><li class=""><span class="pg-h">1:00 <small>p.m.</small></span><div class="pg-b"><p class="pg-t">Ponencia: Enfermedades de importancia económica del café y su manejo</p><p class="pg-s">Dr. Misael Martínez Bolaños · INIFAP, Campo Experimental Rosario Izapa</p></div><span class="pg-a">Conferencias</span></li><li class=""><span class="pg-h">3:00 <small>p.m.</small></span><div class="pg-b"><p class="pg-t">Inauguración del torneo Gol por el Café</p></div><span class="pg-a">Deportivo</span></li><li class=""><span class="pg-h">5:00 <small>p.m.</small></span><div class="pg-b"><p class="pg-t">Galerías de foto</p></div><span class="pg-a">Cultural</span></li><li class=""><span class="pg-h">6:00 <small>p.m.</small></span><div class="pg-b"><p class="pg-t">Programa cultural</p><p class="pg-s">Coneculta Cacahoatán, Profra. Magali Fernández Alegría · Grupo folklórico Revolucionarios y Casa de Cultura Cacahoatán</p></div><span class="pg-a">Cultural</span></li><li class="is-hi"><span class="pg-h">8:00 <small>p.m.</small></span><div class="pg-b"><p class="pg-t">Orquesta Sinfónica de la Marina</p><p class="pg-s">Programa artístico, 8:00 a 10:00 p.m.</p></div><span class="pg-a">Artístico</span></li></ol></div><div class="pg-panel" role="tabpanel" id="pg-p19" aria-labelledby="pg-t19" hidden><p class="pg-day"><b>Sábado 19 de diciembre</b> · Barismo y Copa FICC</p><ol class="pg-list"><li class="is-hi"><span class="pg-h">9:00 <small>a.m.</small></span><div class="pg-b"><p class="pg-t">Competencia de baristas</p><p class="pg-s">Coord. Rafael Sánchez Rodríguez · 9:00 a.m. a 3:00 p.m.</p></div><span class="pg-a">Barismo</span></li><li class=""><span class="pg-h">9:00 <small>a.m.</small></span><div class="pg-b"><p class="pg-t">Juegos tradicionales: balero</p><p class="pg-s">Con Giovany</p></div><span class="pg-a">Infantil</span></li><li class=""><span class="pg-h">9:00 <small>a.m.</small></span><div class="pg-b"><p class="pg-t">Gol por el Café</p><p class="pg-s">premiación 10:30 a.m.</p></div><span class="pg-a">Deportivo</span></li><li class=""><span class="pg-h">10:00 <small>a.m.</small></span><div class="pg-b"><p class="pg-t">Participación de los poetas Tak-Kak-Nah</p><p class="pg-s">10:00 a.m. a 12:00 p.m.</p></div><span class="pg-a">Poetas</span></li><li class=""><span class="pg-h">12:00 <small>p.m.</small></span><div class="pg-b"><p class="pg-t">Inauguración de la Copa FICC de básquetbol</p><p class="pg-s">Auditorio Municipal</p></div><span class="pg-a">Deportivo</span></li><li class=""><span class="pg-h">12:00 <small>p.m.</small></span><div class="pg-b"><p class="pg-t">Ponencia: Manejo de la broca del fruto y el taladrador de la rama del café</p><p class="pg-s">Dr. Juan Francisco Barrera · ECOSUR</p></div><span class="pg-a">Conferencias</span></li><li class=""><span class="pg-h">1:00 <small>p.m.</small></span><div class="pg-b"><p class="pg-t">Ponencia: Importancia de la sombra de un cafetal en el control natural de la broca del café</p><p class="pg-s">Dr. Alfredo Castillo Vera · ECOSUR</p></div><span class="pg-a">Conferencias</span></li><li class=""><span class="pg-h">2:00 <small>p.m.</small></span><div class="pg-b"><p class="pg-t">Casa de Cultura de Suchiate</p><p class="pg-s">2:00 a 4:00 p.m.</p></div><span class="pg-a">Cultural</span></li><li class=""><span class="pg-h">5:00 <small>p.m.</small></span><div class="pg-b"><p class="pg-t">Galerías de foto</p></div><span class="pg-a">Cultural</span></li><li class=""><span class="pg-h">6:00 <small>p.m.</small></span><div class="pg-b"><p class="pg-t">Programa cultural</p><p class="pg-s">Coneculta Cacahoatán · Grupo folklórico independiente Cacahoatán, Patricia Próspero García</p></div><span class="pg-a">Cultural</span></li><li class="is-hi"><span class="pg-h">8:00 <small>p.m.</small></span><div class="pg-b"><p class="pg-t">Pasión Bohemia</p><p class="pg-s">Programa artístico, 8:00 a 10:00 p.m.</p></div><span class="pg-a">Artístico</span></li></ol></div><div class="pg-panel" role="tabpanel" id="pg-p20" aria-labelledby="pg-t20" hidden><p class="pg-day"><b>Domingo 20 de diciembre</b> · Ajedrez y deporte</p><ol class="pg-list"><li class="is-hi"><span class="pg-h">7:00 <small>a.m.</small></span><div class="pg-b"><p class="pg-t">Carrera atlética 6 km</p><p class="pg-s">Salida del Parque Central</p></div><span class="pg-a">Deportivo</span></li><li class=""><span class="pg-h">9:00 <small>a.m.</small></span><div class="pg-b"><p class="pg-t">Competencia de baristas</p><p class="pg-s">9:00 a.m. a 3:00 p.m.</p></div><span class="pg-a">Barismo</span></li><li class=""><span class="pg-h">9:00 <small>a.m.</small></span><div class="pg-b"><p class="pg-t">Juegos tradicionales: trompo y demostración de la chicharra</p><p class="pg-s">Con Giovany</p></div><span class="pg-a">Infantil</span></li><li class="is-hi"><span class="pg-h">10:00 <small>a.m.</small></span><div class="pg-b"><p class="pg-t">Torneo de Ajedrez FICC 2026</p><p class="pg-s">10:00 a.m. a 3:00 p.m.</p></div><span class="pg-a">Ajedrez</span></li><li class=""><span class="pg-h">10:00 <small>a.m.</small></span><div class="pg-b"><p class="pg-t">Copa FICC de básquetbol</p><p class="pg-s">Auditorio Municipal</p></div><span class="pg-a">Deportivo</span></li><li class=""><span class="pg-h">12:00 <small>p.m.</small></span><div class="pg-b"><p class="pg-t">Ponencia: Tratamiento de aguas residuales del café</p><p class="pg-s">M.C. Gamaliel Mejía · ECOSUR</p></div><span class="pg-a">Conferencias</span></li><li class=""><span class="pg-h">1:00 <small>p.m.</small></span><div class="pg-b"><p class="pg-t">Ponencia: Biotecnología y manejo de la roya del café</p><p class="pg-s">Dra. Graciela Huerta</p></div><span class="pg-a">Conferencias</span></li><li class=""><span class="pg-h">5:00 <small>p.m.</small></span><div class="pg-b"><p class="pg-t">Galerías de foto</p></div><span class="pg-a">Cultural</span></li><li class=""><span class="pg-h">6:00 <small>p.m.</small></span><div class="pg-b"><p class="pg-t">Programa cultural</p><p class="pg-s">Coneculta Cacahoatán · Casa de Cultura Municipal y grupo folklórico Villa de las Hortensias, Profra. Sandra Salazar Rodas</p></div><span class="pg-a">Cultural</span></li><li class="is-hi"><span class="pg-h">8:00 <small>p.m.</small></span><div class="pg-b"><p class="pg-t">Dorian Alexander y Roly Mattus</p><p class="pg-s">Programa artístico, 8:00 a 10:00 p.m.</p></div><span class="pg-a">Artístico</span></li></ol></div><div class="pg-panel" role="tabpanel" id="pg-p21" aria-labelledby="pg-t21" hidden><p class="pg-day"><b>Lunes 21 de diciembre</b> · Encuentro Marimbístico</p><ol class="pg-list"><li class=""><span class="pg-h">8:00 <small>a.m.</small></span><div class="pg-b"><p class="pg-t">Agua Hot</p></div><span class="pg-a">Artístico</span></li><li class="is-hi"><span class="pg-h">9:00 <small>a.m.</small></span><div class="pg-b"><p class="pg-t">Final de baristas</p><p class="pg-s">9:00 a.m. a 3:00 p.m.</p></div><span class="pg-a">Barismo</span></li><li class=""><span class="pg-h">9:00 <small>a.m.</small></span><div class="pg-b"><p class="pg-t">Eduardo Franco (Chiapas): Del folclore al contemporáneo</p></div><span class="pg-a">Música</span></li><li class=""><span class="pg-h">10:00 <small>a.m.</small></span><div class="pg-b"><p class="pg-t">Juan Sebastián (Argentina): violonchelo, música de cámara</p></div><span class="pg-a">Música</span></li><li class=""><span class="pg-h">10:00 <small>a.m.</small></span><div class="pg-b"><p class="pg-t">Juegos tradicionales: barrilete libre</p><p class="pg-s">Con Giovany · 10:00 a.m. a 12:00 p.m.</p></div><span class="pg-a">Infantil</span></li><li class=""><span class="pg-h">10:00 <small>a.m.</small></span><div class="pg-b"><p class="pg-t">Copa FICC de básquetbol</p><p class="pg-s">Auditorio Municipal · premiación 12:00 p.m.</p></div><span class="pg-a">Deportivo</span></li><li class=""><span class="pg-h">10:30 <small>a.m.</small></span><div class="pg-b"><p class="pg-t">Krystina Marcoux (Francia–Canadá): Francia y marimba</p></div><span class="pg-a">Música</span></li><li class=""><span class="pg-h">12:15 <small>p.m.</small></span><div class="pg-b"><p class="pg-t">Ponencia de la Facultad de Ciencias Agrícolas</p></div><span class="pg-a">Conferencias</span></li><li class=""><span class="pg-h">1:00 <small>p.m.</small></span><div class="pg-b"><p class="pg-t">Ponencia: Perspectiva del cultivo del café robusta</p><p class="pg-s">Dr. Alfredo Zamarripa Colmenero</p></div><span class="pg-a">Conferencias</span></li><li class=""><span class="pg-h">5:00 <small>p.m.</small></span><div class="pg-b"><p class="pg-t">Galerías de foto (final)</p></div><span class="pg-a">Cultural</span></li><li class="is-hi"><span class="pg-h">6:00 <small>p.m.</small></span><div class="pg-b"><p class="pg-t">2.º Encuentro Marimbístico de la Frontera Sur</p><p class="pg-s">Marimba Municipal de Cacahoatán</p></div><span class="pg-a">Artístico</span></li><li class=""><span class="pg-h">7:00 <small>p.m.</small></span><div class="pg-b"><p class="pg-t">Natalia Escobar (Colombia)</p><p class="pg-s">Encuentro Marimbístico</p></div><span class="pg-a">Artístico</span></li><li class=""><span class="pg-h">8:30 <small>p.m.</small></span><div class="pg-b"><p class="pg-t">Marimba Juvenil de Mazatán, Chiapas</p><p class="pg-s">Encuentro Marimbístico</p></div><span class="pg-a">Artístico</span></li><li class=""><span class="pg-h">9:30 <small>p.m.</small></span><div class="pg-b"><p class="pg-t">Blanca Luz (Guatemala)</p><p class="pg-s">Encuentro Marimbístico</p></div><span class="pg-a">Artístico</span></li></ol></div><div class="pg-panel" role="tabpanel" id="pg-p22" aria-labelledby="pg-t22" hidden><p class="pg-day"><b>Martes 22 de diciembre</b> · Clausura</p><ol class="pg-list"><li class="is-hi"><span class="pg-h">9:00 <small>a.m.</small></span><div class="pg-b"><p class="pg-t">Jornada académica a cargo de la Rectoría de la UNACH</p></div><span class="pg-a">Conferencias</span></li><li class=""><span class="pg-h">9:00 <small>a.m.</small></span><div class="pg-b"><p class="pg-t">Blanca Luz (Guatemala): De la raíz al escenario</p></div><span class="pg-a">Música</span></li><li class=""><span class="pg-h">10:00 <small>a.m.</small></span><div class="pg-b"><p class="pg-t">Conferencia magistral</p><p class="pg-s">Ponente por anunciar</p></div><span class="pg-a">Conferencias</span></li><li class=""><span class="pg-h">10:00 <small>a.m.</small></span><div class="pg-b"><p class="pg-t">José Domingo González: Construcción de la marimba</p></div><span class="pg-a">Música</span></li><li class=""><span class="pg-h">10:30 <small>a.m.</small></span><div class="pg-b"><p class="pg-t">Natalia Escobar: Ritmos colombianos</p></div><span class="pg-a">Música</span></li><li class=""><span class="pg-h">11:00 <small>a.m.</small></span><div class="pg-b"><p class="pg-t">Conferencia magistral virtual: Colombia Café Lab</p><p class="pg-s">Mtro. Elmer Noriel</p></div><span class="pg-a">Conferencias</span></li><li class=""><span class="pg-h">11:25 <small>a.m.</small></span><div class="pg-b"><p class="pg-t">Receso y degustación de café de Chiapas</p></div><span class="pg-a">Principal</span></li><li class=""><span class="pg-h">11:40 <small>a.m.</small></span><div class="pg-b"><p class="pg-t">SIAL: Producción de café en México</p><p class="pg-s">Territorio, sistemas productivos y sostenibilidad</p></div><span class="pg-a">Conferencias</span></li><li class=""><span class="pg-h">12:40 <small>p.m.</small></span><div class="pg-b"><p class="pg-t">Del fruto a la taza: calidad, transformación e innovación</p><p class="pg-s">Facultad de Ciencias Químicas</p></div><span class="pg-a">Conferencias</span></li><li class=""><span class="pg-h">12:40 <small>p.m.</small></span><div class="pg-b"><p class="pg-t">Conversatorio internacional México–Colombia: voces y experiencias</p></div><span class="pg-a">Conferencias</span></li><li class=""><span class="pg-h">1:40 <small>p.m.</small></span><div class="pg-b"><p class="pg-t">Diálogo con productores y asistentes</p></div><span class="pg-a">Conferencias</span></li><li class="is-hi"><span class="pg-h">3:00 <small>p.m.</small></span><div class="pg-b"><p class="pg-t">Clausura: conclusiones, reconocimientos y fotografía oficial</p></div><span class="pg-a">Principal</span></li><li class=""><span class="pg-h">3:00 <small>p.m.</small></span><div class="pg-b"><p class="pg-t">Concurso de poetas</p></div><span class="pg-a">Poetas</span></li><li class=""><span class="pg-h">5:00 <small>p.m.</small></span><div class="pg-b"><p class="pg-t">Galerías de foto y premiación de la galería</p></div><span class="pg-a">Cultural</span></li><li class=""><span class="pg-h">6:00 <small>p.m.</small></span><div class="pg-b"><p class="pg-t">Programa cultural</p><p class="pg-s">Coneculta Cacahoatán</p></div><span class="pg-a">Cultural</span></li><li class=""><span class="pg-h">8:00 <small>p.m.</small></span><div class="pg-b"><p class="pg-t">Encuentro Marimbístico</p><p class="pg-s">Marimba Juvenil de Tuxtla Chico · 8:30 p.m. Marimba Juvenil de Villa Flores</p></div><span class="pg-a">Artístico</span></li><li class=""><span class="pg-h">9:00 <small>p.m.</small></span><div class="pg-b"><p class="pg-t">Eduardo Franco (México) · Krystina Marcoux · Stick and Bow Duo</p><p class="pg-s">Encuentro Marimbístico</p></div><span class="pg-a">Artístico</span></li><li class="is-hi"><span class="pg-h">10:00 <small>p.m.</small></span><div class="pg-b"><p class="pg-t">Gran cierre internacional</p><p class="pg-s">Francia, Colombia, Guatemala, Argentina y México</p></div><span class="pg-a">Artístico</span></li></ol></div>
       <p class="pg-foot">El Concurso Grano de Oro se califica durante el festival; consulta su sección. Las conferencias tienen su <a href="#conferencias" style="color:#E8C06A">agenda aparte</a>.</p>
@@ -1021,7 +1132,6 @@
           <label for="fc-tipo">Participo como</label>
           <select id="fc-tipo" required>
             <option value="" selected disabled>Elige una opción</option>
-            <option value="Concurso Grano de Oro">Concurso Grano de Oro</option>
             <option>Visitante</option>
             <option>Productor de café</option>
             <option value="Rentar espacio para stand">Rentar espacio para stand</option>
@@ -1313,6 +1423,7 @@
       if(!hecho && !el.hidden){ hecho=true; var r=leer(); if(r) sumar(r.tipo,r.personas); }
     }).observe(el,{attributes:true,attributeFilter:['hidden']});
   }
+  vigilar('gdoSuccess',function(){ return {tipo:'Concurso Grano de Oro',personas:1}; });
   vigilar('fcSuccess',function(){
     var t=document.getElementById('fc-tipo'); var p=document.getElementById('fc-personas');
     return {tipo:(t&&t.value)||'Visitante', personas:Math.max(1,Math.min(200,parseInt(p&&p.value,10)||1))};
